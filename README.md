@@ -6,7 +6,7 @@ This is the repo for the eecs498, something notice:
 
 2. The starter-code folder contain the starter-code(?) for the swift front end.
 
-
+3. For the subproject like the server for the mac or the middle server, please create a seperate folder
 
 ## Starter/demo code
 
