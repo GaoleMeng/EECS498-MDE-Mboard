@@ -41,12 +41,16 @@ class ViewController: UIViewController {
     var predWord3: UIButton!
     var predWord4: UIButton!
     var goBack: UIButton!
+    var ip: String?
+    
+    
     //var Button2Array: [UIButton] = Array(repeating: UIButton(type: .system), count: 4)
     var centerArray: [center] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        getip()
         view.backgroundColor = .lightGray
         setButton()
         let ownerview: UIView = self.view
@@ -56,7 +60,60 @@ class ViewController: UIViewController {
         downSwipe.direction = .down
         ownerview.addGestureRecognizer(upSwipe)
         ownerview.addGestureRecognizer(downSwipe)
+        
+        
+        
     }
+    
+    func getip() -> String{
+        
+        let url = URL(string: "https://mboard-middle-server.herokuapp.com/api/getip")! //change the url
+        
+        //create the session object
+        let session = URLSession.shared
+        
+        let parameters = ["name" : "brad"]
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            
+            guard error == nil else {
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                //create json object from data
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                    self.ip = json["ip"] as? String
+                    // handle json...
+                }
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        })
+        task.resume()
+        
+        return "dummy"
+    }
+    
     
     @objc func funcForGesture(sender: UISwipeGestureRecognizer) {
         if mode == 0 {
@@ -360,7 +417,7 @@ class ViewController: UIViewController {
     }
     
     @objc func pressCharacter(_ sender: UIButton) {
-        print("\(sender.titleLabel!.text!) pressed")
+//        print("\(sender.titleLabel!.text!) pressed")
         if sender.titleLabel!.text! == "Sign" {
             Button11.setTitle("+", for: .normal)
             Button12.setTitle("-", for: .normal)
@@ -389,6 +446,46 @@ class ViewController: UIViewController {
             Button34.setTitle("Sign", for: .normal)
         } else {
             inputText.text! += sender.titleLabel!.text!
+            
+            print("test post")
+            
+            if let tmp_url = self.ip {
+                let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
+                //create the session object
+                let session = URLSession.shared
+            
+                //now create the URLRequest object using the url object
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET" //set http method as POST
+                
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+                //create dataTask using the session object to send data to the server
+                let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                    
+                    guard error == nil else {
+                        return
+                    }
+                    
+                    guard let data = data else {
+                        return
+                    }
+                    
+                    do {
+                        //create json object from data
+                        if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                            print(json)
+                        }
+                    } catch let error {
+                        print(error.localizedDescription)
+                    }
+                })
+                task.resume()
+            }
+            else {
+                return
+            }
         }
     }
     
