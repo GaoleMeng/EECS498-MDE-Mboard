@@ -447,7 +447,6 @@ class ViewController: UIViewController {
         } else {
             inputText.text! += sender.titleLabel!.text!
             
-            print("test post")
             
             if let tmp_url = self.ip {
                 let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
@@ -471,15 +470,7 @@ class ViewController: UIViewController {
                     guard let data = data else {
                         return
                     }
-                    
-                    do {
-                        //create json object from data
-                        if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                            print(json)
-                        }
-                    } catch let error {
-                        print(error.localizedDescription)
-                    }
+                
                 })
                 task.resume()
             }
