@@ -75,7 +75,7 @@ class WelcomeViewController: UIViewController {
     func scheduledTimerWithTimeInterval(){
         // do checking the position of the four button ever 0.4 second
         self.timer = Timer.scheduledTimer(
-            timeInterval: 0.2,
+            timeInterval: 0.1,
             target: self,
             selector: #selector(checker),
             userInfo: nil,
@@ -91,7 +91,7 @@ class WelcomeViewController: UIViewController {
         checkpos3.append(center(mx: bt3.frame.midX, my: bt3.frame.midY))
         checkpos4.append(center(mx: bt4.frame.midX, my: bt4.frame.midY))
         
-        if checkpos1.count > 7 {
+        if checkpos1.count > 10 {
             // pop the first value and check the other 5
             var succeed = true
             var cur = center(mx: bt1.frame.midX, my: bt1.frame.midY)
@@ -100,32 +100,32 @@ class WelcomeViewController: UIViewController {
             checkpos3.removeFirst()
             checkpos4.removeFirst()
             for cc in checkpos1 {
-                if cur.x - cc.x + cur.y - cc.y > 3 {
+                if abs(cur.x - cc.x) + abs(cur.y - cc.y) > 3 {
                     succeed = false
                 }
             }
             
+            
             cur = center(mx: bt2.frame.midX, my: bt2.frame.midY)
             for cc in checkpos2 {
-                if cur.x - cc.x + cur.y - cc.y > 3 {
+                if abs(cur.x - cc.x) + abs(cur.y - cc.y) > 3 {
                     succeed = false
                 }
             }
             
             cur = center(mx: bt3.frame.midX, my: bt3.frame.midY)
             for cc in checkpos3 {
-                if cur.x - cc.x + cur.y - cc.y > 3 {
+                if abs(cur.x - cc.x) + abs(cur.y - cc.y) > 3 {
                     succeed = false
                 }
             }
             
             cur = center(mx: bt4.frame.midX, my: bt4.frame.midY)
             for cc in checkpos4 {
-                if cur.x - cc.x + cur.y - cc.y > 3 {
+                if abs(cur.x - cc.x) + abs(cur.y - cc.y) > 3 {
                     succeed = false
                 }
             }
-            print(succeed)
             if succeed {
                 if isOverlap() || invalidRegion() {
                     print("not valid")
@@ -161,7 +161,6 @@ class WelcomeViewController: UIViewController {
                     pulsebt3.start()
                     pulsebt4.start()
 
-                    
                     settle = UIButton()
                     settle.backgroundColor = UIColor.green
                     settle.setTitleColor(UIColor.blue, for: .normal)
