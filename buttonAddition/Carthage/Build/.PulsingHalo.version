@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "0.2.8",
+  "iOS" : [
+    {
+      "name" : "PulsingHalo",
+      "hash" : "427febe51b7e3f3de26f6b2f58360d1c40b7b44f5049aa6692979a2993420130"
+    }
+  ]
+}

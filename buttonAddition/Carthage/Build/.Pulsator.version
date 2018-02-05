@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "0.4.0",
+  "iOS" : [
+    {
+      "name" : "Pulsator",
+      "hash" : "76cc894df294362a466c1f8d055f11046e475c35dbc489aa96439eb070c07750"
+    }
+  ]
+}

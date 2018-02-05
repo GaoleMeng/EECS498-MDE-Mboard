@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; };
+		0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
 		85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7CF6F202362C50049EA32 /* AppDelegate.swift */; };
@@ -16,7 +18,24 @@
 		85B7CF7A202362C50049EA32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B7CF78202362C50049EA32 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0465A3332028111400D6C58A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0465A3302028111400D6C58A /* Pulsator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsator.framework; path = Carthage/Build/iOS/Pulsator.framework; sourceTree = "<group>"; };
+		0465A3342028115C00D6C58A /* Pulsator.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Pulsator.framework.dSYM; path = Carthage/Build/iOS/Pulsator.framework.dSYM; sourceTree = "<group>"; };
+		0465A3372028122300D6C58A /* PulsingHalo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulsingHalo.framework; path = Carthage/Build/iOS/PulsingHalo.framework; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
 		85B7CF6C202362C50049EA32 /* buttonAddition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = buttonAddition.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,17 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0465A3362028122300D6C58A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0465A3372028122300D6C58A /* PulsingHalo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		85B7CF63202362C40049EA32 = {
 			isa = PBXGroup;
 			children = (
+				0465A3342028115C00D6C58A /* Pulsator.framework.dSYM */,
+				0465A3302028111400D6C58A /* Pulsator.framework */,
 				85B7CF6E202362C50049EA32 /* buttonAddition */,
 				85B7CF6D202362C50049EA32 /* Products */,
+				0465A3362028122300D6C58A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +111,8 @@
 				85B7CF68202362C50049EA32 /* Sources */,
 				85B7CF69202362C50049EA32 /* Frameworks */,
 				85B7CF6A202362C50049EA32 /* Resources */,
+				0465A3332028111400D6C58A /* Embed Frameworks */,
+				0465A335202811DC00D6C58A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -136,6 +169,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0465A335202811DC00D6C58A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Pulsator.framework",
+				"",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Pulsator.framework",
+				"",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85B7CF68202362C50049EA32 /* Sources */ = {
@@ -284,6 +337,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MA4ZNQH486;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -300,6 +357,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MA4ZNQH486;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
