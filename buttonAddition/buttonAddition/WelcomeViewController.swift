@@ -10,7 +10,7 @@ import UIKit
 import Pulsator
 
 class WelcomeViewController: UIViewController {
-
+    
     let dumpingRate:CGFloat = 0.7
     var topLabel: UILabel!
     var instrLabel: UILabel!
@@ -67,7 +67,7 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(instrLabel)
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -81,7 +81,7 @@ class WelcomeViewController: UIViewController {
             userInfo: nil,
             repeats: true)
     }
-
+    
     @objc func checker () {
         if okLock {
             return
@@ -160,7 +160,7 @@ class WelcomeViewController: UIViewController {
                     pulsebt2.start()
                     pulsebt3.start()
                     pulsebt4.start()
-
+                    
                     settle = UIButton()
                     settle.backgroundColor = UIColor.green
                     settle.setTitleColor(UIColor.blue, for: .normal)
@@ -195,9 +195,9 @@ class WelcomeViewController: UIViewController {
                     
                     bt1 = UIImageView()
                     bt1.backgroundColor = UIColor.lightGray
-//                    bt1.setTitleColor(UIColor.blue, for: .normal)
+                    //                    bt1.setTitleColor(UIColor.blue, for: .normal)
                     bt1.frame = CGRect(x: sortedPos[0].x - 40, y: sortedPos[0].y - 40, width: 80, height: 80)
-//                    bt1.setTitle("a", for: .normal)
+                    //                    bt1.setTitle("a", for: .normal)
                     bt1.layer.cornerRadius = bt1.frame.height / 2
                     
                     bt2 = UIImageView()
@@ -225,33 +225,33 @@ class WelcomeViewController: UIViewController {
                     
                     
                     if isOverlap() || invalidRegion() {
-//                        instrLabel.text = "Bad position, try again"
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-//                            self.bt1.removeFromSuperview()
-//                            self.bt2.removeFromSuperview()
-//                            self.bt3.removeFromSuperview()
-//                            self.bt4.removeFromSuperview()
-//                            self.instrLabel.text = "Place your four fingers below"
-//                            self.counter = 0
-//                            self.pos = []
-//                        })
+                        //                        instrLabel.text = "Bad position, try again"
+                        //                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                        //                            self.bt1.removeFromSuperview()
+                        //                            self.bt2.removeFromSuperview()
+                        //                            self.bt3.removeFromSuperview()
+                        //                            self.bt4.removeFromSuperview()
+                        //                            self.instrLabel.text = "Place your four fingers below"
+                        //                            self.counter = 0
+                        //                            self.pos = []
+                        //                        })
                     } else {
-//                        settle = UIButton()
-//                        settle.backgroundColor = UIColor.green
-//                        settle.setTitleColor(UIColor.blue, for: .normal)
-//                        settle.frame = CGRect(x: self.view.frame.width - 220, y: 200, width: 150, height: 100)
-//                        settle.setTitle("Sure?", for: .normal)
-//                        settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
-//                        self.view.addSubview(settle)
-//
-//
-//                        reset = UIButton()
-//                        reset.backgroundColor = UIColor.red
-//                        reset.setTitleColor(UIColor.white, for: .normal)
-//                        reset.frame = CGRect(x: self.view.frame.width - 220, y: 300, width: 150, height: 100)
-//                        reset.setTitle("Reset", for: .normal)
-//                        reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
-//                        self.view.addSubview(reset)
+                        //                        settle = UIButton()
+                        //                        settle.backgroundColor = UIColor.green
+                        //                        settle.setTitleColor(UIColor.blue, for: .normal)
+                        //                        settle.frame = CGRect(x: self.view.frame.width - 220, y: 200, width: 150, height: 100)
+                        //                        settle.setTitle("Sure?", for: .normal)
+                        //                        settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
+                        //                        self.view.addSubview(settle)
+                        //
+                        //
+                        //                        reset = UIButton()
+                        //                        reset.backgroundColor = UIColor.red
+                        //                        reset.setTitleColor(UIColor.white, for: .normal)
+                        //                        reset.frame = CGRect(x: self.view.frame.width - 220, y: 300, width: 150, height: 100)
+                        //                        reset.setTitle("Reset", for: .normal)
+                        //                        reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
+                        //                        self.view.addSubview(reset)
                     }
                 }
             }
@@ -272,7 +272,7 @@ class WelcomeViewController: UIViewController {
             min_dis = thisDist
             min_bt = 1
         }
-
+        
         xDist = Float(bt2.frame.midX) - x;
         yDist = Float(bt2.frame.midY) - y;
         thisDist = xDist * xDist + yDist * yDist
@@ -322,7 +322,7 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-
+    
     func isOverlap() -> Bool {
         if bt2.frame.origin.x - bt1.frame.origin.x <= 80
             || bt3.frame.origin.x - bt2.frame.origin.x <= 80
@@ -344,7 +344,7 @@ class WelcomeViewController: UIViewController {
     }
     
     
-     @objc func pressConfirm(_ sender: UIButton) {
+    @objc func pressConfirm(_ sender: UIButton) {
         let keyView = ViewController()
         keyView.setCenterArray(x1: bt1.frame.origin.x, y1: bt1.frame.origin.y,
                                x2: bt2.frame.origin.x, y2: bt2.frame.origin.y,
@@ -355,7 +355,7 @@ class WelcomeViewController: UIViewController {
     
     @objc func pressReset(_ sender: UIButton) {
         self.timer.invalidate()
-
+        
         bt1.removeFromSuperview()
         bt2.removeFromSuperview()
         bt3.removeFromSuperview()
@@ -387,3 +387,4 @@ class WelcomeViewController: UIViewController {
     }
     
 }
+
