@@ -11,7 +11,7 @@ struct center {
 
 class ViewController: UIViewController {
     
-    var inputText: UILabel!
+    //var inputText: UILabel!
     var buttons: Array<UIButton> = []
     var centerArray: [center] = []
     
@@ -31,20 +31,6 @@ class ViewController: UIViewController {
     var modes: Array<UIButton> = []
     var predWords: Array<UIButton> = []
     var ip: String?
-    
-    /*var Button11: UIButton!
-    var Button12: UIButton!
-    var Button13: UIButton!
-    var Button14: UIButton!
-    var Button21: UIButton!
-    var Button22: UIButton!
-    var Button23: UIButton!
-    var Button24: UIButton!
-    var Button31: UIButton!
-    var Button32: UIButton!
-    var Button33: UIButton!
-    var Button34: UIButton!*/ // This can be also sign in number mode
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,12 +174,12 @@ class ViewController: UIViewController {
     }
     
     func setButton() {
-        inputText = UILabel(frame: CGRect(x: 44, y: 75, width: 680.5, height: 96))
+        /*inputText = UILabel(frame: CGRect(x: 44, y: 75, width: 680.5, height: 96))
         inputText.textAlignment = .left
         inputText.font = UIFont(name: "", size: 45)
         inputText.text = ""
         inputText.backgroundColor = UIColor.white
-        self.view.addSubview(inputText)
+        self.view.addSubview(inputText)*/
         
         var iter: Int = 0
         // setup normal keys
@@ -279,7 +265,7 @@ class ViewController: UIViewController {
         Enter = UIButton()
         Enter.backgroundColor = UIColor.gray
         Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 200, y: centerArray.sorted(by: {$0.y < $1.y})[0].y + 100, width: 100, height: 150)
+        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y + 250, width: 100, height: 150)
         Enter.addTarget(self, action: #selector(pressEnter(_:)), for: .touchUpInside)
         Enter.setTitle("Enter", for: .normal)
         self.view.addSubview(Enter)
@@ -287,7 +273,7 @@ class ViewController: UIViewController {
         SwitchMode = UIButton()
         SwitchMode.backgroundColor = UIColor.green
         SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 200, y: centerArray.sorted(by: {$0.y < $1.y})[0].y - 100, width: 100, height: 100)
+        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y - 200, width: 100, height: 100)
         SwitchMode.setTitle("Mode", for: .normal)
         SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
         self.view.addSubview(SwitchMode)
@@ -295,7 +281,7 @@ class ViewController: UIViewController {
         goBack = UIButton()
         goBack.backgroundColor = UIColor.red
         goBack.setTitleColor(UIColor.white, for: .normal)
-        goBack.frame = CGRect(x: Space.frame.minX, y: self.view.frame.height - 100, width: 100, height: 100)
+        goBack.frame = CGRect(x: 44, y: 44, width: 100, height: 100)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Go back", for: .normal)
         self.view.addSubview(goBack)
@@ -331,7 +317,7 @@ class ViewController: UIViewController {
     }
     
     @objc func pressCharacter(_ sender: UIButton) {
-        //        print("\(sender.titleLabel!.text!) pressed")
+        print("\(sender.titleLabel!.text!) pressed")
         if sender.titleLabel!.text! == "Sign" {
             buttons[0].setTitle("+", for: .normal)
             buttons[1].setTitle("-", for: .normal)
@@ -359,7 +345,7 @@ class ViewController: UIViewController {
             buttons[10].setTitle("9", for: .normal)
             buttons[11].setTitle("Sign", for: .normal)
         } else {
-            inputText.text! += sender.titleLabel!.text!
+            //inputText.text! += sender.titleLabel!.text!
             
             
             if let tmp_url = self.ip {
@@ -396,14 +382,14 @@ class ViewController: UIViewController {
     
     @objc func pressDelete(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
-        if inputText.text!.count > 0 {
+        /*if inputText.text!.count > 0 {
             inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
-        }
+        }*/
     }
     
     @objc func pressSpace(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
-        inputText.text! += " "
+        /*inputText.text! += " "*/
     }
     
     @objc func pressCap(_ sender: UIButton) {
@@ -438,7 +424,7 @@ class ViewController: UIViewController {
     
     @objc func pressEnter(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
-        inputText.text! += "\n"
+        /*inputText.text! += "\n"*/
     }
     
     @objc func pressMode(_ sender: UIButton) {
@@ -546,6 +532,6 @@ class ViewController: UIViewController {
     
     @objc func pressWord(_ sender: UIButton) {
         print("Word: \(sender.titleLabel!.text!) pressed")
-        inputText.text! += sender.titleLabel!.text!
+        /*inputText.text! += sender.titleLabel!.text!*/
     }
 }

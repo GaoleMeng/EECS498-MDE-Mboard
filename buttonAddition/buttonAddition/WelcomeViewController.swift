@@ -12,7 +12,6 @@ import Pulsator
 class WelcomeViewController: UIViewController {
     
     let dumpingRate:CGFloat = 0.7
-    var topLabel: UILabel!
     var instrLabel: UILabel!
     var counter: Int = 0
     var pos:[center] = []
@@ -47,18 +46,21 @@ class WelcomeViewController: UIViewController {
         //        let tapGes = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         //        self.view.addGestureRecognizer(tapGes)
         self.view.backgroundColor = .white
-        let vLine = lineView(frame: CGRect(x: self.view.frame.width - 220 /*551*/, y: 204, width: 180, height: self.view.frame.height))
-        vLine.backgroundColor = UIColor.white
-        self.view.addSubview(vLine)
-        topLabel = UILabel(frame: CGRect(x: 44, y: 75, width: 680.5, height: 96))
-        topLabel.font = topLabel.font.withSize(70)
-        topLabel.text = "Welcome to M-Board"
-        topLabel.textAlignment = .center
-        topLabel.textColor = .black
-        topLabel.backgroundColor = .white
-        self.view.addSubview(topLabel)
-        instrLabel = UILabel(frame: CGRect(x: 20, y: 204, width: 523, height: 80))
-        instrLabel.font = topLabel.font.withSize(35)
+        //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
+        let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
+        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135, y: 300, width: 2, height: self.view.frame.height - 440))
+        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135, height: 2))
+        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135, height: 2))
+        vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        hLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        self.view.addSubview(vLine1)
+        self.view.addSubview(vLine2)
+        self.view.addSubview(hLine1)
+        self.view.addSubview(hLine2)
+        instrLabel = UILabel(frame: CGRect(x: 0, y: 105, width: self.view.frame.width - 135, height: 80))
+        instrLabel.font = instrLabel.font.withSize(60)
         instrLabel.text = "Place your four fingers below"
         instrLabel.textAlignment = .center
         instrLabel.textColor = .black
@@ -127,6 +129,11 @@ class WelcomeViewController: UIViewController {
                 }
             }
             if succeed {
+                print("overlap")
+                print(isOverlap())
+                print("invalid")
+                print(invalidRegion())
+                print("----")
                 if isOverlap() || invalidRegion() {
                     print("not valid")
                 }
@@ -164,7 +171,7 @@ class WelcomeViewController: UIViewController {
                     settle = UIButton()
                     settle.backgroundColor = UIColor.green
                     settle.setTitleColor(UIColor.blue, for: .normal)
-                    settle.frame = CGRect(x: self.view.frame.width - 220, y: 200, width: 150, height: 100)
+                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 50, width: 100, height: 100)
                     settle.setTitle("Sure?", for: .normal)
                     settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
                     self.view.addSubview(settle)
@@ -172,7 +179,7 @@ class WelcomeViewController: UIViewController {
                     reset = UIButton()
                     reset.backgroundColor = UIColor.red
                     reset.setTitleColor(UIColor.white, for: .normal)
-                    reset.frame = CGRect(x: self.view.frame.width - 220, y: 300, width: 150, height: 100)
+                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 50, width: 100, height: 100)
                     reset.setTitle("Reset", for: .normal)
                     reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
                     self.view.addSubview(reset)
@@ -195,9 +202,7 @@ class WelcomeViewController: UIViewController {
                     
                     bt1 = UIImageView()
                     bt1.backgroundColor = UIColor.lightGray
-                    //                    bt1.setTitleColor(UIColor.blue, for: .normal)
                     bt1.frame = CGRect(x: sortedPos[0].x - 40, y: sortedPos[0].y - 40, width: 80, height: 80)
-                    //                    bt1.setTitle("a", for: .normal)
                     bt1.layer.cornerRadius = bt1.frame.height / 2
                     
                     bt2 = UIImageView()
@@ -222,37 +227,6 @@ class WelcomeViewController: UIViewController {
                     
                     self.touchLock = true
                     scheduledTimerWithTimeInterval()
-                    
-                    
-                    if isOverlap() || invalidRegion() {
-                        //                        instrLabel.text = "Bad position, try again"
-                        //                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        //                            self.bt1.removeFromSuperview()
-                        //                            self.bt2.removeFromSuperview()
-                        //                            self.bt3.removeFromSuperview()
-                        //                            self.bt4.removeFromSuperview()
-                        //                            self.instrLabel.text = "Place your four fingers below"
-                        //                            self.counter = 0
-                        //                            self.pos = []
-                        //                        })
-                    } else {
-                        //                        settle = UIButton()
-                        //                        settle.backgroundColor = UIColor.green
-                        //                        settle.setTitleColor(UIColor.blue, for: .normal)
-                        //                        settle.frame = CGRect(x: self.view.frame.width - 220, y: 200, width: 150, height: 100)
-                        //                        settle.setTitle("Sure?", for: .normal)
-                        //                        settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
-                        //                        self.view.addSubview(settle)
-                        //
-                        //
-                        //                        reset = UIButton()
-                        //                        reset.backgroundColor = UIColor.red
-                        //                        reset.setTitleColor(UIColor.white, for: .normal)
-                        //                        reset.frame = CGRect(x: self.view.frame.width - 220, y: 300, width: 150, height: 100)
-                        //                        reset.setTitle("Reset", for: .normal)
-                        //                        reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
-                        //                        self.view.addSubview(reset)
-                    }
                 }
             }
         }
@@ -324,20 +298,36 @@ class WelcomeViewController: UIViewController {
     
     
     func isOverlap() -> Bool {
-        if bt2.frame.origin.x - bt1.frame.origin.x <= 80
-            || bt3.frame.origin.x - bt2.frame.origin.x <= 80
-            || bt4.frame.origin.x - bt3.frame.origin.x <= 80 {
+        var bxArray: [CGFloat] = []
+        bxArray.append(bt1.frame.midX)
+        bxArray.append(bt2.frame.midX)
+        bxArray.append(bt3.frame.midX)
+        bxArray.append(bt4.frame.midX)
+        bxArray = bxArray.sorted(by: {$0 < $1})
+        print(bxArray)
+        //print(bt1.frame.midX, bt2.frame.midX, bt3.frame.midX, bt4.frame.midX)
+        if bxArray[1] - bxArray[0] <= 80
+            || bxArray[2] - bxArray[1] <= 80
+            || bxArray[3] - bxArray[2] <= 80 {
             return true
         }
         return false
     }
     
     func invalidRegion() -> Bool {
-        if bt4.frame.origin.x > self.view.frame.width - 300 || bt1.frame.origin.x < 20
-            || bt1.frame.origin.y < 250
-            || bt2.frame.origin.y < 250
-            || bt3.frame.origin.y < 250
-            || bt4.frame.origin.y < 250 {
+        var bxArray: [CGFloat] = []
+        bxArray.append(bt1.frame.midX)
+        bxArray.append(bt2.frame.midX)
+        bxArray.append(bt3.frame.midX)
+        bxArray.append(bt4.frame.midX)
+        bxArray = bxArray.sorted(by: {$0 < $1})
+        print(bxArray)
+        if bxArray[3] > self.view.frame.width - 150
+            || bxArray[0] < 40
+            || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
+            || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210
+            || bt3.frame.origin.y < 300 || bt3.frame.origin.y > self.view.frame.height - 210
+            || bt4.frame.origin.y < 300 || bt4.frame.origin.y > self.view.frame.height - 210 {
             return true
         }
         return false
@@ -345,11 +335,17 @@ class WelcomeViewController: UIViewController {
     
     
     @objc func pressConfirm(_ sender: UIButton) {
+        var bxArray: [UIImageView] = []
+        bxArray.append(bt1)
+        bxArray.append(bt2)
+        bxArray.append(bt3)
+        bxArray.append(bt4)
+        bxArray = bxArray.sorted(by: {$0.frame.origin.x < $1.frame.origin.x})
         let keyView = ViewController()
-        keyView.setCenterArray(x1: bt1.frame.origin.x, y1: bt1.frame.origin.y,
-                               x2: bt2.frame.origin.x, y2: bt2.frame.origin.y,
-                               x3: bt3.frame.origin.x, y3: bt3.frame.origin.y,
-                               x4: bt4.frame.origin.x, y4: bt4.frame.origin.y)
+        keyView.setCenterArray(x1: bxArray[0].frame.origin.x, y1: bxArray[0].frame.origin.y,
+                               x2: bxArray[1].frame.origin.x, y2: bxArray[1].frame.origin.y,
+                               x3: bxArray[2].frame.origin.x, y3: bxArray[2].frame.origin.y,
+                               x4: bxArray[3].frame.origin.x, y4: bxArray[3].frame.origin.y)
         self.present(keyView, animated: true, completion: nil)
     }
     

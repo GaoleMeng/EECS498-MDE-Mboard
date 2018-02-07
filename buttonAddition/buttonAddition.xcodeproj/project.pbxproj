@@ -11,6 +11,7 @@
 		0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
+		8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F1D7202A32AC0030B309 /* rectangular.swift */; };
 		85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7CF6F202362C50049EA32 /* AppDelegate.swift */; };
 		85B7CF72202362C50049EA32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7CF71202362C50049EA32 /* ViewController.swift */; };
 		85B7CF75202362C50049EA32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B7CF73202362C50049EA32 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		0465A3372028122300D6C58A /* PulsingHalo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulsingHalo.framework; path = Carthage/Build/iOS/PulsingHalo.framework; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
+		8578F1D7202A32AC0030B309 /* rectangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rectangular.swift; sourceTree = "<group>"; };
 		85B7CF6C202362C50049EA32 /* buttonAddition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = buttonAddition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85B7CF6F202362C50049EA32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85B7CF71202362C50049EA32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				8578161620238D4000B45AF8 /* WelcomeViewController.swift */,
 				85B7CF71202362C50049EA32 /* ViewController.swift */,
 				857816182023AE4000B45AF8 /* lineView.swift */,
+				8578F1D7202A32AC0030B309 /* rectangular.swift */,
 				85B7CF73202362C50049EA32 /* Main.storyboard */,
 				85B7CF76202362C50049EA32 /* Assets.xcassets */,
 				85B7CF78202362C50049EA32 /* LaunchScreen.storyboard */,
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				857816192023AE4000B45AF8 /* lineView.swift in Sources */,
+				8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */,
 				8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */,
 				85B7CF72202362C50049EA32 /* ViewController.swift in Sources */,
 				85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */,
@@ -344,7 +348,7 @@
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaole.buttonAddition;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyu.buttonAddition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -364,7 +368,7 @@
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaole.buttonAddition;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyu.buttonAddition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

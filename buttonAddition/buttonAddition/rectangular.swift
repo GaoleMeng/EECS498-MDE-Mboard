@@ -1,22 +1,22 @@
 //
-//  lineView.swift
+//  rectangular.swift
 //  buttonAddition
 //
-//  Created by jingyu on 2/1/18.
+//  Created by jingyu on 2/6/18.
 //  Copyright © 2018 jingyu. All rights reserved.
 //
 
 import UIKit
 
-class lineView: UIView {
+class rectangular: UIView {
 
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,8 +28,10 @@ class lineView: UIView {
     
     override func draw(_ rect: CGRect) {
         let aPath = UIBezierPath()
+        
         aPath.move(to: CGPoint(x: 0, y: 0))
-        aPath.addLine(to: CGPoint(x: 0, y: self.frame.height))
+        
+        aPath.addLine(to: CGPoint(x: self.frame.width, y: 0))
         
         //Keep using the method addLineToPoint until you get to the one where about to close the path
         
