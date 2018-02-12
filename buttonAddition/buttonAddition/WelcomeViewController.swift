@@ -141,19 +141,16 @@ class WelcomeViewController: UIViewController {
                 }
             }
             if succeed {
-                print("overlap")
-                print(isOverlap())
-                print("invalid")
-                print(invalidRegion())
-                print("----")
                 if isOverlap() || invalidRegion() {
+                    print("overlap")
+                    print(isOverlap())
+                    print("invalid")
+                    print(invalidRegion())
+                    print("----")
                     print("not valid")
                 }
                 else {
                     // the check is ok, we then progress to the finalize of the button
-                    
-                    
-                    
                     
                     pulsebt1 = Pulsator()
                     view.layer.addSublayer(pulsebt1)
@@ -345,11 +342,11 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
+        //print(bxArray)
         //print(bt1.frame.midX, bt2.frame.midX, bt3.frame.midX, bt4.frame.midX)
-        if bxArray[1] - bxArray[0] <= 80
+        if bxArray[1] - bxArray[0] <= 70
             || bxArray[2] - bxArray[1] <= 80
-            || bxArray[3] - bxArray[2] <= 80 {
+            || bxArray[3] - bxArray[2] <= 70 {
             return true
         }
         return false
@@ -362,8 +359,8 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
-        if bxArray[3] > self.view.frame.width - 150
+        //print(bxArray)
+        if bxArray[3] > self.view.frame.width - 170
             || bxArray[0] < 40
             || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
             || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210
