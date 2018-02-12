@@ -60,7 +60,7 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(hLine1)
         self.view.addSubview(hLine2)
         instrLabel = UILabel(frame: CGRect(x: 0, y: 105, width: self.view.frame.width - 135, height: 80))
-        instrLabel.font = instrLabel.font.withSize(60)
+        instrLabel.font = instrLabel.font.withSize(45)
         instrLabel.text = "Place your four fingers below"
         instrLabel.textAlignment = .center
         instrLabel.textColor = .black
