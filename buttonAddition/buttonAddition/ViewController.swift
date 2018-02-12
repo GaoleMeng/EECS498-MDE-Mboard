@@ -1,4 +1,6 @@
 import UIKit
+import SwiftyButton
+
 
 struct center {
     var x: CGFloat
@@ -12,7 +14,7 @@ struct center {
 class ViewController: UIViewController {
     
     //var inputText: UILabel!
-    var buttons: Array<UIButton> = []
+    var buttons: Array<PressableButton> = []
     var centerArray: [center] = []
     
     var Space: UIButton!
@@ -192,10 +194,13 @@ class ViewController: UIViewController {
             } else if iter < 12 {
                 row = 1
             }
-            let bt = UIButton()
-            bt.backgroundColor = UIColor.white
+            let bt = PressableButton()
+//            bt.backgroundColor = UIColor.white
             bt.setTitleColor(UIColor.black, for: .normal)
             bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+            bt.shadowHeight = 8
+            bt.cornerRadius = 20
+            
             bt.addTarget(self, action: #selector(pressCharacter(_:)), for: .touchUpInside)
             if row == -1 {
                 if iter % 4 == 0 {
@@ -310,9 +315,7 @@ class ViewController: UIViewController {
             let bt = UIButton()
             bt.backgroundColor = UIColor.gray
             bt.setTitleColor(UIColor.white, for: .normal)
-            //bt.frame = CGRect(x: buttons[iter % 4].frame.origin.x - 20, y: buttons[iter % 4].frame.origin.y - 100, width: 100, height: 80)
-            //bt.frame = CGRect(x: Int(buttons[iter % 4].frame.origin.x), y: Int(center_y - 200), width: 100, height: 80)
-            bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter) * pred_width), y: Int(center_y - 200), width: Int(pred_width - 2), height: 80)
+            bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter) * pred_width), y: Int(center_y - 300), width: Int(pred_width - 2), height: 80)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
             bt.setTitle("predWord" + String(iter), for: .normal)
             predWords.append(bt)
@@ -400,9 +403,14 @@ class ViewController: UIViewController {
             buttons[11].setTitle("Sign", for: .normal)
         } else {
             //inputText.text! += sender.titleLabel!.text!
-            postRequest(text: sender.titleLabel!.text!)
+            if sender.titleLabel!.text! == "%" {
+                postRequest(text: "key_percent")
+            } else {
+                postRequest(text: sender.titleLabel!.text!)
+            }
             
-            /*if let tmp_url = self.ip {
+            /*
+            if let tmp_url = self.ip {
                 let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
                 //create the session object
                 let session = URLSession.shared
@@ -436,6 +444,7 @@ class ViewController: UIViewController {
     
     @objc func pressDelete(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
+        postRequest(text: "key_delete")
         /*if inputText.text!.count > 0 {
             inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
         }*/
@@ -443,6 +452,7 @@ class ViewController: UIViewController {
     
     @objc func pressSpace(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
+        postRequest(text: "key_space")
         /*inputText.text! += " "*/
     }
     
@@ -479,6 +489,7 @@ class ViewController: UIViewController {
     @objc func pressEnter(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
         /*inputText.text! += "\n"*/
+        postRequest(text: "key_newline")
     }
     
     @objc func pressMode(_ sender: UIButton) {
@@ -587,5 +598,6 @@ class ViewController: UIViewController {
     @objc func pressWord(_ sender: UIButton) {
         print("Word: \(sender.titleLabel!.text!) pressed")
         /*inputText.text! += sender.titleLabel!.text!*/
+        postRequest(text: sender.titleLabel!.text!)
     }
 }

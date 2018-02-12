@@ -8,6 +8,8 @@
 
 import UIKit
 import Pulsator
+import SwiftyButton
+import NVActivityIndicatorView
 
 class WelcomeViewController: UIViewController {
     
@@ -25,9 +27,10 @@ class WelcomeViewController: UIViewController {
     var pulsebt3: Pulsator!
     var pulsebt4: Pulsator!
     
+    var settle: PressableButton!
     
-    var settle: UIButton!
-    var reset: UIButton!
+
+    var reset: PressableButton!
     
     // track the position of the four finger
     var checkpos1: [center] = []
@@ -38,6 +41,8 @@ class WelcomeViewController: UIViewController {
     var touchLock: Bool = false
     var okLock: Bool = false
     var timer = Timer()
+    
+    var loadingicon: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +73,13 @@ class WelcomeViewController: UIViewController {
         touchLock = false
         self.view.addSubview(instrLabel)
         
+        loadingicon = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width - 135, height: 80), color: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1))
+        
+        self.view.addSubview(loadingicon)
+//        loadingicon.startAnimating()
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,7 +105,7 @@ class WelcomeViewController: UIViewController {
         checkpos3.append(center(mx: bt3.frame.midX, my: bt3.frame.midY))
         checkpos4.append(center(mx: bt4.frame.midX, my: bt4.frame.midY))
         
-        if checkpos1.count > 10 {
+        if checkpos1.count > 8 {
             // pop the first value and check the other 5
             var succeed = true
             var cur = center(mx: bt1.frame.midX, my: bt1.frame.midY)
@@ -139,6 +151,7 @@ class WelcomeViewController: UIViewController {
                 }
                 else {
                     // the check is ok, we then progress to the finalize of the button
+                    
                     pulsebt1 = Pulsator()
                     view.layer.addSublayer(pulsebt1)
                     pulsebt1.radius = 110
@@ -168,21 +181,46 @@ class WelcomeViewController: UIViewController {
                     pulsebt3.start()
                     pulsebt4.start()
                     
-                    settle = UIButton()
-                    settle.backgroundColor = UIColor.green
-                    settle.setTitleColor(UIColor.blue, for: .normal)
-                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 50, width: 100, height: 100)
-                    settle.setTitle("Sure?", for: .normal)
-                    settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
-                    self.view.addSubview(settle)
+                    settle = PressableButton()
+                    //                    settle.backgroundColor = UIColor.green
+                    settle.colors = .init(
+                        button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
+                        shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+                    )
                     
-                    reset = UIButton()
-                    reset.backgroundColor = UIColor.red
+                    settle.shadowHeight = 7
+                    settle.cornerRadius = 5
+                    //                    settle.setTitleColor(UIColor.blue, for: .normal)
+                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
+                    settle.setTitle("Comfirm", for: .normal)
+                    settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
+                    
+                    self.view.addSubview(self.settle)
+//                    UIView.animate(withDuration: 1.5) {
+//                        self.settle.alpha = 1.0
+//                    }
+                    
+                    reset = PressableButton()
+                    reset.colors = .init(
+                        button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1),
+                        shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1)
+                    )
+                    reset.shadowHeight = 7
+                    reset.cornerRadius = 5
+                    
                     reset.setTitleColor(UIColor.white, for: .normal)
-                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 50, width: 100, height: 100)
+                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 75, width: 100, height: 100)
                     reset.setTitle("Reset", for: .normal)
                     reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
-                    self.view.addSubview(reset)
+                    
+                    self.view.addSubview(self.reset)
+                    UIView.animate(withDuration: 1) {
+                        self.reset.colors = .init(
+                            button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1),
+                            shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1)
+                        )
+                    }
+                    
                     self.okLock = true
                 }
             }
@@ -341,10 +379,12 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt4)
         bxArray = bxArray.sorted(by: {$0.frame.origin.x < $1.frame.origin.x})
         let keyView = ViewController()
+        keyView.modalTransitionStyle = .crossDissolve
         keyView.setCenterArray(x1: bxArray[0].frame.origin.x, y1: bxArray[0].frame.origin.y,
                                x2: bxArray[1].frame.origin.x, y2: bxArray[1].frame.origin.y,
                                x3: bxArray[2].frame.origin.x, y3: bxArray[2].frame.origin.y,
                                x4: bxArray[3].frame.origin.x, y4: bxArray[3].frame.origin.y)
+        
         self.present(keyView, animated: true, completion: nil)
     }
     
