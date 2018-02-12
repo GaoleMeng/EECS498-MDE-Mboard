@@ -17,18 +17,18 @@ class ViewController: UIViewController {
     var buttons: Array<PressableButton> = []
     var centerArray: [center] = []
     
-    var Space: UIButton!
-    var Delete: UIButton!
-    var Enter: UIButton!
+    var Space: PressableButton!
+    var Delete: PressableButton!
+    var Enter: PressableButton!
     
-    var Cap: UIButton!
+    var Cap: PressableButton!
     var isCapped: Int = 0
     
-    var SwitchMode: UIButton!
+    var SwitchMode: PressableButton!
     var vState: Int = 0
     var mode: Int = 0
     
-    var goBack: UIButton!
+    var goBack: PressableButton!
     
     var modes: Array<UIButton> = []
     var predWords: Array<UIButton> = []
@@ -47,6 +47,31 @@ class ViewController: UIViewController {
         downSwipe.direction = .down
         ownerview.addGestureRecognizer(upSwipe)
         ownerview.addGestureRecognizer(downSwipe)
+        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+            self.buttons[0].alpha = 1
+            self.buttons[0].frame.origin.y -= 100
+            self.buttons[1].alpha = 1
+            self.buttons[1].frame.origin.y -= 100
+            self.buttons[2].alpha = 1
+            self.buttons[2].frame.origin.y -= 100
+            self.buttons[3].alpha = 1
+            self.buttons[3].frame.origin.y -= 100
+            
+            self.buttons[8].alpha = 1
+            self.buttons[8].frame.origin.y += 100
+            self.buttons[9].alpha = 1
+            self.buttons[9].frame.origin.y += 100
+            self.buttons[10].alpha = 1
+            self.buttons[10].frame.origin.y += 100
+            self.buttons[11].alpha = 1
+            self.buttons[11].frame.origin.y += 100
+        }, completion: nil)
+
     }
     
     func getip() -> String{
@@ -100,59 +125,144 @@ class ViewController: UIViewController {
     
     
     @objc func funcForGesture(sender: UISwipeGestureRecognizer) {
+        
         if mode == 0 {
             if sender.direction == .up {
-                if vState == 2 {
-                    vState = 0
+                if self.vState == 2 {
+                    self.vState = 0
                 } else {
-                    vState += 1
+                    self.vState += 1
                 }
-            } else if sender.direction == .down{
+                
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.y -= 60
+                    }
+                }, completion: { (finished: Bool) in
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.y += 120
+                    }
+                    
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        for bt in self.buttons {
+                            bt.alpha = 1
+                            bt.frame.origin.y -= 60
+                            if self.vState == 0 {
+                                self.buttons[0].setTitle("q", for: .normal)
+                                self.buttons[1].setTitle("w", for: .normal)
+                                self.buttons[2].setTitle("e", for: .normal)
+                                self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[4].setTitle("a", for: .normal)
+                                self.buttons[5].setTitle("s", for: .normal)
+                                self.buttons[6].setTitle("d", for: .normal)
+                                self.buttons[7].setTitle("f", for: .normal)
+                                self.buttons[8].setTitle("z", for: .normal)
+                                self.buttons[9].setTitle("x", for: .normal)
+                                self.buttons[10].setTitle("c", for: .normal)
+                                self.buttons[11].setTitle("v", for: .normal)
+                            } else if self.vState == 1 {
+                                self.buttons[0].setTitle("t", for: .normal)
+                                self.buttons[1].setTitle("y", for: .normal)
+                                self.buttons[2].setTitle("u", for: .normal)
+                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[5].setTitle("h", for: .normal)
+                                self.buttons[6].setTitle("j", for: .normal)
+                                self.buttons[7].setTitle("k", for: .normal)
+                                self.buttons[8].setTitle("b", for: .normal)
+                                self.buttons[9].setTitle("n", for: .normal)
+                                self.buttons[10].setTitle("m", for: .normal)
+                                self.buttons[11].setTitle("o", for: .normal)
+                            } else if self.vState == 2 {
+                                self.buttons[0].setTitle("p", for: .normal)
+                                self.buttons[1].setTitle("l", for: .normal)
+                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[4].setTitle("\"", for: .normal)
+                                self.buttons[5].setTitle("?", for: .normal)
+                                self.buttons[6].setTitle("(", for: .normal)
+                                self.buttons[7].setTitle(")", for: .normal)
+                                self.buttons[8].setTitle(";", for: .normal)
+                                self.buttons[9].setTitle(":", for: .normal)
+                                self.buttons[10].setTitle("@", for: .normal)
+                                self.buttons[11].setTitle("$", for: .normal)
+                            }
+                        }
+                    }, completion: nil)
+                })
+            }
+            else if sender.direction == .down {
                 if vState == 0 {
                     vState = 2
                 } else {
                     vState -= 1
                 }
-            }
-            if vState == 0 {
-                buttons[0].setTitle("q", for: .normal)
-                buttons[1].setTitle("w", for: .normal)
-                buttons[2].setTitle("e", for: .normal)
-                buttons[3].setTitle("r", for: .normal)
-                buttons[4].setTitle("a", for: .normal)
-                buttons[5].setTitle("s", for: .normal)
-                buttons[6].setTitle("d", for: .normal)
-                buttons[7].setTitle("f", for: .normal)
-                buttons[8].setTitle("z", for: .normal)
-                buttons[9].setTitle("x", for: .normal)
-                buttons[10].setTitle("c", for: .normal)
-                buttons[11].setTitle("v", for: .normal)
-            } else if vState == 1 {
-                buttons[0].setTitle("t", for: .normal)
-                buttons[1].setTitle("y", for: .normal)
-                buttons[2].setTitle("u", for: .normal)
-                buttons[3].setTitle("i", for: .normal)
-                buttons[4].setTitle("g", for: .normal)
-                buttons[5].setTitle("h", for: .normal)
-                buttons[6].setTitle("j", for: .normal)
-                buttons[7].setTitle("k", for: .normal)
-                buttons[8].setTitle("b", for: .normal)
-                buttons[9].setTitle("n", for: .normal)
-                buttons[10].setTitle("m", for: .normal)
-                buttons[11].setTitle("o", for: .normal)
-            } else if vState == 2 {
-                buttons[0].setTitle("p", for: .normal)
-                buttons[1].setTitle("l", for: .normal)
-                buttons[2].setTitle(".", for: .normal)
-                buttons[3].setTitle(",", for: .normal)
-                buttons[4].setTitle("\"", for: .normal)
-                buttons[5].setTitle("?", for: .normal)
-                buttons[6].setTitle("(", for: .normal)
-                buttons[7].setTitle(")", for: .normal)
-                buttons[8].setTitle(";", for: .normal)
-                buttons[9].setTitle(":", for: .normal)
-                buttons[10].setTitle("@", for: .normal)
-                buttons[11].setTitle("$", for: .normal)
+                
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.y += 60
+                    }
+                }, completion: { (finished: Bool) in
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.y -= 120
+                    }
+                    
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        for bt in self.buttons {
+                            bt.alpha = 1
+                            bt.frame.origin.y += 60
+                            if self.vState == 0 {
+                                self.buttons[0].setTitle("q", for: .normal)
+                                self.buttons[1].setTitle("w", for: .normal)
+                                self.buttons[2].setTitle("e", for: .normal)
+                                self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[4].setTitle("a", for: .normal)
+                                self.buttons[5].setTitle("s", for: .normal)
+                                self.buttons[6].setTitle("d", for: .normal)
+                                self.buttons[7].setTitle("f", for: .normal)
+                                self.buttons[8].setTitle("z", for: .normal)
+                                self.buttons[9].setTitle("x", for: .normal)
+                                self.buttons[10].setTitle("c", for: .normal)
+                                self.buttons[11].setTitle("v", for: .normal)
+                            } else if self.vState == 1 {
+                                self.buttons[0].setTitle("t", for: .normal)
+                                self.buttons[1].setTitle("y", for: .normal)
+                                self.buttons[2].setTitle("u", for: .normal)
+                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[5].setTitle("h", for: .normal)
+                                self.buttons[6].setTitle("j", for: .normal)
+                                self.buttons[7].setTitle("k", for: .normal)
+                                self.buttons[8].setTitle("b", for: .normal)
+                                self.buttons[9].setTitle("n", for: .normal)
+                                self.buttons[10].setTitle("m", for: .normal)
+                                self.buttons[11].setTitle("o", for: .normal)
+                            } else if self.vState == 2 {
+                                self.buttons[0].setTitle("p", for: .normal)
+                                self.buttons[1].setTitle("l", for: .normal)
+                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[4].setTitle("\"", for: .normal)
+                                self.buttons[5].setTitle("?", for: .normal)
+                                self.buttons[6].setTitle("(", for: .normal)
+                                self.buttons[7].setTitle(")", for: .normal)
+                                self.buttons[8].setTitle(";", for: .normal)
+                                self.buttons[9].setTitle(":", for: .normal)
+                                self.buttons[10].setTitle("@", for: .normal)
+                                self.buttons[11].setTitle("$", for: .normal)
+                            }
+                        }
+                    }, completion: nil)
+                })
+                
             }
         } else if mode == 1 {
             // This is number mode, can add swipe to change vState
@@ -195,12 +305,12 @@ class ViewController: UIViewController {
                 row = 1
             }
             let bt = PressableButton()
-//            bt.backgroundColor = UIColor.white
-            bt.setTitleColor(UIColor.black, for: .normal)
-            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 80, height: 80)
             bt.shadowHeight = 8
             bt.cornerRadius = 20
             
+            // transition of the button:
+        
             bt.addTarget(self, action: #selector(pressCharacter(_:)), for: .touchUpInside)
             if row == -1 {
                 if iter % 4 == 0 {
@@ -236,6 +346,12 @@ class ViewController: UIViewController {
             bt.layer.cornerRadius = bt.frame.height / 2
             buttons.append(bt)
             self.view.addSubview(bt)
+            
+//            UIView.animate(withDuration: 0.3, delay: 1, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+//                bt.alpha = 1
+//                bt.frame.origin.y += CGFloat(100 * row)
+//            }, completion: nil)
+//
             iter += 1
         }
         
@@ -261,50 +377,84 @@ class ViewController: UIViewController {
             go_back_benchmark_y = 44
         }
         
-        SwitchMode = UIButton()
-        SwitchMode.backgroundColor = UIColor.green
-        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 100)
-        SwitchMode.setTitle("Mode", for: .normal)
+        SwitchMode = PressableButton()
+//        SwitchMode.backgroundColor = UIColor.green
+//        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
+        SwitchMode.colors = .init(
+            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
+            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+        )
+        
+        SwitchMode.shadowHeight = 8
+        SwitchMode.cornerRadius = 16
+        
+        
+        SwitchMode.setTitle("Switch", for: .normal)
         SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
         self.view.addSubview(SwitchMode)
         
-        Cap = UIButton()
-        Cap.backgroundColor = UIColor.gray
-        Cap.setTitleColor(UIColor.white, for: .normal)
-        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 100, width: 100, height: 100)
+        Cap = PressableButton()
+//        Cap.backgroundColor = UIColor.gray
+//        Cap.setTitleColor(UIColor.white, for: .normal)
+        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 100, width: 100, height: 90)
+        Cap.colors = .init(
+            button: UIColor(red: 241 / 255, green: 196 / 255, blue: 15 / 255, alpha: 1),
+            shadow: UIColor(red: 155 / 255, green: 126 / 255, blue: 10 / 255, alpha: 1)
+        )
+        
+        Cap.shadowHeight = 8
+        Cap.cornerRadius = 16
+        
+        
         Cap.addTarget(self, action: #selector(pressCap(_:)), for: .touchUpInside)
         Cap.setTitle("Cap", for: .normal)
         self.view.addSubview(Cap)
         
-        Delete = UIButton()
-        Delete.backgroundColor = UIColor.red
-        Delete.setTitleColor(UIColor.white, for: .normal)
-        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 200, width: 100, height: 100)
+        Delete = PressableButton()
+//        Delete.setTitleColor(UIColor.white, for: .normal)
+        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 200, width: 100, height: 90)
+        
+        Delete.shadowHeight = 8
+        Delete.cornerRadius = 16
         Delete.addTarget(self, action: #selector(pressDelete(_:)), for: .touchUpInside)
         Delete.setTitle("Del", for: .normal)
         self.view.addSubview(Delete)
         
-        Space = UIButton()
-        Space.backgroundColor = UIColor.white
-        Space.setTitleColor(UIColor.black, for: .normal)
-        Space.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 300, width: 100, height: 150)
+        Space = PressableButton()
+//        Space.backgroundColor = UIColor.white
+//        Space.setTitleColor(UIColor.black, for: .normal)
+        Space.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 300, width: 100, height: 130)
+        Space.colors = .init(
+            button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
+            shadow: UIColor(red: 25 / 255, green: 112 / 255, blue: 61 / 255, alpha: 1)
+        )
+        
+        Space.shadowHeight = 8
+        Space.cornerRadius = 16
         Space.addTarget(self, action: #selector(pressSpace(_:)), for: .touchUpInside)
         Space.setTitle("Space", for: .normal)
         self.view.addSubview(Space)
         
-        Enter = UIButton()
-        Enter.backgroundColor = UIColor.gray
-        Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 450, width: 100, height: 150)
+        Enter = PressableButton()
+//        Enter.backgroundColor = UIColor.gray
+//        Enter.setTitleColor(UIColor.white, for: .normal)
+        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 450, width: 100, height: 130)
+        
+        Enter.colors = .init(
+            button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1),
+            shadow: UIColor(red: 40 / 255, green: 42 / 255, blue: 45 / 255, alpha: 1)
+        )
+        Enter.shadowHeight = 8
+        Enter.cornerRadius = 16
         Enter.addTarget(self, action: #selector(pressEnter(_:)), for: .touchUpInside)
         Enter.setTitle("Enter", for: .normal)
         self.view.addSubview(Enter)
         
-        goBack = UIButton()
-        goBack.backgroundColor = UIColor.red
-        goBack.setTitleColor(UIColor.white, for: .normal)
-        goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 100)
+        goBack = PressableButton()
+//        goBack.backgroundColor = UIColor.red
+//        goBack.setTitleColor(UIColor.white, for: .normal)
+        goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 90)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Go back", for: .normal)
         self.view.addSubview(goBack)
@@ -325,9 +475,13 @@ class ViewController: UIViewController {
         
         iter = 0
         while iter < 2 {
-            let bt = UIButton()
-            bt.backgroundColor = UIColor.gray
-            bt.setTitleColor(UIColor.black, for: .normal)
+            let bt = PressableButton()
+//            bt.backgroundColor = UIColor.gray
+//            bt.setTitleColor(UIColor.black, for: .normal)
+            
+            bt.shadowHeight = 8
+            bt.cornerRadius = 16
+            
             bt.frame = CGRect(x: 150, y: 200 + 150 * iter, width: 100, height: 100)
             bt.addTarget(self, action: #selector(pressSwitchMode(_:)), for: .touchUpInside)
             if iter == 0 {
@@ -592,6 +746,7 @@ class ViewController: UIViewController {
     
     @objc func pressGoBack(_ sender: UIButton) {
         let keyView = WelcomeViewController(nibName: nil, bundle: nil)
+        keyView.modalTransitionStyle = .crossDissolve
         self.present(keyView, animated: true, completion: nil)
     }
     

@@ -194,6 +194,7 @@ class WelcomeViewController: UIViewController {
                     settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
                     settle.setTitle("Comfirm", for: .normal)
                     settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
+                    settle.alpha = 0
                     
                     self.view.addSubview(self.settle)
 //                    UIView.animate(withDuration: 1.5) {
@@ -213,7 +214,16 @@ class WelcomeViewController: UIViewController {
                     reset.setTitle("Reset", for: .normal)
                     reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
                     
+                    reset.alpha = 0
+                    
+                    
                     self.view.addSubview(self.reset)
+                    
+                    UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        self.settle.alpha = 1
+                        self.reset.alpha = 1
+                    }, completion: nil)
+                    
                     UIView.animate(withDuration: 1) {
                         self.reset.colors = .init(
                             button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1),
