@@ -1,0 +1,11 @@
+framework module SwiftyButton {
+  umbrella header "SwiftyButton.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftyButton.Swift {
+    header "SwiftyButton-Swift.h"
+    requires objc
+}

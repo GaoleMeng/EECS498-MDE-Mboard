@@ -59,11 +59,11 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(vLine2)
         self.view.addSubview(hLine1)
         self.view.addSubview(hLine2)
-        instrLabel = UILabel(frame: CGRect(x: 0, y: 105, width: self.view.frame.width - 135, height: 80))
-        instrLabel.font = instrLabel.font.withSize(60)
-        instrLabel.text = "Place your four fingers below"
-        instrLabel.textAlignment = .center
-        instrLabel.textColor = .black
+        instrLabel = UILabel(frame: CGRect(x: 50, y: 200, width: self.view.frame.width - 135, height: 80))
+        instrLabel.font = instrLabel.font.withSize(30)
+        instrLabel.text = "Place and keep your four fingers inside"
+        instrLabel.textAlignment = .left
+        instrLabel.textColor = .gray
         instrLabel.backgroundColor = .white
         touchLock = false
         self.view.addSubview(instrLabel)
@@ -129,12 +129,12 @@ class WelcomeViewController: UIViewController {
                 }
             }
             if succeed {
-                print("overlap")
-                print(isOverlap())
-                print("invalid")
-                print(invalidRegion())
-                print("----")
                 if isOverlap() || invalidRegion() {
+                    print("overlap")
+                    print(isOverlap())
+                    print("invalid")
+                    print(invalidRegion())
+                    print("----")
                     print("not valid")
                 }
                 else {
@@ -304,11 +304,10 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
-        //print(bt1.frame.midX, bt2.frame.midX, bt3.frame.midX, bt4.frame.midX)
-        if bxArray[1] - bxArray[0] <= 80
+        //print(bxArray)
+        if bxArray[1] - bxArray[0] <= 70
             || bxArray[2] - bxArray[1] <= 80
-            || bxArray[3] - bxArray[2] <= 80 {
+            || bxArray[3] - bxArray[2] <= 70 {
             return true
         }
         return false
@@ -321,8 +320,8 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
-        if bxArray[3] > self.view.frame.width - 150
+        //print(bxArray)
+        if bxArray[3] > self.view.frame.width - 170
             || bxArray[0] < 40
             || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
             || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210

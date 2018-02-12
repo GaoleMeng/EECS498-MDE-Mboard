@@ -238,10 +238,44 @@ class ViewController: UIViewController {
         vLine.backgroundColor = UIColor.lightGray
         self.view.addSubview(vLine)
         
+        let center_y = centerArray.sorted(by: {$0.y < $1.y})[0].y
+        var benchmark : CGFloat
+        var go_back_benchmark_x : CGFloat
+        var go_back_benchmark_y : CGFloat
+        if center_y < 400 {
+            benchmark = center_y - 200
+            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_y = self.view.frame.height - 150
+        } else if center_y < self.view.frame.height - 450{
+            benchmark = center_y - 300
+            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_y = self.view.frame.height - 150
+        } else {
+            benchmark = center_y - 400
+            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_y = 44
+        }
+        
+        SwitchMode = UIButton()
+        SwitchMode.backgroundColor = UIColor.green
+        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 100)
+        SwitchMode.setTitle("Mode", for: .normal)
+        SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
+        self.view.addSubview(SwitchMode)
+        
+        Cap = UIButton()
+        Cap.backgroundColor = UIColor.gray
+        Cap.setTitleColor(UIColor.white, for: .normal)
+        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 100, width: 100, height: 100)
+        Cap.addTarget(self, action: #selector(pressCap(_:)), for: .touchUpInside)
+        Cap.setTitle("Cap", for: .normal)
+        self.view.addSubview(Cap)
+        
         Delete = UIButton()
         Delete.backgroundColor = UIColor.red
         Delete.setTitleColor(UIColor.white, for: .normal)
-        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y, width: 100, height: 100)
+        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 200, width: 100, height: 100)
         Delete.addTarget(self, action: #selector(pressDelete(_:)), for: .touchUpInside)
         Delete.setTitle("Del", for: .normal)
         self.view.addSubview(Delete)
@@ -249,49 +283,36 @@ class ViewController: UIViewController {
         Space = UIButton()
         Space.backgroundColor = UIColor.white
         Space.setTitleColor(UIColor.black, for: .normal)
-        Space.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y + 100, width: 100, height: 150)
+        Space.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 300, width: 100, height: 150)
         Space.addTarget(self, action: #selector(pressSpace(_:)), for: .touchUpInside)
         Space.setTitle("Space", for: .normal)
         self.view.addSubview(Space)
         
-        Cap = UIButton()
-        Cap.backgroundColor = UIColor.gray
-        Cap.setTitleColor(UIColor.white, for: .normal)
-        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y - 100, width: 100, height: 100)
-        Cap.addTarget(self, action: #selector(pressCap(_:)), for: .touchUpInside)
-        Cap.setTitle("Cap", for: .normal)
-        self.view.addSubview(Cap)
-        
         Enter = UIButton()
         Enter.backgroundColor = UIColor.gray
         Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y + 250, width: 100, height: 150)
+        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 450, width: 100, height: 150)
         Enter.addTarget(self, action: #selector(pressEnter(_:)), for: .touchUpInside)
         Enter.setTitle("Enter", for: .normal)
         self.view.addSubview(Enter)
         
-        SwitchMode = UIButton()
-        SwitchMode.backgroundColor = UIColor.green
-        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: centerArray.sorted(by: {$0.y < $1.y})[0].y - 200, width: 100, height: 100)
-        SwitchMode.setTitle("Mode", for: .normal)
-        SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
-        self.view.addSubview(SwitchMode)
-        
         goBack = UIButton()
         goBack.backgroundColor = UIColor.red
         goBack.setTitleColor(UIColor.white, for: .normal)
-        goBack.frame = CGRect(x: 44, y: 44, width: 100, height: 100)
+        goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 100)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Go back", for: .normal)
         self.view.addSubview(goBack)
         
         iter = 0
+        let pred_width = (buttons[3].frame.origin.x - buttons[0].frame.origin.x + 80) / 4
         while iter < 4 {
             let bt = UIButton()
             bt.backgroundColor = UIColor.gray
             bt.setTitleColor(UIColor.white, for: .normal)
-            bt.frame = CGRect(x: buttons[iter % 4].frame.origin.x - 20, y: buttons[iter % 4].frame.origin.y - 100, width: 100, height: 80)
+            //bt.frame = CGRect(x: buttons[iter % 4].frame.origin.x - 20, y: buttons[iter % 4].frame.origin.y - 100, width: 100, height: 80)
+            //bt.frame = CGRect(x: Int(buttons[iter % 4].frame.origin.x), y: Int(center_y - 200), width: 100, height: 80)
+            bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter) * pred_width), y: Int(center_y - 200), width: Int(pred_width - 2), height: 80)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
             bt.setTitle("predWord" + String(iter), for: .normal)
             predWords.append(bt)
@@ -314,6 +335,39 @@ class ViewController: UIViewController {
             modes.append(bt)
             iter += 1
         }
+    }
+    
+    func postRequest(text : String) -> Bool {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/input/" + text)!
+            //create the session object
+            let session = URLSession.shared
+            
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+            })
+            task.resume()
+        }
+        else {
+            return false
+        }
+        return true
     }
     
     @objc func pressCharacter(_ sender: UIButton) {
@@ -346,9 +400,9 @@ class ViewController: UIViewController {
             buttons[11].setTitle("Sign", for: .normal)
         } else {
             //inputText.text! += sender.titleLabel!.text!
+            postRequest(text: sender.titleLabel!.text!)
             
-            
-            if let tmp_url = self.ip {
+            /*if let tmp_url = self.ip {
                 let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
                 //create the session object
                 let session = URLSession.shared
@@ -376,7 +430,7 @@ class ViewController: UIViewController {
             }
             else {
                 return
-            }
+            }*/
         }
     }
     
