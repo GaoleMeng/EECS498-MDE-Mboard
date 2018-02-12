@@ -1,4 +1,6 @@
 import UIKit
+import SwiftyButton
+
 
 struct center {
     var x: CGFloat
@@ -12,7 +14,7 @@ struct center {
 class ViewController: UIViewController {
     
     //var inputText: UILabel!
-    var buttons: Array<UIButton> = []
+    var buttons: Array<PressableButton> = []
     var centerArray: [center] = []
     
     var Space: UIButton!
@@ -192,10 +194,13 @@ class ViewController: UIViewController {
             } else if iter < 12 {
                 row = 1
             }
-            let bt = UIButton()
-            bt.backgroundColor = UIColor.white
+            let bt = PressableButton()
+//            bt.backgroundColor = UIColor.white
             bt.setTitleColor(UIColor.black, for: .normal)
             bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+            bt.shadowHeight = 8
+            bt.cornerRadius = 20
+            
             bt.addTarget(self, action: #selector(pressCharacter(_:)), for: .touchUpInside)
             if row == -1 {
                 if iter % 4 == 0 {
@@ -474,6 +479,12 @@ class ViewController: UIViewController {
                     row = 1
                 }
                 buttons[iter].frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                
+                
+                
+                
+                
+                
                 iter += 1
             }
             for pred in predWords {
