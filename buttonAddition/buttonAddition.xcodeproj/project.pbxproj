@@ -17,6 +17,8 @@
 		04EFC0582031668200D6B02E /* NVActivityIndicatorView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04EFC05A2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */; };
 		04EFC05B2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; };
+		04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
 		8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F1D7202A32AC0030B309 /* rectangular.swift */; };
@@ -38,6 +40,7 @@
 				04EFC05320315E6100D6B02E /* SwiftyButton.framework in Embed Frameworks */,
 				0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */,
 				04EFC0582031668200D6B02E /* NVActivityIndicatorView.framework in Embed Frameworks */,
+				04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,6 +55,7 @@
 		04EFC0542031667800D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewAppExtension.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewAppExtension.framework; sourceTree = "<group>"; };
+		04F1CC1920327131003A5BA0 /* BubbleTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BubbleTransition.framework; path = Carthage/Build/iOS/BubbleTransition.framework; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
 		8578F1D7202A32AC0030B309 /* rectangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rectangular.swift; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 				04EFC05120315DE500D6B02E /* SwiftyButton.framework in Frameworks */,
 				0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */,
 				04EFC0572031668200D6B02E /* NVActivityIndicatorView.framework in Frameworks */,
+				04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +99,7 @@
 		85B7CF63202362C40049EA32 = {
 			isa = PBXGroup;
 			children = (
+				04F1CC1920327131003A5BA0 /* BubbleTransition.framework */,
 				04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */,
 				04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */,
 				0465A3342028115C00D6C58A /* Pulsator.framework.dSYM */,
