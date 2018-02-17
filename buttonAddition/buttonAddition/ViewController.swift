@@ -11,7 +11,7 @@ struct center {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     //var inputText: UILabel!
     var buttons: Array<PressableButton> = []

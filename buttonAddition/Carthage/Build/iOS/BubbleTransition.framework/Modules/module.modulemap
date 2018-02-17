@@ -1,0 +1,11 @@
+framework module BubbleTransition {
+  umbrella header "BubbleTransition.h"
+
+  export *
+  module * { export * }
+}
+
+module BubbleTransition.Swift {
+    header "BubbleTransition-Swift.h"
+    requires objc
+}
