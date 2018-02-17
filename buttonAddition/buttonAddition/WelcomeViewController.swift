@@ -192,7 +192,7 @@ class WelcomeViewController: UIViewController {
                     settle.cornerRadius = 5
                     //                    settle.setTitleColor(UIColor.blue, for: .normal)
                     settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
-                    settle.setTitle("Comfirm", for: .normal)
+                    settle.setTitle("Confirm", for: .normal)
                     settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
                     settle.alpha = 0
                     
