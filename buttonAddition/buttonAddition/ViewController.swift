@@ -24,7 +24,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var Cap: PressableButton!
     var isCapped: Int = 0
     
-    var SwitchMode: PressableButton!
+//    var SwitchMode: PressableButton!
     var vState: Int = 0
     var mode: Int = 0
     
@@ -33,6 +33,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var modes: Array<UIButton> = []
     var predWords: Array<UIButton> = []
     var ip: String?
+    var nav_arrows_alpha: Array<UIButton> = []
+    var nav_arrows_num: Array<UIButton> = []
+    var nav_left = UIButton()
+    var nav_right = UIButton()
+    var nav_up = UIButton()
+    var nav_down = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +49,16 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         let ownerview: UIView = self.view
         let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         upSwipe.direction = .up
         downSwipe.direction = .down
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
         ownerview.addGestureRecognizer(upSwipe)
         ownerview.addGestureRecognizer(downSwipe)
+        ownerview.addGestureRecognizer(leftSwipe)
+        ownerview.addGestureRecognizer(rightSwipe)
         
 
     }
@@ -140,12 +152,21 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         bt.alpha = 0
                         bt.frame.origin.y -= 60
                     }
+                    self.nav_up.alpha = 0
+                    self.nav_up.frame.origin.y -= 5
+                    self.nav_down.alpha = 0
+                    self.nav_down.frame.origin.y -= 5
+                    
                 }, completion: { (finished: Bool) in
                     
                     for bt in self.buttons {
                         bt.alpha = 0
                         bt.frame.origin.y += 120
                     }
+                    self.nav_up.alpha = 0
+                    self.nav_up.frame.origin.y += 10
+                    self.nav_down.alpha = 0
+                    self.nav_down.frame.origin.y += 10
                     
                     UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                         for bt in self.buttons {
@@ -192,6 +213,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[11].setTitle("$", for: .normal)
                             }
                         }
+                        self.nav_up.alpha = 1
+                        self.nav_up.frame.origin.y -= 5
+                        self.nav_down.alpha = 1
+                        self.nav_down.frame.origin.y -= 5
                     }, completion: nil)
                 })
             }
@@ -208,12 +233,21 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         bt.alpha = 0
                         bt.frame.origin.y += 60
                     }
+                    self.nav_up.alpha = 0
+                    self.nav_up.frame.origin.y += 5
+                    self.nav_down.alpha = 0
+                    self.nav_down.frame.origin.y += 5
+                    
                 }, completion: { (finished: Bool) in
                     
                     for bt in self.buttons {
                         bt.alpha = 0
                         bt.frame.origin.y -= 120
                     }
+                    self.nav_up.alpha = 0
+                    self.nav_up.frame.origin.y -= 10
+                    self.nav_down.alpha = 0
+                    self.nav_down.frame.origin.y -= 10
                     
                     UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                         for bt in self.buttons {
@@ -260,12 +294,203 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[11].setTitle("$", for: .normal)
                             }
                         }
+                        self.nav_up.alpha = 1
+                        self.nav_up.frame.origin.y += 5
+                        self.nav_down.alpha = 1
+                        self.nav_down.frame.origin.y += 5
                     }, completion: nil)
                 })
                 
             }
+                //switch to number mode
+            else if sender.direction == .left {
+                
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.x -= 60
+                    }
+                    for bt in self.predWords{
+                        bt.alpha = 0
+                        bt.frame.origin.x -= 60
+                    }
+                    for arrow in self.nav_arrows_alpha{
+                        arrow.alpha = 0
+                        arrow.frame.origin.x -= 5
+                    }
+                }, completion: { (finished: Bool) in
+                    // buttons being removed
+                    for arrow in self.nav_arrows_alpha{
+                        arrow.alpha = 0
+                        arrow.frame.origin.x += 5
+                        arrow.removeFromSuperview()
+                    }
+                    for bt in self.predWords{
+                        bt.alpha = 0
+                        bt.frame.origin.x += 60
+                        bt.removeFromSuperview()
+                    }
+                    // change keys
+                    self.buttons[0].setTitle("1", for: .normal)
+                    self.buttons[1].setTitle("4", for: .normal)
+                    self.buttons[2].setTitle("7", for: .normal)
+                    self.buttons[3].setTitle(".", for: .normal)
+                    self.buttons[4].setTitle("2", for: .normal)
+                    self.buttons[5].setTitle("5", for: .normal)
+                    self.buttons[6].setTitle("8", for: .normal)
+                    self.buttons[7].setTitle("0", for: .normal)
+                    self.buttons[8].setTitle("3", for: .normal)
+                    self.buttons[9].setTitle("6", for: .normal)
+                    self.buttons[10].setTitle("9", for: .normal)
+                    self.buttons[11].setTitle("Sign", for: .normal)
+                    // reformat keys
+                    var iter: Int = 0
+                    let tl = self.Cap.frame.origin.y
+                    while iter < 12 {
+                        var column: Int = 0
+                        if iter < 4 {
+                            column = 0
+                        } else if iter < 8 {
+                            column = 1
+                        } else {
+                            column = 2
+                        }
+                        self.buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
+                        iter += 1
+                    }
+                    
+                    // shift buttons for animation
+                    for arrow in self.nav_arrows_num{
+                        self.view.addSubview(arrow)
+                        arrow.alpha = 0
+                        arrow.frame.origin.x += 5
+                    }
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.x += 120
+                    }
+                    
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        for bt in self.buttons {
+                            bt.alpha = 1
+                            bt.frame.origin.x -= 60
+                        }
+                        for arrow in self.nav_arrows_num{
+                            arrow.alpha = 1
+                            arrow.frame.origin.x -= 5
+                        }
+                    }, completion: nil)
+                })
+                mode = 1
+            }
         } else if mode == 1 {
-            // This is number mode, can add swipe to change vState
+            //switch to alpha mode
+            if sender.direction == .right {
+                
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                    
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.x += 60
+                    }
+                    for arrow in self.nav_arrows_num{
+                        arrow.alpha = 0
+                        arrow.frame.origin.x += 5
+                    }
+                }, completion: { (finished: Bool) in
+                    // change buttons
+                    if self.vState == 0 {
+                        self.buttons[0].setTitle("q", for: .normal)
+                        self.buttons[1].setTitle("w", for: .normal)
+                        self.buttons[2].setTitle("e", for: .normal)
+                        self.buttons[3].setTitle("r", for: .normal)
+                        self.buttons[4].setTitle("a", for: .normal)
+                        self.buttons[5].setTitle("s", for: .normal)
+                        self.buttons[6].setTitle("d", for: .normal)
+                        self.buttons[7].setTitle("f", for: .normal)
+                        self.buttons[8].setTitle("z", for: .normal)
+                        self.buttons[9].setTitle("x", for: .normal)
+                        self.buttons[10].setTitle("c", for: .normal)
+                        self.buttons[11].setTitle("v", for: .normal)
+                    } else if self.vState == 1 {
+                        self.buttons[0].setTitle("t", for: .normal)
+                        self.buttons[1].setTitle("y", for: .normal)
+                        self.buttons[2].setTitle("u", for: .normal)
+                        self.buttons[3].setTitle("i", for: .normal)
+                        self.buttons[4].setTitle("g", for: .normal)
+                        self.buttons[5].setTitle("h", for: .normal)
+                        self.buttons[6].setTitle("j", for: .normal)
+                        self.buttons[7].setTitle("k", for: .normal)
+                        self.buttons[8].setTitle("b", for: .normal)
+                        self.buttons[9].setTitle("n", for: .normal)
+                        self.buttons[10].setTitle("m", for: .normal)
+                        self.buttons[11].setTitle("o", for: .normal)
+                    } else if self.vState == 2 {
+                        self.buttons[0].setTitle("p", for: .normal)
+                        self.buttons[1].setTitle("l", for: .normal)
+                        self.buttons[2].setTitle(".", for: .normal)
+                        self.buttons[3].setTitle(",", for: .normal)
+                        self.buttons[4].setTitle("\"", for: .normal)
+                        self.buttons[5].setTitle("?", for: .normal)
+                        self.buttons[6].setTitle("(", for: .normal)
+                        self.buttons[7].setTitle(")", for: .normal)
+                        self.buttons[8].setTitle(";", for: .normal)
+                        self.buttons[9].setTitle(":", for: .normal)
+                        self.buttons[10].setTitle("@", for: .normal)
+                        self.buttons[11].setTitle("$", for: .normal)
+                    }
+                    //reformat
+                    var iter: Int = 0
+                    while iter < 12 {
+                        var row: Int = 0
+                        if iter < 4 {
+                            row = -1
+                        } else if iter < 8 {
+                            row = 0
+                        } else {
+                            row = 1
+                        }
+                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                        iter += 1
+                    }
+                    for bt in self.buttons {
+                        bt.alpha = 0
+                        bt.frame.origin.x -= 120
+                    }
+                    for pred in self.predWords {
+                        self.view.addSubview(pred)
+                        pred.alpha = 0
+                        pred.frame.origin.x -= 60
+                    }
+                    for arrow in self.nav_arrows_alpha{
+                        self.view.addSubview(arrow)
+                        arrow.alpha = 0
+                        arrow.frame.origin.x -= 5
+                    }
+                    for arrow in self.nav_arrows_num{
+                        arrow.removeFromSuperview()
+                        arrow.alpha = 0
+                        arrow.frame.origin.x -= 5
+                    }
+                    
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        for bt in self.buttons {
+                            bt.alpha = 1
+                            bt.frame.origin.x += 60
+                        }
+                        for bt in self.predWords {
+                            bt.alpha = 1
+                            bt.frame.origin.x += 60
+                        }
+                        for arrow in self.nav_arrows_alpha{
+                            arrow.alpha = 1
+                            arrow.frame.origin.x += 5
+                        }
+                    }, completion: nil)
+                })
+                mode = 0
+            }
         }
     }
     
@@ -377,22 +602,22 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             go_back_benchmark_y = 44
         }
         
-        SwitchMode = PressableButton()
-//        SwitchMode.backgroundColor = UIColor.green
-//        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
-        SwitchMode.colors = .init(
-            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
-            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
-        )
-        
-        SwitchMode.shadowHeight = 8
-        SwitchMode.cornerRadius = 16
-        
-        
-        SwitchMode.setTitle("Switch", for: .normal)
-        SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
-        self.view.addSubview(SwitchMode)
+//        SwitchMode = PressableButton()
+////        SwitchMode.backgroundColor = UIColor.green
+////        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+//        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
+//        SwitchMode.colors = .init(
+//            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
+//            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+//        )
+//
+//        SwitchMode.shadowHeight = 8
+//        SwitchMode.cornerRadius = 16
+//
+//
+//        SwitchMode.setTitle("Switch", for: .normal)
+//        SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
+//        self.view.addSubview(SwitchMode)
         
         Cap = PressableButton()
 //        Cap.backgroundColor = UIColor.gray
@@ -471,6 +696,51 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             predWords.append(bt)
             self.view.addSubview(bt)
             iter += 1
+        }
+        
+        // setup navigational buttons
+        let nav_bt_size = CGFloat(55)
+        let nav_bt_x = (buttons[3].frame.origin.x + buttons[0].frame.origin.x + pred_width - nav_bt_size) / 2
+        let nav_bt_y = view.frame.maxY - (2.5 * nav_bt_size)
+        let bt = UIButton()
+        bt.backgroundColor = UIColor.black
+        bt.setTitleColor(UIColor.white, for: .normal)
+        bt.frame = CGRect(x: Int(nav_bt_x), y: Int(nav_bt_y), width: Int(nav_bt_size), height: Int(nav_bt_size))
+        bt.layer.cornerRadius = 0.5 * bt.bounds.size.width
+        bt.clipsToBounds = true
+        bt.setTitle("Swipe", for: .normal)
+        self.view.addSubview(bt)
+        // arrows for character modes
+        let up_arrow = UIButton()
+        up_arrow.setTitleColor(UIColor.white, for: .normal)
+        up_arrow.frame = CGRect(x: Int(nav_bt_x), y: Int(nav_bt_y - nav_bt_size - 2), width: Int(nav_bt_size), height: Int(nav_bt_size))
+        up_arrow.setTitle("a-z", for: .normal)
+        nav_arrows_alpha.append(up_arrow)
+        nav_up = up_arrow
+        
+        let down_arrow = UIButton()
+        down_arrow.setTitleColor(UIColor.white, for: .normal)
+        down_arrow.frame = CGRect(x: Int(nav_bt_x), y: Int(nav_bt_y + nav_bt_size + 2), width: Int(nav_bt_size), height: Int(nav_bt_size))
+        down_arrow.setTitle("a-z", for: .normal)
+        nav_arrows_alpha.append(down_arrow)
+        nav_down = down_arrow
+        
+        let right_arrow = UIButton()
+        right_arrow.setTitleColor(UIColor.white, for: .normal)
+        right_arrow.frame = CGRect(x: Int(nav_bt_x + nav_bt_size + 2), y: Int(nav_bt_y), width: Int(nav_bt_size), height: Int(nav_bt_size))
+        right_arrow.setTitle("#", for: .normal)
+        nav_arrows_alpha.append(right_arrow)
+        nav_right = right_arrow
+        
+        let left_arrow = UIButton()
+        left_arrow.setTitleColor(UIColor.white, for: .normal)
+        left_arrow.frame = CGRect(x: Int(nav_bt_x - nav_bt_size - 2), y: Int(nav_bt_y), width: Int(nav_bt_size), height: Int(nav_bt_size))
+        left_arrow.setTitle("a-z", for: .normal)
+        nav_arrows_num.append(left_arrow)
+        nav_left = left_arrow
+        
+        for arrow in nav_arrows_alpha{
+            self.view.addSubview(arrow)
         }
         
         iter = 0
@@ -662,7 +932,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Enter.removeFromSuperview()
         Cap.removeFromSuperview()
         goBack.removeFromSuperview()
-        SwitchMode.removeFromSuperview()
+//        SwitchMode.removeFromSuperview()
     }
     
     @objc func pressSwitchMode(_ sender: UIButton) {
@@ -698,6 +968,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             for pred in predWords {
                 self.view.addSubview(pred)
             }
+            for arrow in nav_arrows_alpha{
+                self.view.addSubview(arrow)
+            }
+            for arrow in nav_arrows_num{
+                arrow.removeFromSuperview()
+            }
         } else if sender.titleLabel!.text! == "Number" {
             mode = 1
             vState = 0
@@ -728,6 +1004,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
                 iter += 1
             }
+            for arrow in nav_arrows_num{
+                self.view.addSubview(arrow)
+            }
+            for arrow in nav_arrows_alpha{
+                arrow.removeFromSuperview()
+            }
         }
         for bt in buttons {
             self.view.addSubview(bt)
@@ -736,7 +1018,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         self.view.addSubview(Delete)
         self.view.addSubview(Enter)
         self.view.addSubview(Cap)
-        self.view.addSubview(SwitchMode)
+//        self.view.addSubview(SwitchMode)
         self.view.addSubview(goBack)
         
         for bt in modes {
