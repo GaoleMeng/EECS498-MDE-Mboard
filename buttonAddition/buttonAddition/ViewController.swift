@@ -456,7 +456,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     }
                     for bt in self.buttons {
                         bt.alpha = 0
-                        bt.frame.origin.x -= 120
+                        bt.frame.origin.x -= 60
                     }
                     for pred in self.predWords {
                         self.view.addSubview(pred)
