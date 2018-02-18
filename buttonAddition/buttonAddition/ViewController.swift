@@ -753,6 +753,13 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     @objc func pressWord(_ sender: UIButton) {
         print("Word: \(sender.titleLabel!.text!) pressed")
         /*inputText.text! += sender.titleLabel!.text!*/
+        //sender.color()
+        sender.backgroundColor = .white
+        sender.setTitleColor(.black, for: .normal)
         postRequest(text: sender.titleLabel!.text!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
+            sender.backgroundColor = .gray
+            sender.setTitleColor(.white, for: .normal)
+        })
     }
 }

@@ -19,6 +19,7 @@
 		04EFC05B2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; };
 		04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		855A4615203A1FE000FC9C19 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855A4614203A1FE000FC9C19 /* UIButtonExtension.swift */; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
 		8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F1D7202A32AC0030B309 /* rectangular.swift */; };
@@ -56,6 +57,7 @@
 		04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewAppExtension.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewAppExtension.framework; sourceTree = "<group>"; };
 		04F1CC1920327131003A5BA0 /* BubbleTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BubbleTransition.framework; path = Carthage/Build/iOS/BubbleTransition.framework; sourceTree = "<group>"; };
+		855A4614203A1FE000FC9C19 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
 		8578F1D7202A32AC0030B309 /* rectangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rectangular.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				85B7CF6F202362C50049EA32 /* AppDelegate.swift */,
 				8578161620238D4000B45AF8 /* WelcomeViewController.swift */,
 				85B7CF71202362C50049EA32 /* ViewController.swift */,
+				855A4614203A1FE000FC9C19 /* UIButtonExtension.swift */,
 				857816182023AE4000B45AF8 /* lineView.swift */,
 				8578F1D7202A32AC0030B309 /* rectangular.swift */,
 				85B7CF73202362C50049EA32 /* Main.storyboard */,
@@ -233,6 +236,7 @@
 				8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */,
 				85B7CF72202362C50049EA32 /* ViewController.swift in Sources */,
 				85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */,
+				855A4615203A1FE000FC9C19 /* UIButtonExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +374,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MA4ZNQH486;
+				DEVELOPMENT_TEAM = YVRMRZLT82;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -378,7 +382,7 @@
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaole.buttonAddition;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyu.buttonAddition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -390,7 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MA4ZNQH486;
+				DEVELOPMENT_TEAM = YVRMRZLT82;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -398,7 +402,7 @@
 				INFOPLIST_FILE = buttonAddition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gaole.buttonAddition;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jingyu.buttonAddition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

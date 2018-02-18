@@ -13,6 +13,8 @@ import NVActivityIndicatorView
 
 class WelcomeViewController: UIViewController {
     
+    var wrongPos: Int = 0
+    
     let dumpingRate:CGFloat = 0.7
     var instrLabel: UILabel!
     var counter: Int = 0
@@ -141,13 +143,35 @@ class WelcomeViewController: UIViewController {
                 }
             }
             if succeed {
-                if isOverlap() || invalidRegion() {
-                    print("overlap")
-                    print(isOverlap())
-                    print("invalid")
-                    print(invalidRegion())
-                    print("----")
-                    print("not valid")
+                if isOverlap(){
+                    if wrongPos == 0 {
+                        instrLabel.text = "This may cause key overlap"
+                        instrLabel.textColor = .red
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            // Put your code which should be executed with a delay here
+                            self.instrLabel.text = "Place and keep your four fingers inside"
+                            self.instrLabel.textColor = .gray
+                        })
+                    }
+                    wrongPos += 1
+                    if wrongPos == 20 {
+                        wrongPos = 0
+                    }
+                }
+                else if invalidRegion() {
+                    if wrongPos == 0 {
+                        instrLabel.text = "Please place inside the region"
+                        instrLabel.textColor = .red
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            // Put your code which should be executed with a delay here
+                            self.instrLabel.text = "Place and keep your four fingers inside"
+                            self.instrLabel.textColor = .gray
+                        })
+                    }
+                    wrongPos += 1
+                    if wrongPos == 20 {
+                        wrongPos = 0
+                    }
                 }
                 else {
                     // the check is ok, we then progress to the finalize of the button
