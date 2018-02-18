@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; };
 		0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04E0434B2038DCAF0032AC49 /* MouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0434A2038DCAF0032AC49 /* MouseView.swift */; };
 		04EFC05120315DE500D6B02E /* SwiftyButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC05020315DE500D6B02E /* SwiftyButton.framework */; };
 		04EFC05220315E6100D6B02E /* SwiftyButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC05020315DE500D6B02E /* SwiftyButton.framework */; };
 		04EFC05320315E6100D6B02E /* SwiftyButton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC05020315DE500D6B02E /* SwiftyButton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -51,6 +52,7 @@
 		0465A3302028111400D6C58A /* Pulsator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsator.framework; path = Carthage/Build/iOS/Pulsator.framework; sourceTree = "<group>"; };
 		0465A3342028115C00D6C58A /* Pulsator.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Pulsator.framework.dSYM; path = Carthage/Build/iOS/Pulsator.framework.dSYM; sourceTree = "<group>"; };
 		0465A3372028122300D6C58A /* PulsingHalo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulsingHalo.framework; path = Carthage/Build/iOS/PulsingHalo.framework; sourceTree = "<group>"; };
+		04E0434A2038DCAF0032AC49 /* MouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouseView.swift; sourceTree = "<group>"; };
 		04EFC05020315DE500D6B02E /* SwiftyButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyButton.framework; path = Carthage/Build/iOS/SwiftyButton.framework; sourceTree = "<group>"; };
 		04EFC0542031667800D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				8578161620238D4000B45AF8 /* WelcomeViewController.swift */,
 				85B7CF71202362C50049EA32 /* ViewController.swift */,
 				857816182023AE4000B45AF8 /* lineView.swift */,
+				04E0434A2038DCAF0032AC49 /* MouseView.swift */,
 				8578F1D7202A32AC0030B309 /* rectangular.swift */,
 				85B7CF73202362C50049EA32 /* Main.storyboard */,
 				85B7CF76202362C50049EA32 /* Assets.xcassets */,
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E0434B2038DCAF0032AC49 /* MouseView.swift in Sources */,
 				857816192023AE4000B45AF8 /* lineView.swift in Sources */,
 				8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */,
 				8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */,

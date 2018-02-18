@@ -1,5 +1,6 @@
 import UIKit
 import SwiftyButton
+import BubbleTransition
 
 
 struct center {
@@ -30,9 +31,13 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     var goBack: PressableButton!
     
+    var mouseButton: PressableButton!
+    
     var modes: Array<UIButton> = []
     var predWords: Array<UIButton> = []
     var ip: String?
+    
+    let transition = BubbleTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,27 +59,27 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
             self.buttons[0].alpha = 1
-            self.buttons[0].frame.origin.y -= 100
+            self.buttons[0].frame.origin.y = self.buttons[4].frame.origin.y - 100
             self.buttons[1].alpha = 1
-            self.buttons[1].frame.origin.y -= 100
+            self.buttons[1].frame.origin.y = self.buttons[5].frame.origin.y - 100
             self.buttons[2].alpha = 1
-            self.buttons[2].frame.origin.y -= 100
+            self.buttons[2].frame.origin.y = self.buttons[6].frame.origin.y - 100
             self.buttons[3].alpha = 1
-            self.buttons[3].frame.origin.y -= 100
+            self.buttons[3].frame.origin.y = self.buttons[7].frame.origin.y -  100
             
             self.buttons[8].alpha = 1
-            self.buttons[8].frame.origin.y += 100
+            self.buttons[8].frame.origin.y = self.buttons[4].frame.origin.y + 100
             self.buttons[9].alpha = 1
-            self.buttons[9].frame.origin.y += 100
+            self.buttons[9].frame.origin.y = self.buttons[5].frame.origin.y + 100
             self.buttons[10].alpha = 1
-            self.buttons[10].frame.origin.y += 100
+            self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
             self.buttons[11].alpha = 1
-            self.buttons[11].frame.origin.y += 100
+            self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
         }, completion: nil)
 
     }
     
-    func getip() -> String{
+    func getip(){
         
         let url = URL(string: "https://mboard-middle-server.herokuapp.com/api/getip")! //change the url
         
@@ -120,7 +125,6 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         })
         task.resume()
         
-        return "dummy"
     }
     
     
@@ -377,19 +381,36 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             go_back_benchmark_y = 44
         }
         
-        SwitchMode = PressableButton()
-//        SwitchMode.backgroundColor = UIColor.green
-//        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
-        SwitchMode.colors = .init(
-            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
-            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
-        )
         
+        SwitchMode = PressableButton()
+        //        SwitchMode.backgroundColor = UIColor.green
+        //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark - 100, width: 100, height: 90)
+        SwitchMode.colors = .init(
+            button: UIColor(red: 80 / 255, green: 90 / 255, blue: 100 / 255, alpha: 1),
+            shadow: UIColor(red: 50 / 255, green: 60 / 255, blue: 50 / 255, alpha: 1)
+        )
+       
         SwitchMode.shadowHeight = 8
         SwitchMode.cornerRadius = 16
         
         
+        mouseButton = PressableButton()
+//        SwitchMode.backgroundColor = UIColor.green
+//        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+        mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
+        mouseButton.colors = .init(
+            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
+            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+        )
+        
+        mouseButton.setTitle("🖱️", for: .normal)
+        mouseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+        mouseButton.addTarget(self, action: #selector(pressMouse(_:)), for: .touchUpInside)
+        mouseButton.shadowHeight = 8
+        mouseButton.cornerRadius = 16
+        
+        self.view.addSubview(mouseButton)
         SwitchMode.setTitle("Switch", for: .normal)
         SwitchMode.addTarget(self, action: #selector(pressMode(_:)), for: .touchUpInside)
         self.view.addSubview(SwitchMode)
@@ -646,6 +667,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         postRequest(text: "key_newline")
     }
     
+    
     @objc func pressMode(_ sender: UIButton) {
         print("Mode switch")
         for bt in modes {
@@ -663,6 +685,40 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Cap.removeFromSuperview()
         goBack.removeFromSuperview()
         SwitchMode.removeFromSuperview()
+    }
+    
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .present
+        transition.startingPoint = mouseButton.center
+        transition.duration = 0.2
+        transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
+        
+        return transition
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionMode = .dismiss
+        transition.startingPoint = mouseButton.center
+        transition.duration = 0.2
+        transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
+        
+        return transition
+    }
+    
+    @objc func pressMouse(_ sender: UIButton) {
+        let keyView = MouseView()
+        keyView.transitioningDelegate = self
+        keyView.modalPresentationStyle = .custom
+        
+        if let tmp_ip = self.ip {
+            keyView.setpos(x1: self.mouseButton.center.x - 50, y1: self.mouseButton.center.y - 45, inner_ip: tmp_ip)
+        }
+        else {
+            keyView.setpos(x1: self.mouseButton.center.x - 50, y1: self.mouseButton.center.y - 45, inner_ip: "")
+            getip()
+        }
+        
+        self.present(keyView, animated: true, completion: nil)
     }
     
     @objc func pressSwitchMode(_ sender: UIButton) {
