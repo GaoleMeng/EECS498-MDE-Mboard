@@ -8,11 +8,11 @@
   "tvOS" : [
 
   ],
-  "commitish" : "0.4.0",
+  "commitish" : "0.4.1",
   "iOS" : [
     {
       "name" : "Pulsator",
-      "hash" : "76cc894df294362a466c1f8d055f11046e475c35dbc489aa96439eb070c07750"
+      "hash" : "15a5c5e272fae7016c72313ed2851944138e55510523548390c089140231fea9"
     }
   ]
 }

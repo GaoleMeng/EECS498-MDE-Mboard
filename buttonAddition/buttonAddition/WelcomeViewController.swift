@@ -8,8 +8,11 @@
 
 import UIKit
 import Pulsator
+import SwiftyButton
+import NVActivityIndicatorView
 
 class WelcomeViewController: UIViewController {
+    var wrongPos: Int = 0
     
     let dumpingRate:CGFloat = 0.7
     var instrLabel: UILabel!
@@ -25,9 +28,10 @@ class WelcomeViewController: UIViewController {
     var pulsebt3: Pulsator!
     var pulsebt4: Pulsator!
     
+    var settle: PressableButton!
     
-    var settle: UIButton!
-    var reset: UIButton!
+
+    var reset: PressableButton!
     
     // track the position of the four finger
     var checkpos1: [center] = []
@@ -39,6 +43,8 @@ class WelcomeViewController: UIViewController {
     var okLock: Bool = false
     var timer = Timer()
     
+    var loadingicon: NVActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,9 +54,9 @@ class WelcomeViewController: UIViewController {
         self.view.backgroundColor = .white
         //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
         let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
-        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135, y: 300, width: 2, height: self.view.frame.height - 440))
-        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135, height: 2))
-        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135, height: 2))
+        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
+        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
         vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
         vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
         hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -59,14 +65,21 @@ class WelcomeViewController: UIViewController {
         self.view.addSubview(vLine2)
         self.view.addSubview(hLine1)
         self.view.addSubview(hLine2)
-        instrLabel = UILabel(frame: CGRect(x: 0, y: 105, width: self.view.frame.width - 135, height: 80))
-        instrLabel.font = instrLabel.font.withSize(60)
-        instrLabel.text = "Place your four fingers below"
-        instrLabel.textAlignment = .center
-        instrLabel.textColor = .black
+        instrLabel = UILabel(frame: CGRect(x: 50, y: 200, width: self.view.frame.width - 135, height: 80))
+        instrLabel.font = instrLabel.font.withSize(30)
+        instrLabel.text = "Place and keep your four fingers inside"
+        instrLabel.textAlignment = .left
+        instrLabel.textColor = .gray
         instrLabel.backgroundColor = .white
         touchLock = false
         self.view.addSubview(instrLabel)
+        
+        loadingicon = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width - 135, height: 80), color: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1))
+        
+        self.view.addSubview(loadingicon)
+//        loadingicon.startAnimating()
+        
+        
         
     }
     
@@ -93,7 +106,7 @@ class WelcomeViewController: UIViewController {
         checkpos3.append(center(mx: bt3.frame.midX, my: bt3.frame.midY))
         checkpos4.append(center(mx: bt4.frame.midX, my: bt4.frame.midY))
         
-        if checkpos1.count > 10 {
+        if checkpos1.count > 8 {
             // pop the first value and check the other 5
             var succeed = true
             var cur = center(mx: bt1.frame.midX, my: bt1.frame.midY)
@@ -129,16 +142,39 @@ class WelcomeViewController: UIViewController {
                 }
             }
             if succeed {
-                print("overlap")
-                print(isOverlap())
-                print("invalid")
-                print(invalidRegion())
-                print("----")
-                if isOverlap() || invalidRegion() {
-                    print("not valid")
+                if isOverlap(){
+                    if wrongPos == 0 {
+                        instrLabel.text = "This may cause key overlap"
+                        instrLabel.textColor = .red
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            // Put your code which should be executed with a delay here
+                            self.instrLabel.text = "Place and keep your four fingers inside"
+                            self.instrLabel.textColor = .gray
+                        })
+                    }
+                    wrongPos += 1
+                    if wrongPos == 30 {
+                        wrongPos = 0
+                    }
+                }
+                else if invalidRegion() {
+                    if wrongPos == 0 {
+                        instrLabel.text = "Please place inside the region"
+                        instrLabel.textColor = .red
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            // Put your code which should be executed with a delay here
+                            self.instrLabel.text = "Place and keep your four fingers inside"
+                            self.instrLabel.textColor = .gray
+                        })
+                    }
+                    wrongPos += 1
+                    if wrongPos == 30 {
+                        wrongPos = 0
+                    }
                 }
                 else {
                     // the check is ok, we then progress to the finalize of the button
+                    
                     pulsebt1 = Pulsator()
                     view.layer.addSublayer(pulsebt1)
                     pulsebt1.radius = 110
@@ -168,21 +204,62 @@ class WelcomeViewController: UIViewController {
                     pulsebt3.start()
                     pulsebt4.start()
                     
-                    settle = UIButton()
-                    settle.backgroundColor = UIColor.green
-                    settle.setTitleColor(UIColor.blue, for: .normal)
-                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 50, width: 100, height: 100)
-                    settle.setTitle("Sure?", for: .normal)
-                    settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
-                    self.view.addSubview(settle)
+                    settle = PressableButton()
+                    //                    settle.backgroundColor = UIColor.green
+                    settle.colors = .init(
+                        //button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                        //shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+                        button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                        shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
+                    )
                     
-                    reset = UIButton()
-                    reset.backgroundColor = UIColor.red
+                    settle.shadowHeight = 7
+                    settle.cornerRadius = 5
+                    //                    settle.setTitleColor(UIColor.blue, for: .normal)
+                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
+                    settle.setTitle("Confirm", for: .normal) // jingyu
+                    settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
+                    settle.alpha = 0
+                    
+                    self.view.addSubview(self.settle)
+//                    UIView.animate(withDuration: 1.5) {
+//                        self.settle.alpha = 1.0
+//                    }
+                    
+                    reset = PressableButton()
+                    reset.colors = .init(
+                        //button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                        //shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
+                        button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                        shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+                    )
+                    reset.shadowHeight = 7
+                    reset.cornerRadius = 5
+                    
                     reset.setTitleColor(UIColor.white, for: .normal)
-                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 50, width: 100, height: 100)
+                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 75, width: 100, height: 100)
                     reset.setTitle("Reset", for: .normal)
                     reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
-                    self.view.addSubview(reset)
+                    
+                    reset.alpha = 0
+                    
+                    
+                    self.view.addSubview(self.reset)
+                    
+                    UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                        self.settle.alpha = 1
+                        self.reset.alpha = 1
+                    }, completion: nil)
+                    
+                    UIView.animate(withDuration: 1) {
+                        self.reset.colors = .init(
+                            //button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                            //shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
+                            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+                        )
+                    }
+                    
                     self.okLock = true
                 }
             }
@@ -304,11 +381,10 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
-        //print(bt1.frame.midX, bt2.frame.midX, bt3.frame.midX, bt4.frame.midX)
-        if bxArray[1] - bxArray[0] <= 80
-            || bxArray[2] - bxArray[1] <= 80
-            || bxArray[3] - bxArray[2] <= 80 {
+        //print(bxArray)
+        if bxArray[1] - bxArray[0] <= 100 // jingyu: 70
+            || bxArray[2] - bxArray[1] <= 110 // jingyu: 80
+            || bxArray[3] - bxArray[2] <= 100 { // jingyu: 70
             return true
         }
         return false
@@ -321,8 +397,8 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt3.frame.midX)
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
-        print(bxArray)
-        if bxArray[3] > self.view.frame.width - 150
+        //print(bxArray)
+        if bxArray[3] > self.view.frame.width - 170 - 20 // jingyu
             || bxArray[0] < 40
             || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
             || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210
@@ -342,10 +418,12 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt4)
         bxArray = bxArray.sorted(by: {$0.frame.origin.x < $1.frame.origin.x})
         let keyView = ViewController()
+        keyView.modalTransitionStyle = .crossDissolve
         keyView.setCenterArray(x1: bxArray[0].frame.origin.x, y1: bxArray[0].frame.origin.y,
                                x2: bxArray[1].frame.origin.x, y2: bxArray[1].frame.origin.y,
                                x3: bxArray[2].frame.origin.x, y3: bxArray[2].frame.origin.y,
                                x4: bxArray[3].frame.origin.x, y4: bxArray[3].frame.origin.y)
+        
         self.present(keyView, animated: true, completion: nil)
     }
     
