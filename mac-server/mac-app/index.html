@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Switch</title>
+
+  <link rel="stylesheet"  type="text/css" href="style.css">
+
+</head>
+<body>
+  <div id="dragarea">
+
+  <div>
+  <div class="container">
+
+    <div class="switch white">
+      <input type="radio" name="switch" id="switch-off" onclick="radioClicked()" checked>
+      <input type="radio" name="switch" id="switch-on" onclick="radioClicked()" >
+
+      <label for="switch-off">Off</label>
+      <label for="switch-on">On</label>
+
+      <span class="toggle"></span>
+
+    </div> <!-- end switch -->
+
+  </div> <!-- end container -->
+  <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+      require('./appstart.js')
+      function radioClicked() {
+        console.log("fff")
+        fetch("http://localhost:3000/toggle", { credentials: 'same-origin' })
+          .then((response) => {
+            if (!response.ok) throw Error(response.statusText);
+            console.log("manage to toggle")
+          })
+          .catch(error => console.log(error)); // eslint-disable-line no-console
+      }
+
+  </script>
+</body>
+</html>

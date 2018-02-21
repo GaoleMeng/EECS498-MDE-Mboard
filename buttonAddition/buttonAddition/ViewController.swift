@@ -43,12 +43,16 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var nav_up = UIButton()
     var nav_down = UIButton()
     
+    // the boolean to tell whether it is the num mode
+    var whether_num: Bool!
+    
     let transition = BubbleTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         getip()
+        whether_num = false
         view.backgroundColor = .lightGray
         setButton()
         let ownerview: UIView = self.view
@@ -68,26 +72,29 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-            self.buttons[0].alpha = 1
-            self.buttons[0].frame.origin.y = self.buttons[4].frame.origin.y - 100
-            self.buttons[1].alpha = 1
-            self.buttons[1].frame.origin.y = self.buttons[5].frame.origin.y - 100
-            self.buttons[2].alpha = 1
-            self.buttons[2].frame.origin.y = self.buttons[6].frame.origin.y - 100
-            self.buttons[3].alpha = 1
-            self.buttons[3].frame.origin.y = self.buttons[7].frame.origin.y -  100
-            
-            self.buttons[8].alpha = 1
-            self.buttons[8].frame.origin.y = self.buttons[4].frame.origin.y + 100
-            self.buttons[9].alpha = 1
-            self.buttons[9].frame.origin.y = self.buttons[5].frame.origin.y + 100
-            self.buttons[10].alpha = 1
-            self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
-            self.buttons[11].alpha = 1
-            self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
-        }, completion: nil)
 
+        if (!whether_num) {
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                self.buttons[0].alpha = 1
+                self.buttons[0].frame.origin.y = self.buttons[4].frame.origin.y - 100
+                self.buttons[1].alpha = 1
+                self.buttons[1].frame.origin.y = self.buttons[5].frame.origin.y - 100
+                self.buttons[2].alpha = 1
+                self.buttons[2].frame.origin.y = self.buttons[6].frame.origin.y - 100
+                self.buttons[3].alpha = 1
+                self.buttons[3].frame.origin.y = self.buttons[7].frame.origin.y -  100
+                
+                self.buttons[8].alpha = 1
+                self.buttons[8].frame.origin.y = self.buttons[4].frame.origin.y + 100
+                self.buttons[9].alpha = 1
+                self.buttons[9].frame.origin.y = self.buttons[5].frame.origin.y + 100
+                self.buttons[10].alpha = 1
+                self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
+                self.buttons[11].alpha = 1
+                self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
+            }, completion: nil)
+        }
+    
     }
     
     func getip(){
@@ -306,7 +313,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             }
                 //switch to number mode
             else if sender.direction == .left {
-                
+                whether_num = true
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
                     for bt in self.buttons {
@@ -358,7 +365,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             column = 2
                         }
-                        self.buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
+                        self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 100, height: 90)
                         iter += 1
                     }
                     
@@ -382,6 +389,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                             arrow.alpha = 1
                             arrow.frame.origin.x -= 5
                         }
+                        
+                        
                     }, completion: nil)
                 })
                 mode = 1
@@ -389,6 +398,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         } else if mode == 1 {
             //switch to alpha mode
             if sender.direction == .right {
+                whether_num = false
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
@@ -453,7 +463,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             row = 1
                         }
-                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 100, height: 90)
                         iter += 1
                     }
                     for bt in self.buttons {
@@ -1040,7 +1050,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     row = 1
                 }
-                buttons[iter].frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                buttons[iter].frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 100, height: 90)
                 iter += 1
             }
             for pred in predWords {
@@ -1079,7 +1089,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     column = 2
                 }
-                buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
+                buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 100, height: 90)
                 iter += 1
             }
             for arrow in nav_arrows_num{
