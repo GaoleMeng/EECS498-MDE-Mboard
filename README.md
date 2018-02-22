@@ -2,13 +2,13 @@
 
 ## Quick start
 
-A basic M-board app involves two apps to be started, which located in two folder:
+A basic M-Board app involves two apps to be started, which located in two folder:
 
-- `buttonAddition` - the iPad app that used as the virtual keyboard.
+- `buttonAddition` - the iPad app that is used as the virtual keyboard.
 
-- `mac-keyboard-server` - the receiver app runs on Mac to receive input from virtual keyboard
+- `mac-keyboard-server` - the receiver app that runs on Mac to receive input from virtual keyboard
 
-To use the app, clone and run this repository with the following command, the first thing you do is to run the receiver app in the terminal:
+To use the app, clone the repository and run the following commands. These commands include running the receiver app in the terminal, which is the first thing you need to do in order to use M-Board app:
 
 ```bash
 # Clone this repository
@@ -20,16 +20,16 @@ cd mac-keyboard-server
 # Start the app, you should have node to start it:
 npm start
 ```
-This will open up a window with an on/off switch. Set this switch to on.
+This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping).
 In alpha release, remember to open and turn on the receiver app before running the iPad app!
 
 Next you will start up the iPad app. To do this, complete the following steps:
 1. Navigate to the root of your newly created repository called EECS498-MDE-Mboard
 2. Go into the buttonAddition directory
 3. Open buttonAddition.xcodeproj with Xcode
-4. Click in the box that says "buttonAddition" which is to the right of the start and stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
-5. If you have an iPad, you can plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list.
-6. Press the start button in the top left corner of the screen and wait for the program to finish building.
+4. Click in the box that says "buttonAddition" which is to the right of the Build-and-Run and Stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
+5. If you have an iPad, you can plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list. You will have a better experience of the whole features of M-Board, if you can run that on iPad. Remember to check the bundle indentifier and signing team by click the buttonAddition folder in the left column of the screen. You might need to change the bundle identifier and signing team to your own Apple developer account in order to run the app on iPad.
+6. Press the Build-and-Run button in the top left corner of the screen and wait for the program to finish building. It will take a while.
 7. On your device or simulator, you should now see a new application. Press on this to open the app.
 
 Now you should be able to use the application
@@ -38,16 +38,18 @@ Now you should be able to use the application
 To begin using the application, you will first be presented with the Configuration screen (0)
 
 0. Configuration Sceen:
-- Configure the keyboard to your hand by placing your fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be). Follow the on-screen directions to do this.
+- Configure the keyboard to your hand by placing your four fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be one by one). Follow the on-screen directions to do this.
 - If you are satisfied with the postioning, click confirm. This will bring you to the main typing screen (1). Otherwise, you can click reset to restart this process.
+- If your positioning will cause overlapping keys in the later view or is not inside the outline area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers to close to each other. 
 
 1. Main typing screen:
-- Press character keys to type to computer.
+- On your computer, set the cursor to where you want to type (Notes, Word, etc.)
+- On the iPad, press character keys to type to the computer.
 - Swipe up or down on the screen to change the characters on the keys.
 - Swipe left on the screen to switch to the number mode screen (2).
-- Word prediction boxes along the top of the screen may be pressed to type the word offered in that box.
-- Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side of this view.
-- "Configure" button at bottom right brings you back to configure the keyboard if you would like to reconfigure.
+- Word prediction boxes along the top of the screen may be pressed to type the word offered in that box. The whole functionality of the word prediction box will be implemented in Beta release.
+- Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side of this view. You can also try them.
+- "Configure" button at bottom right (or top right based on your positioning in (0)) brings you back to configure the keyboard if you would like to reconfigure.
 - Pressing the blue button on the right with a computer mouse symbol will bring you to the mouse control screen (3).
 - The symbols at the bottom of the screen (including a black circle with the label "Swipe") cannot be interracted with. These are navigtional symbols which show you what keys you can get to by swiping in various directions. These will be updated for whatever screen you are on except for the mouse control screen (3) which does not offer navigation-by-swiping.
 
@@ -65,6 +67,6 @@ To begin using the application, you will first be presented with the Configurati
 ## Note for developer
 1. Before submit the code, since everyone has the permission, please leave enough commit information to others.
 
-2. The starter-code folder contain the starter-code(?) for the swift front end.
+2. The starter-code folder contain very primitive starter-code for the swift front end.
 
-3. For the subproject like the server for the mac or the middle server, please create a seperate folder
+3. For the subproject like the server for the mac or the middle server, please create a seperate folder.
