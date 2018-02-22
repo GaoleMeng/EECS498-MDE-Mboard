@@ -1,4 +1,4 @@
-# M-Board EECS498 - sec10
+# M-Board
 
 ## Quick start
 
