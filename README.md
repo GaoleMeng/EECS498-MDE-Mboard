@@ -20,13 +20,46 @@ cd mac-keyboard-server
 # Start the app, you should have node to start it:
 npm start
 ```
+This will open up a window with an on/off switch. Set this switch to on.
+In alpha release, remember to open and turn on the receiver app before running the iPad app!
 
-In alpha release, remember to open the receiver app first!
+Next you will start up the iPad app. To do this, complete the following steps:
+1. Navigate to the root of your newly created repository called EECS498-MDE-Mboard
+2. Go into the buttonAddition directory
+3. Open buttonAddition.xcodeproj with Xcode
+4. Click in the box that says "buttonAddition" which is to the right of the start and stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
+5. If you have an iPad, you can plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list.
+6. Press the start button in the top left corner of the screen and wait for the program to finish building.
+7. On your device or simulator, you should now see a new application. Press on this to open the app.
 
+Now you should be able to use the application
 
-(Nick's part:)
+### Using the application
+To begin using the application, you will first be presented with the Configuration screen (0)
 
+0. Configuration Sceen:
+- Configure the keyboard to your hand by placing your fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be). Follow the on-screen directions to do this.
+- If you are satisfied with the postioning, click confirm. This will bring you to the main typing screen (1). Otherwise, you can click reset to restart this process.
 
+1. Main typing screen:
+- Press character keys to type to computer.
+- Swipe up or down on the screen to change the characters on the keys.
+- Swipe left on the screen to switch to the number mode screen (2).
+- Word prediction boxes along the top of the screen may be pressed to type the word offered in that box.
+- Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side of this view.
+- "Configure" button at bottom right brings you back to configure the keyboard if you would like to reconfigure.
+- Pressing the blue button on the right with a computer mouse symbol will bring you to the mouse control screen (3).
+- The symbols at the bottom of the screen (including a black circle with the label "Swipe") cannot be interracted with. These are navigtional symbols which show you what keys you can get to by swiping in various directions. These will be updated for whatever screen you are on except for the mouse control screen (3) which does not offer navigation-by-swiping.
+
+2. Number mode screen:
+- Press number keys to type to the computer.
+- Press the "sign" button to switch to number-related signs. This will also present the "Num" button, which can be pressed to switch the keys back to numbers.
+- Swipe right on the screen to switch back to the main typing screen (1).
+- Access to all keys from the main typing screen (1) that are not character keys or word prediction boxes.
+
+3. Mouse control screen:
+- Press and drag your finger (or mouse if using a simulator) on the screen to control the cursor on your computer.
+- Press the "Back" button to go back to whichever screen you navigated here from.
 
 
 ## Note for developer
