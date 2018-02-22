@@ -21,7 +21,8 @@ cd mac-keyboard-server
 npm start
 ```
 This will open up a window with an on/off switch. Set this switch to on.
-In alpha release, remember to open and turn on the receiver app before running the iPad app!
+
+### In the alpha release, remember to open and turn on the receiver app before running the iPad app!
 
 Next you will start up the iPad app. To do this, complete the following steps:
 1. Navigate to the root of your newly created repository called EECS498-MDE-Mboard
