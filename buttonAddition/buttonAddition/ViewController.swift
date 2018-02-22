@@ -25,6 +25,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var Cap: PressableButton!
     var isCapped: Int = 0
     
+    var timer = Timer()
+    
     //var SwitchMode: PressableButton!
     var vState: Int = 0
     var mode: Int = 0
@@ -60,6 +62,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+
         upSwipe.direction = .up
         downSwipe.direction = .down
         leftSwipe.direction = .left
@@ -68,8 +71,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         ownerview.addGestureRecognizer(downSwipe)
         ownerview.addGestureRecognizer(leftSwipe)
         ownerview.addGestureRecognizer(rightSwipe)
-
+        scheduledTimerWithTimeInterval()
     }
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
 
@@ -97,8 +102,19 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     }
     
-    func getip(){
-        
+    func scheduledTimerWithTimeInterval(){
+        // do checking the position of the four button ever 0.4 second
+        self.timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(self.getip),
+            userInfo: nil,
+            repeats: true)
+    }
+    
+    
+    @objc func getip(){
+        print("finding ip")
         let url = URL(string: "https://mboard-middle-server.herokuapp.com/api/getip")! //change the url
         
         //create the session object
@@ -135,7 +151,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     print(json)
                     self.ip = json["ip"] as? String
-                    // handle json...
+                    self.timer.invalidate()
                 }
             } catch let error {
                 print(error.localizedDescription)
@@ -365,7 +381,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             column = 2
                         }
-                        self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 100, height: 90)
+                        self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 90, height: 90)
                         iter += 1
                     }
                     
@@ -463,7 +479,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             row = 1
                         }
-                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 100, height: 90)
+                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 90, height: 90)
                         iter += 1
                     }
                     for bt in self.buttons {
@@ -543,7 +559,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 row = 1
             }
             let bt = PressableButton()
-            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 100, height: 90) // jingyu
+            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
             bt.shadowHeight = 8
             bt.cornerRadius = 20
             
@@ -634,10 +650,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
 //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
         // mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
         mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
-        /* mouseButton.colors = .init(
-            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
-            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
-        ) */ // jingyu use default blue color
+        mouseButton.colors = .init(
+            button: UIColor(red: 52 / 255, green: 125 / 255, blue: 219 / 255, alpha: 1),
+            shadow: UIColor(red: 38 / 255, green: 116 / 255, blue: 168 / 255, alpha: 1)
+        )
         
         mouseButton.setTitle("🖱️", for: .normal)
         mouseButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
@@ -655,10 +671,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
 //        Cap.setTitleColor(UIColor.white, for: .normal)
         // Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
         Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
-        /* Cap.colors = .init(
-            button: UIColor(red: 241 / 255, green: 196 / 255, blue: 15 / 255, alpha: 1),
-            shadow: UIColor(red: 155 / 255, green: 126 / 255, blue: 10 / 255, alpha: 1)
-        )*/ // jingyu use default blue color
+        Cap.colors = .init(
+            button: UIColor(red: 41 / 255, green: 128 / 255, blue: 185 / 255, alpha: 1),
+            shadow: UIColor(red: 31 / 255, green: 95 / 255, blue: 137 / 255, alpha: 1)
+        )
         
         Cap.shadowHeight = 8
         Cap.cornerRadius = 16
@@ -673,7 +689,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         // Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
         Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
         Delete.colors = .init(
-            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
+            button: UIColor(red: 229 / 255, green: 80 / 255, blue: 57 / 255, alpha: 1),
             shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
         ) // jingyu add color
         Delete.shadowHeight = 8
@@ -729,7 +745,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             bt.backgroundColor = UIColor.gray
             bt.setTitleColor(UIColor.white, for: .normal)
             bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter % 2) * pred_width),
-                              y: Int(center_y - 300 + CGFloat((iter / 2) * 82)), width: Int(pred_width - 2), height: 80)
+                              y: Int(center_y - 300 + CGFloat((iter / 2) * 52)), width: Int(pred_width - 2), height: 50)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
             bt.setTitle("predWord" + String(iter), for: .normal)
             predWords.append(bt)
@@ -992,7 +1008,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.startingPoint = mouseButton.center
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         return transition
@@ -1001,7 +1017,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = mouseButton.center
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         return transition

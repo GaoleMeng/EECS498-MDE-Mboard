@@ -455,7 +455,6 @@ class WelcomeViewController: UIViewController {
     }
     
     
-    
     @objc func tapAction() {
         // dummy code
     }
