@@ -31,7 +31,7 @@ Next you will start up the iPad app. To do this, complete the following steps:
 2. Go into the buttonAddition directory
 3. Open buttonAddition.xcodeproj with Xcode
 4. Click in the box that says "buttonAddition" which is to the right of the Build-and-Run and Stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
-5. If you have an iPad, you can plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list. You will have a better experience of the whole features of M-Board, if you can run that on iPad. Remember to check the bundle indentifier and signing team by click the buttonAddition folder in the left column of the screen. You might need to change the bundle identifier and signing team to your own Apple developer account in order to run the app on iPad.
+5. If you have an iPad, you can plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list. You will have a better experience of the whole features of M-Board, if you can run that on iPad. Remember to check the bundle indentifier and signing team by clicking the buttonAddition folder in the left column of the screen. You might need to change the bundle identifier and signing team to your own Apple developer account in order to run the app on iPad.
 6. Press the Build-and-Run button in the top left corner of the screen and wait for the program to finish building. It will take a while.
 7. On your device or simulator, you should now see a new application. Press on this to open the app.
 
@@ -43,7 +43,7 @@ To begin using the application, you will first be presented with the Configurati
 0. Configuration Sceen:
 - Configure the keyboard to your hand by placing your four fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be one by one). Follow the on-screen directions to do this.
 - If you are satisfied with the postioning, click confirm. This will bring you to the main typing screen (1). Otherwise, you can click reset to restart this process.
-- If your positioning will cause overlapping keys in the later view or is not inside the outline area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers to close to each other. 
+- If your positioning will cause overlapping keys in the later view or is not inside the outlined area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers to close to each other. 
 
 1. Main typing screen:
 - On your computer, set the cursor to where you want to type (Notes, Word, etc.)
