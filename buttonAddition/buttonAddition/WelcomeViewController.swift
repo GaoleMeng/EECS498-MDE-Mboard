@@ -54,9 +54,9 @@ class WelcomeViewController: UIViewController {
         self.view.backgroundColor = .white
         //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
         let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
-        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135, y: 300, width: 2, height: self.view.frame.height - 440))
-        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135, height: 2))
-        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135, height: 2))
+        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
+        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
         vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
         vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
         hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -207,15 +207,17 @@ class WelcomeViewController: UIViewController {
                     settle = PressableButton()
                     //                    settle.backgroundColor = UIColor.green
                     settle.colors = .init(
-                        button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
-                        shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+                        //button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                        //shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+                        button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                        shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
                     )
                     
                     settle.shadowHeight = 7
                     settle.cornerRadius = 5
                     //                    settle.setTitleColor(UIColor.blue, for: .normal)
                     settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
-                    settle.setTitle("Comfirm", for: .normal)
+                    settle.setTitle("Confirm", for: .normal) // jingyu
                     settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
                     settle.alpha = 0
                     
@@ -226,8 +228,10 @@ class WelcomeViewController: UIViewController {
                     
                     reset = PressableButton()
                     reset.colors = .init(
-                        button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1),
-                        shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1)
+                        //button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                        //shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
+                        button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                        shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
                     )
                     reset.shadowHeight = 7
                     reset.cornerRadius = 5
@@ -249,8 +253,10 @@ class WelcomeViewController: UIViewController {
                     
                     UIView.animate(withDuration: 1) {
                         self.reset.colors = .init(
-                            button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1),
-                            shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1)
+                            //button: UIColor(red: 96 / 255, green: 201 / 255, blue: 92 / 255, alpha: 1), // jingyu
+                            //shadow: UIColor(red: 65 / 255, green: 130 / 255, blue: 63 / 255, alpha: 1) // jingyu
+                            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
                         )
                     }
                     
@@ -376,9 +382,9 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
         //print(bxArray)
-        if bxArray[1] - bxArray[0] <= 70
-            || bxArray[2] - bxArray[1] <= 80
-            || bxArray[3] - bxArray[2] <= 70 {
+        if bxArray[1] - bxArray[0] <= 100 // jingyu: 70
+            || bxArray[2] - bxArray[1] <= 110 // jingyu: 80
+            || bxArray[3] - bxArray[2] <= 100 { // jingyu: 70
             return true
         }
         return false
@@ -392,7 +398,7 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
         //print(bxArray)
-        if bxArray[3] > self.view.frame.width - 170
+        if bxArray[3] > self.view.frame.width - 170 - 20 // jingyu
             || bxArray[0] < 40
             || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
             || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210
@@ -447,7 +453,6 @@ class WelcomeViewController: UIViewController {
         
         pos = []
     }
-    
     
     
     @objc func tapAction() {

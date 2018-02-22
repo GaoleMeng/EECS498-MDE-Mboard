@@ -23,28 +23,91 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     var getlock: Bool!
     
     var counter: Int!
+    
+    var leftclick: PressableButton!
+    var rightclick: PressableButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(pressleft))
+        self.view.addGestureRecognizer(tapGes)
+        
+        let tapDouble = UITapGestureRecognizer(target: self, action: #selector(pressright(_:)))
+        tapDouble.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(tapDouble)
+        
+        let tapDoublecc = UITapGestureRecognizer(target: self, action: #selector(pressdouble(_:)))
+        tapDoublecc.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(tapDoublecc)
+        
         tmp = PressableButton()
         tmp.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
 //        tmp.backgroundColor = .red
         tmp.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         tmp.colors = .init(
-            button: UIColor(red: 247 / 255, green: 231 / 255, blue: 183 / 255, alpha: 1),
-            shadow: UIColor(red: 163 / 255, green: 152 / 255, blue: 119 / 255, alpha: 1)
+            button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
+            shadow: UIColor(red: 62 / 255, green: 68 / 255, blue: 71 / 255, alpha: 1)
         )
         tmp.setTitle("Back", for: .normal)
-        tmp.setTitleColor(.black, for: .normal)
+        tmp.setTitleColor(.white, for: .normal)
         tmp.shadowHeight = 8
         tmp.cornerRadius = 16
         getlock = false
         counter = 0
         self.view.backgroundColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
+        
+//        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
+        
+        leftclick = PressableButton()
+        rightclick = PressableButton()
+        
+        
+        leftclick = PressableButton()
+        leftclick.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        leftclick.shadowHeight = 8
+        leftclick.cornerRadius = 16
+        
+        leftclick.colors = .init(
+            button: UIColor(red: 149 / 255, green: 165 / 255, blue: 166 / 255, alpha: 1),
+            shadow: UIColor(red: 93 / 255, green: 103 / 255, blue: 104 / 255, alpha: 1)
+        )
+        leftclick.addTarget(self, action: #selector(pressleft(_:)), for: .touchUpInside)
+        leftclick.setTitle("left", for: .normal)
+        
+        
+        rightclick = PressableButton()
+        rightclick.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        rightclick.shadowHeight = 8
+        rightclick.cornerRadius = 16
+        
+        rightclick.colors = .init(
+            button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
+            shadow: UIColor(red: 73 / 255, green: 81 / 255, blue: 84 / 255, alpha: 1)
+        )
+        
+        rightclick.addTarget(self, action: #selector(pressright(_:)), for: .touchUpInside)
+        rightclick.setTitle("right", for: .normal)
+        
+        leftclick.alpha = 0
+        rightclick.alpha = 0
+//
+//        self.view.addSubview(leftclick)
+//        self.view.addSubview(rightclick)
         self.view.addSubview(tmp)
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+//            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
+//            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
+//            self.leftclick.alpha = 1
+//            self.rightclick.alpha = 1
+//        }, completion: nil)
+        
     }
     
     func setpos(x1: CGFloat, y1: CGFloat, inner_ip: String) {
@@ -105,6 +168,118 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     @objc func pressConfirm(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func pressleft(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/leftclick")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    @objc func pressdouble(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/doubleclick")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    @objc func pressright(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/rightclick")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
     }
     
     func getip() {

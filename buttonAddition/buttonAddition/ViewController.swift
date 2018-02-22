@@ -25,6 +25,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var Cap: PressableButton!
     var isCapped: Int = 0
     
+    var timer = Timer()
+    
     //var SwitchMode: PressableButton!
     var vState: Int = 0
     var mode: Int = 0
@@ -43,12 +45,16 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var nav_up = UIButton()
     var nav_down = UIButton()
     
+    // the boolean to tell whether it is the num mode
+    var whether_num: Bool!
+    
     let transition = BubbleTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         getip()
+        whether_num = false
         view.backgroundColor = .lightGray
         setButton()
         let ownerview: UIView = self.view
@@ -56,6 +62,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+
         upSwipe.direction = .up
         downSwipe.direction = .down
         leftSwipe.direction = .left
@@ -64,34 +71,50 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         ownerview.addGestureRecognizer(downSwipe)
         ownerview.addGestureRecognizer(leftSwipe)
         ownerview.addGestureRecognizer(rightSwipe)
-
+        scheduledTimerWithTimeInterval()
     }
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-            self.buttons[0].alpha = 1
-            self.buttons[0].frame.origin.y = self.buttons[4].frame.origin.y - 100
-            self.buttons[1].alpha = 1
-            self.buttons[1].frame.origin.y = self.buttons[5].frame.origin.y - 100
-            self.buttons[2].alpha = 1
-            self.buttons[2].frame.origin.y = self.buttons[6].frame.origin.y - 100
-            self.buttons[3].alpha = 1
-            self.buttons[3].frame.origin.y = self.buttons[7].frame.origin.y -  100
-            
-            self.buttons[8].alpha = 1
-            self.buttons[8].frame.origin.y = self.buttons[4].frame.origin.y + 100
-            self.buttons[9].alpha = 1
-            self.buttons[9].frame.origin.y = self.buttons[5].frame.origin.y + 100
-            self.buttons[10].alpha = 1
-            self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
-            self.buttons[11].alpha = 1
-            self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
-        }, completion: nil)
 
+        if (!whether_num) {
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+                self.buttons[0].alpha = 1
+                self.buttons[0].frame.origin.y = self.buttons[4].frame.origin.y - 100
+                self.buttons[1].alpha = 1
+                self.buttons[1].frame.origin.y = self.buttons[5].frame.origin.y - 100
+                self.buttons[2].alpha = 1
+                self.buttons[2].frame.origin.y = self.buttons[6].frame.origin.y - 100
+                self.buttons[3].alpha = 1
+                self.buttons[3].frame.origin.y = self.buttons[7].frame.origin.y -  100
+                
+                self.buttons[8].alpha = 1
+                self.buttons[8].frame.origin.y = self.buttons[4].frame.origin.y + 100
+                self.buttons[9].alpha = 1
+                self.buttons[9].frame.origin.y = self.buttons[5].frame.origin.y + 100
+                self.buttons[10].alpha = 1
+                self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
+                self.buttons[11].alpha = 1
+                self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
+            }, completion: nil)
+        }
+    
     }
     
-    func getip(){
-        
+    func scheduledTimerWithTimeInterval(){
+        // do checking the position of the four button ever 0.4 second
+        self.timer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(self.getip),
+            userInfo: nil,
+            repeats: true)
+    }
+    
+    
+    @objc func getip(){
+        print("finding ip")
         let url = URL(string: "https://mboard-middle-server.herokuapp.com/api/getip")! //change the url
         
         //create the session object
@@ -128,7 +151,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     print(json)
                     self.ip = json["ip"] as? String
-                    // handle json...
+                    self.timer.invalidate()
                 }
             } catch let error {
                 print(error.localizedDescription)
@@ -306,7 +329,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             }
                 //switch to number mode
             else if sender.direction == .left {
-                
+                whether_num = true
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
                     for bt in self.buttons {
@@ -358,7 +381,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             column = 2
                         }
-                        self.buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
+                        self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 90, height: 90)
                         iter += 1
                     }
                     
@@ -382,6 +405,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                             arrow.alpha = 1
                             arrow.frame.origin.x -= 5
                         }
+                        
+                        
                     }, completion: nil)
                 })
                 mode = 1
@@ -389,6 +414,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         } else if mode == 1 {
             //switch to alpha mode
             if sender.direction == .right {
+                whether_num = false
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
@@ -453,7 +479,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             row = 1
                         }
-                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                        self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 90, height: 90)
                         iter += 1
                     }
                     for bt in self.buttons {
@@ -533,7 +559,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 row = 1
             }
             let bt = PressableButton()
-            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 80, height: 80)
+            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
             bt.shadowHeight = 8
             bt.cornerRadius = 20
             
@@ -583,9 +609,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             iter += 1
         }
         
-        let vLine = lineView(frame: CGRect(x: buttons[7].frame.origin.x + 100, y: 204, width: 197, height: 819))
-        vLine.backgroundColor = UIColor.lightGray
-        self.view.addSubview(vLine)
+        //let vLine = lineView(frame: CGRect(x: buttons[7].frame.origin.x + 120, y: 204, width: 197, height: 819)) // jingyu
+        //vLine.backgroundColor = UIColor.lightGray // jingyu
+        //self.view.addSubview(vLine) // jingyu
         
         let center_y = centerArray.sorted(by: {$0.y < $1.y})[0].y
         var benchmark : CGFloat
@@ -593,15 +619,15 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         var go_back_benchmark_y : CGFloat
         if center_y < 400 {
             benchmark = center_y - 200
-            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_x = buttons[7].frame.origin.x + 120 // jingyu
             go_back_benchmark_y = self.view.frame.height - 150
         } else if center_y < self.view.frame.height - 450{
             benchmark = center_y - 300
-            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_x = buttons[7].frame.origin.x + 120 // jingyu
             go_back_benchmark_y = self.view.frame.height - 150
         } else {
             benchmark = center_y - 400
-            go_back_benchmark_x = buttons[7].frame.origin.x + 100
+            go_back_benchmark_x = buttons[7].frame.origin.x + 120 // jingyu
             go_back_benchmark_y = 44
         }
         
@@ -622,10 +648,11 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         mouseButton = PressableButton()
 //        SwitchMode.backgroundColor = UIColor.green
 //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark, width: 100, height: 90)
+        // mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
+        mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
         mouseButton.colors = .init(
-            button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1),
-            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+            button: UIColor(red: 52 / 255, green: 125 / 255, blue: 219 / 255, alpha: 1),
+            shadow: UIColor(red: 38 / 255, green: 116 / 255, blue: 168 / 255, alpha: 1)
         )
         
         mouseButton.setTitle("🖱️", for: .normal)
@@ -642,10 +669,11 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Cap = PressableButton()
 //        Cap.backgroundColor = UIColor.gray
 //        Cap.setTitleColor(UIColor.white, for: .normal)
-        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 100, width: 100, height: 90)
+        // Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
+        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
         Cap.colors = .init(
-            button: UIColor(red: 241 / 255, green: 196 / 255, blue: 15 / 255, alpha: 1),
-            shadow: UIColor(red: 155 / 255, green: 126 / 255, blue: 10 / 255, alpha: 1)
+            button: UIColor(red: 41 / 255, green: 128 / 255, blue: 185 / 255, alpha: 1),
+            shadow: UIColor(red: 31 / 255, green: 95 / 255, blue: 137 / 255, alpha: 1)
         )
         
         Cap.shadowHeight = 8
@@ -658,8 +686,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         
         Delete = PressableButton()
 //        Delete.setTitleColor(UIColor.white, for: .normal)
-        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 200, width: 100, height: 90)
-        
+        // Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
+        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
+        Delete.colors = .init(
+            button: UIColor(red: 229 / 255, green: 80 / 255, blue: 57 / 255, alpha: 1),
+            shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
+        ) // jingyu add color
         Delete.shadowHeight = 8
         Delete.cornerRadius = 16
         Delete.addTarget(self, action: #selector(pressDelete(_:)), for: .touchUpInside)
@@ -669,10 +701,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Space = PressableButton()
 //        Space.backgroundColor = UIColor.white
 //        Space.setTitleColor(UIColor.black, for: .normal)
-        Space.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 300, width: 100, height: 130)
+        Space.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 300, width: 100, height: 130) // jingyu
         Space.colors = .init(
-            button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
-            shadow: UIColor(red: 25 / 255, green: 112 / 255, blue: 61 / 255, alpha: 1)
+            // button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
+            // shadow: UIColor(red: 25 / 255, green: 112 / 255, blue: 61 / 255, alpha: 1)
+            button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1), // jingyu
+            shadow: UIColor(red: 40 / 255, green: 42 / 255, blue: 45 / 255, alpha: 1) // jingyu
         )
         
         Space.shadowHeight = 8
@@ -684,7 +718,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Enter = PressableButton()
 //        Enter.backgroundColor = UIColor.gray
 //        Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark + 450, width: 100, height: 130)
+        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 450, width: 100, height: 130) // jingyu
         
         Enter.colors = .init(
             button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1),
@@ -701,16 +735,17 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
 //        goBack.setTitleColor(UIColor.white, for: .normal)
         goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 90)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
-        goBack.setTitle("Go back", for: .normal)
+        goBack.setTitle("Configure", for: .normal)
         self.view.addSubview(goBack)
         
         iter = 0
-        let pred_width = (buttons[3].frame.origin.x - buttons[0].frame.origin.x + 80) / 4
+        let pred_width = (buttons[3].frame.origin.x - buttons[0].frame.origin.x + 80) / 2 // jingyu
         while iter < 4 {
             let bt = UIButton()
             bt.backgroundColor = UIColor.gray
             bt.setTitleColor(UIColor.white, for: .normal)
-            bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter) * pred_width), y: Int(center_y - 300), width: Int(pred_width - 2), height: 80)
+            bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter % 2) * pred_width),
+                              y: Int(center_y - 300 + CGFloat((iter / 2) * 52)), width: Int(pred_width - 2), height: 50)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
             bt.setTitle("predWord" + String(iter), for: .normal)
             predWords.append(bt)
@@ -849,6 +884,20 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             //inputText.text! += sender.titleLabel!.text!
             if sender.titleLabel!.text! == "%" {
                 postRequest(text: "key_percent")
+            } else if sender.titleLabel!.text! == "\"" {
+                postRequest(text: "key_quotation")
+            } else if sender.titleLabel!.text! == "?" {
+                postRequest(text: "key_question")
+            } else if sender.titleLabel!.text! == "<" {
+                postRequest(text: "key_less")
+            } else if sender.titleLabel!.text! == ">" {
+                postRequest(text: "key_more")
+            } else if sender.titleLabel!.text! == "{" {
+                postRequest(text: "key_lbracket")
+            } else if sender.titleLabel!.text! == "}" {
+                postRequest(text: "key_rbracket")
+            } else if sender.titleLabel!.text! == "/" {
+                postRequest(text: "key_slash")
             } else {
                 postRequest(text: sender.titleLabel!.text!)
             }
@@ -959,7 +1008,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .present
         transition.startingPoint = mouseButton.center
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         return transition
@@ -968,7 +1017,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         transition.transitionMode = .dismiss
         transition.startingPoint = mouseButton.center
-        transition.duration = 0.2
+        transition.duration = 0.3
         transition.bubbleColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         return transition
@@ -1017,7 +1066,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     row = 1
                 }
-                buttons[iter].frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 80, height: 80)
+                buttons[iter].frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y + CGFloat(100 * row), width: 100, height: 90)
                 iter += 1
             }
             for pred in predWords {
@@ -1056,7 +1105,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     column = 2
                 }
-                buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 80, height: 80)
+                buttons[iter].frame = CGRect(x: 100 + 90 * CGFloat(column), y: tl + CGFloat(90 * (iter % 4)), width: 100, height: 90)
                 iter += 1
             }
             for arrow in nav_arrows_num{
