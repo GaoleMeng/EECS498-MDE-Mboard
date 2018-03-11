@@ -97,6 +97,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
                 self.buttons[11].alpha = 1
                 self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
+                
+                self.buttons[12].alpha = 1
+                self.buttons[12].frame.origin.y = self.buttons[7].frame.origin.y - 200
             }, completion: nil)
         }
     
@@ -202,6 +205,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[1].setTitle("w", for: .normal)
                                 self.buttons[2].setTitle("e", for: .normal)
                                 self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[12].setTitle("t", for: .normal)
                                 self.buttons[4].setTitle("a", for: .normal)
                                 self.buttons[5].setTitle("s", for: .normal)
                                 self.buttons[6].setTitle("d", for: .normal)
@@ -211,23 +215,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[10].setTitle("c", for: .normal)
                                 self.buttons[11].setTitle("v", for: .normal)
                             } else if self.vState == 1 {
-                                self.buttons[0].setTitle("t", for: .normal)
-                                self.buttons[1].setTitle("y", for: .normal)
-                                self.buttons[2].setTitle("u", for: .normal)
-                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[0].setTitle("y", for: .normal)
+                                self.buttons[1].setTitle("u", for: .normal)
+                                self.buttons[2].setTitle("i", for: .normal)
+                                self.buttons[3].setTitle("o", for: .normal)
                                 self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[12].setTitle("p", for: .normal)
                                 self.buttons[5].setTitle("h", for: .normal)
                                 self.buttons[6].setTitle("j", for: .normal)
                                 self.buttons[7].setTitle("k", for: .normal)
                                 self.buttons[8].setTitle("b", for: .normal)
                                 self.buttons[9].setTitle("n", for: .normal)
                                 self.buttons[10].setTitle("m", for: .normal)
-                                self.buttons[11].setTitle("o", for: .normal)
+                                self.buttons[11].setTitle("l", for: .normal)
                             } else if self.vState == 2 {
-                                self.buttons[0].setTitle("p", for: .normal)
-                                self.buttons[1].setTitle("l", for: .normal)
-                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[0].setTitle("!", for: .normal)
+                                self.buttons[1].setTitle("#", for: .normal)
+                                self.buttons[2].setTitle("'", for: .normal)
                                 self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[12].setTitle(".", for: .normal)
                                 self.buttons[4].setTitle("\"", for: .normal)
                                 self.buttons[5].setTitle("?", for: .normal)
                                 self.buttons[6].setTitle("(", for: .normal)
@@ -283,6 +289,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[1].setTitle("w", for: .normal)
                                 self.buttons[2].setTitle("e", for: .normal)
                                 self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[12].setTitle("t", for: .normal)
                                 self.buttons[4].setTitle("a", for: .normal)
                                 self.buttons[5].setTitle("s", for: .normal)
                                 self.buttons[6].setTitle("d", for: .normal)
@@ -292,23 +299,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[10].setTitle("c", for: .normal)
                                 self.buttons[11].setTitle("v", for: .normal)
                             } else if self.vState == 1 {
-                                self.buttons[0].setTitle("t", for: .normal)
-                                self.buttons[1].setTitle("y", for: .normal)
-                                self.buttons[2].setTitle("u", for: .normal)
-                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[0].setTitle("y", for: .normal)
+                                self.buttons[1].setTitle("u", for: .normal)
+                                self.buttons[2].setTitle("i", for: .normal)
+                                self.buttons[3].setTitle("o", for: .normal)
                                 self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[12].setTitle("p", for: .normal)
                                 self.buttons[5].setTitle("h", for: .normal)
                                 self.buttons[6].setTitle("j", for: .normal)
                                 self.buttons[7].setTitle("k", for: .normal)
                                 self.buttons[8].setTitle("b", for: .normal)
                                 self.buttons[9].setTitle("n", for: .normal)
                                 self.buttons[10].setTitle("m", for: .normal)
-                                self.buttons[11].setTitle("o", for: .normal)
+                                self.buttons[11].setTitle("l", for: .normal)
                             } else if self.vState == 2 {
-                                self.buttons[0].setTitle("p", for: .normal)
-                                self.buttons[1].setTitle("l", for: .normal)
-                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[0].setTitle("!", for: .normal)
+                                self.buttons[1].setTitle("#", for: .normal)
+                                self.buttons[2].setTitle("'", for: .normal)
                                 self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[12].setTitle(".", for: .normal)
                                 self.buttons[4].setTitle("\"", for: .normal)
                                 self.buttons[5].setTitle("?", for: .normal)
                                 self.buttons[6].setTitle("(", for: .normal)
@@ -356,6 +365,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         bt.frame.origin.x += 60
                         bt.removeFromSuperview()
                     }
+                    self.buttons[12].alpha = 0
+                    self.buttons[12].removeFromSuperview()
+                    
                     // change keys
                     self.buttons[0].setTitle("1", for: .normal)
                     self.buttons[1].setTitle("4", for: .normal)
@@ -418,7 +430,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
-                    for bt in self.buttons {
+                    for bt in self.buttons[0...11] {
                         bt.alpha = 0
                         bt.frame.origin.x += 60
                     }
@@ -433,6 +445,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[1].setTitle("w", for: .normal)
                         self.buttons[2].setTitle("e", for: .normal)
                         self.buttons[3].setTitle("r", for: .normal)
+                        self.buttons[12].setTitle("t", for: .normal)
                         self.buttons[4].setTitle("a", for: .normal)
                         self.buttons[5].setTitle("s", for: .normal)
                         self.buttons[6].setTitle("d", for: .normal)
@@ -442,23 +455,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[10].setTitle("c", for: .normal)
                         self.buttons[11].setTitle("v", for: .normal)
                     } else if self.vState == 1 {
-                        self.buttons[0].setTitle("t", for: .normal)
-                        self.buttons[1].setTitle("y", for: .normal)
-                        self.buttons[2].setTitle("u", for: .normal)
-                        self.buttons[3].setTitle("i", for: .normal)
+                        self.buttons[0].setTitle("y", for: .normal)
+                        self.buttons[1].setTitle("u", for: .normal)
+                        self.buttons[2].setTitle("i", for: .normal)
+                        self.buttons[3].setTitle("o", for: .normal)
                         self.buttons[4].setTitle("g", for: .normal)
+                        self.buttons[12].setTitle("p", for: .normal)
                         self.buttons[5].setTitle("h", for: .normal)
                         self.buttons[6].setTitle("j", for: .normal)
                         self.buttons[7].setTitle("k", for: .normal)
                         self.buttons[8].setTitle("b", for: .normal)
                         self.buttons[9].setTitle("n", for: .normal)
                         self.buttons[10].setTitle("m", for: .normal)
-                        self.buttons[11].setTitle("o", for: .normal)
+                        self.buttons[11].setTitle("l", for: .normal)
                     } else if self.vState == 2 {
-                        self.buttons[0].setTitle("p", for: .normal)
-                        self.buttons[1].setTitle("l", for: .normal)
-                        self.buttons[2].setTitle(".", for: .normal)
+                        self.buttons[0].setTitle("!", for: .normal)
+                        self.buttons[1].setTitle("#", for: .normal)
+                        self.buttons[2].setTitle("'", for: .normal)
                         self.buttons[3].setTitle(",", for: .normal)
+                        self.buttons[12].setTitle(".", for: .normal)
                         self.buttons[4].setTitle("\"", for: .normal)
                         self.buttons[5].setTitle("?", for: .normal)
                         self.buttons[6].setTitle("(", for: .normal)
@@ -482,6 +497,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 90, height: 90)
                         iter += 1
                     }
+                    self.view.addSubview(self.buttons[12])
                     for bt in self.buttons {
                         bt.alpha = 0
                         bt.frame.origin.x -= 60
@@ -549,7 +565,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         
         var iter: Int = 0
         // setup normal keys
-        while iter < 12 {
+        while iter < 13 {
             var row: Int = 0
             if iter < 4 {
                 row = -1
@@ -557,9 +573,15 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 row = 0
             } else if iter < 12 {
                 row = 1
+            } else if iter == 12{
+                row = 2
             }
             let bt = PressableButton()
-            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
+            if iter < 12{
+                bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
+            } else if iter == 12{
+                bt.frame = CGRect(x: centerArray[3].x, y: centerArray[3].y, width: 90, height: 90) // jingyu
+            }
             bt.shadowHeight = 8
             bt.cornerRadius = 20
             
@@ -586,7 +608,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     bt.setTitle("f", for: .normal)
                 }
-            } else {
+            } else if row == 1{
                 if iter % 4 == 0 {
                     bt.setTitle("z", for: .normal)
                 } else if iter % 4 == 1 {
@@ -596,6 +618,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     bt.setTitle("v", for: .normal)
                 }
+            } else if row == 2{
+                bt.setTitle("t", for: .normal)
             }
             bt.layer.cornerRadius = bt.frame.height / 2
             buttons.append(bt)
