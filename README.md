@@ -26,7 +26,7 @@ In alpha release, remember to open and turn on the receiver app before running t
 
 ### In the alpha release, remember to open and turn on the receiver app before running the iPad app!
 
-Next you will start up the iPad app. To do this, complete the following steps:
+Then start the virtual keyboard on iPad. To do this, complete the following steps:
 1. Navigate to the root of `EECS498-MDE-Mboard`
 2. Enter `buttonAddition` directory
 3. Open `buttonAddition.xcodeproj` with Xcode

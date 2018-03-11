@@ -20,6 +20,7 @@ app.get('/input/:char', (req, res) => {
 
     let start = app.get('toggle')
     if (start){
+        robot.setKeyboardDelay(0)
         let string = req.params.char
 
         if (string == "key_space") {
