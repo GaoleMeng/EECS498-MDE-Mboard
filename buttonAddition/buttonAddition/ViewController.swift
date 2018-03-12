@@ -820,6 +820,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     }
     
     func postRequest(text : String) -> Bool {
+        
         if let tmp_url = self.ip {
             let url = URL(string: "http://" + tmp_url + ":3000/input/" + text)!
             //create the session object

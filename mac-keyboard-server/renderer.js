@@ -9,6 +9,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 app.set('toggle', false)
+app.set('mousedown', false)
 app.set('ip', ip.address())
 
 
@@ -17,7 +18,7 @@ app.get('/input/:char', (req, res) => {
     // robot.typeString("abc")
     // console.log(keyboard)
     // if ()
-
+    console.log("trigger")
     let start = app.get('toggle')
     if (start){
         robot.setKeyboardDelay(0)
@@ -128,6 +129,61 @@ app.post('/api/move', (req, res) => {
 })
 
 
+app.get('/api/mouseToggle', (req, res) => {
+    robot.setMouseDelay(0)
+    res.setHeader('Content-Type', 'application/json')
+    let start = app.get('toggle')
+    if (start) {
+        let whetherdown = app.get('mousedown')
+        if (whetherdown) {
+            robot.mouseToggle("down")
+            app.set('mousedown', false)
+        }
+        else {
+            robot.mouseToggle("up")
+            app.set('mousedown', true)
+        }
+    }
+
+    res_data = {
+        "status": "mouse move"
+    }
+    res.json(res_data)
+})
+
+
+app.get('/api/mouseup', (req, res) => {
+    robot.setMouseDelay(0)
+    res.setHeader('Content-Type', 'application/json')
+    let start = app.get('toggle')
+    console.log("sss!")
+    if (start) {
+        robot.mouseToggle("up")
+    }
+
+    res_data = {
+        "status": "mouse move"
+    }
+    res.json(res_data)
+})
+
+
+
+app.get('/api/mousedown', (req, res) => {
+    robot.setMouseDelay(0)
+    res.setHeader('Content-Type', 'application/json')
+    let start = app.get('toggle')
+    if (start) {
+        robot.mouseToggle("down")
+    }
+
+    res_data = {
+        "status": "mouse move"
+    }
+    res.json(res_data)
+})
+
+
 app.get('/api/moveMouse/:xx/:yy', (req, res) => {
     robot.setMouseDelay(0)
     res.setHeader('Content-Type', 'application/json')
@@ -136,12 +192,53 @@ app.get('/api/moveMouse/:xx/:yy', (req, res) => {
     if (start){
         let x = parseFloat(req.params.xx)
         let y = parseFloat(req.params.yy)
-
         robot.moveMouse(robot.getMousePos().x + x, robot.getMousePos().y + y)
     }
     // console.log(robot.getMousePos())
     res_data = {
         "status": "mouse move"
+    }
+    res.json(res_data)
+})
+
+
+
+app.get('/api/dragMouse/:xx/:yy', (req, res) => {
+    robot.setMouseDelay(0)
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start){
+        let x = parseFloat(req.params.xx)
+        let y = parseFloat(req.params.yy)
+        robot.mouseToggle("down");
+        robot.dragMouse(robot.getMousePos().x + x, robot.getMousePos().y + y)
+        // robot.mouseToggle("up");
+
+    }
+    // console.log(robot.getMousePos())
+    res_data = {
+        "status": "mouse move"
+    }
+    res.json(res_data)
+})
+
+
+
+app.get('/api/scrollMouse/:xx/:yy', (req, res) => {
+    robot.setMouseDelay(0)
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start){
+        let x = parseFloat(req.params.xx)
+        let y = parseFloat(req.params.yy)
+
+        robot.scrollMouse(x, y)
+    }
+    // console.log(robot.getMousePos())
+    res_data = {
+        "status": "mouse scoroll"
     }
     res.json(res_data)
 })
