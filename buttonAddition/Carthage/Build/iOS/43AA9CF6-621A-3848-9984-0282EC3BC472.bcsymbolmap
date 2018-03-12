@@ -1,0 +1,382 @@
+BCSymbolMap Version: 2.0
+-[OnboardingViewController dealloc]
++[OnboardingViewController onboardWithBackgroundImage:contents:]
+-[OnboardingViewController initWithBackgroundImage:contents:]
++[OnboardingViewController onboardWithBackgroundVideoURL:contents:]
+-[OnboardingViewController initWithBackgroundVideoURL:contents:]
+-[OnboardingViewController initWithContents:]
+___45-[OnboardingViewController initWithContents:]_block_invoke
+-[OnboardingViewController viewDidLoad]
+-[OnboardingViewController viewWillAppear:]
+-[OnboardingViewController viewWillDisappear:]
+-[OnboardingViewController viewWillLayoutSubviews]
+-[OnboardingViewController generateView]
+-[OnboardingViewController handleAppEnteredForeground]
+-[OnboardingViewController handleSkipButtonPressed]
+-[OnboardingViewController setUnderPageControlPadding:]
+-[OnboardingViewController pageViewController:viewControllerBeforeViewController:]
+-[OnboardingViewController pageViewController:viewControllerAfterViewController:]
+-[OnboardingViewController pageViewController:didFinishAnimating:previousViewControllers:transitionCompleted:]
+-[OnboardingViewController moveNextPage]
+-[OnboardingViewController setCurrentPage:]
+-[OnboardingViewController setNextPage:]
+-[OnboardingViewController scrollViewDidScroll:]
+-[OnboardingViewController blurBackground]
+-[OnboardingViewController viewControllers]
+-[OnboardingViewController setViewControllers:]
+-[OnboardingViewController backgroundImage]
+-[OnboardingViewController setBackgroundImage:]
+-[OnboardingViewController shouldMaskBackground]
+-[OnboardingViewController setShouldMaskBackground:]
+-[OnboardingViewController shouldBlurBackground]
+-[OnboardingViewController setShouldBlurBackground:]
+-[OnboardingViewController shouldFadeTransitions]
+-[OnboardingViewController setShouldFadeTransitions:]
+-[OnboardingViewController fadePageControlOnLastPage]
+-[OnboardingViewController setFadePageControlOnLastPage:]
+-[OnboardingViewController fadeSkipButtonOnLastPage]
+-[OnboardingViewController setFadeSkipButtonOnLastPage:]
+-[OnboardingViewController allowSkipping]
+-[OnboardingViewController setAllowSkipping:]
+-[OnboardingViewController skipHandler]
+-[OnboardingViewController setSkipHandler:]
+-[OnboardingViewController swipingEnabled]
+-[OnboardingViewController setSwipingEnabled:]
+-[OnboardingViewController pageControl]
+-[OnboardingViewController setPageControl:]
+-[OnboardingViewController skipButton]
+-[OnboardingViewController setSkipButton:]
+-[OnboardingViewController stopMoviePlayerWhenDisappear]
+-[OnboardingViewController setStopMoviePlayerWhenDisappear:]
+-[OnboardingViewController moviePlayerController]
+-[OnboardingViewController setMoviePlayerController:]
+-[OnboardingViewController underPageControlPadding]
+-[OnboardingViewController currentPage]
+-[OnboardingViewController upcomingPage]
+-[OnboardingViewController setUpcomingPage:]
+-[OnboardingViewController pageVC]
+-[OnboardingViewController setPageVC:]
+-[OnboardingViewController player]
+-[OnboardingViewController setPlayer:]
+-[OnboardingViewController videoURL]
+-[OnboardingViewController setVideoURL:]
+-[OnboardingViewController .cxx_destruct]
+___block_descriptor_tmp
+___block_literal_global
+_OBJC_IVAR_$_OnboardingViewController._currentPage
+_OBJC_IVAR_$_OnboardingViewController._underPageControlPadding
+_OBJC_IVAR_$_OnboardingViewController._viewControllers
+_OBJC_IVAR_$_OnboardingViewController._upcomingPage
+_OBJC_IVAR_$_OnboardingViewController._backgroundImage
+_OBJC_IVAR_$_OnboardingViewController._shouldMaskBackground
+_OBJC_IVAR_$_OnboardingViewController._shouldBlurBackground
+_OBJC_IVAR_$_OnboardingViewController._shouldFadeTransitions
+_OBJC_IVAR_$_OnboardingViewController._fadePageControlOnLastPage
+_OBJC_IVAR_$_OnboardingViewController._fadeSkipButtonOnLastPage
+_OBJC_IVAR_$_OnboardingViewController._allowSkipping
+_OBJC_IVAR_$_OnboardingViewController._skipHandler
+_OBJC_IVAR_$_OnboardingViewController._swipingEnabled
+_OBJC_IVAR_$_OnboardingViewController._pageControl
+_OBJC_IVAR_$_OnboardingViewController._skipButton
+_OBJC_IVAR_$_OnboardingViewController._stopMoviePlayerWhenDisappear
+_OBJC_IVAR_$_OnboardingViewController._moviePlayerController
+_OBJC_IVAR_$_OnboardingViewController._pageVC
+_OBJC_IVAR_$_OnboardingViewController._player
+_OBJC_IVAR_$_OnboardingViewController._videoURL
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_UIPageViewControllerDataSource
+l_OBJC_LABEL_PROTOCOL_$_UIPageViewControllerDataSource
+l_OBJC_PROTOCOL_$_UIPageViewControllerDelegate
+l_OBJC_LABEL_PROTOCOL_$_UIPageViewControllerDelegate
+l_OBJC_PROTOCOL_$_UIScrollViewDelegate
+l_OBJC_LABEL_PROTOCOL_$_UIScrollViewDelegate
+l_OBJC_PROTOCOL_$_OnboardingContentViewControllerDelegate
+l_OBJC_LABEL_PROTOCOL_$_OnboardingContentViewControllerDelegate
+Apple LLVM version 9.0.0 (clang-900.0.39.2)
+/Users/jacky/EECS498/test/buttonAddition/Carthage/Checkouts/Onboard/Source/OnboardingViewController.m
+/Users/jacky/EECS498/test/buttonAddition/Carthage/Checkouts/Onboard/Onboard Framework
+/Users/jacky/EECS498/test/buttonAddition/Carthage/Checkouts/Onboard/Source/OnboardingViewController.h
+__45-[OnboardingViewController initWithContents:]_block_invoke
+-[OnboardingContentViewController dealloc]
++[OnboardingContentViewController contentWithTitle:body:image:buttonText:action:]
+-[OnboardingContentViewController initWithTitle:body:image:buttonText:action:]
+___78-[OnboardingContentViewController initWithTitle:body:image:buttonText:action:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
++[OnboardingContentViewController contentWithTitle:body:image:buttonText:actionBlock:]
++[OnboardingContentViewController contentWithTitle:body:videoURL:buttonText:action:]
+-[OnboardingContentViewController initWithTitle:body:videoURL:buttonText:action:]
+___81-[OnboardingContentViewController initWithTitle:body:videoURL:buttonText:action:]_block_invoke
+___copy_helper_block_.20
+___destroy_helper_block_.21
++[OnboardingContentViewController contentWithTitle:body:videoURL:buttonText:actionBlock:]
+-[OnboardingContentViewController initWithTitle:body:image:buttonText:actionBlock:]
+-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]
+___92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke
+___92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_2
+___92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_3
+___92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_4
+___92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_5
+-[OnboardingContentViewController viewDidLoad]
+-[OnboardingContentViewController viewWillAppear:]
+___50-[OnboardingContentViewController viewWillAppear:]_block_invoke
+___copy_helper_block_.156
+___destroy_helper_block_.157
+-[OnboardingContentViewController viewDidAppear:]
+___49-[OnboardingContentViewController viewDidAppear:]_block_invoke
+___copy_helper_block_.167
+___destroy_helper_block_.168
+-[OnboardingContentViewController viewWillDisappear:]
+___53-[OnboardingContentViewController viewWillDisappear:]_block_invoke
+___copy_helper_block_.174
+___destroy_helper_block_.175
+-[OnboardingContentViewController viewDidDisappear:]
+___52-[OnboardingContentViewController viewDidDisappear:]_block_invoke
+___copy_helper_block_.181
+___destroy_helper_block_.182
+-[OnboardingContentViewController handleAppEnteredForeground]
+-[OnboardingContentViewController viewWillLayoutSubviews]
+-[OnboardingContentViewController updateAlphas:]
+-[OnboardingContentViewController handleButtonPressed]
+-[OnboardingContentViewController delegate]
+-[OnboardingContentViewController setDelegate:]
+-[OnboardingContentViewController movesToNextViewController]
+-[OnboardingContentViewController setMovesToNextViewController:]
+-[OnboardingContentViewController iconImageView]
+-[OnboardingContentViewController setIconImageView:]
+-[OnboardingContentViewController titleLabel]
+-[OnboardingContentViewController setTitleLabel:]
+-[OnboardingContentViewController bodyLabel]
+-[OnboardingContentViewController setBodyLabel:]
+-[OnboardingContentViewController actionButton]
+-[OnboardingContentViewController setActionButton:]
+-[OnboardingContentViewController iconWidth]
+-[OnboardingContentViewController setIconWidth:]
+-[OnboardingContentViewController iconHeight]
+-[OnboardingContentViewController setIconHeight:]
+-[OnboardingContentViewController topPadding]
+-[OnboardingContentViewController setTopPadding:]
+-[OnboardingContentViewController underIconPadding]
+-[OnboardingContentViewController setUnderIconPadding:]
+-[OnboardingContentViewController underTitlePadding]
+-[OnboardingContentViewController setUnderTitlePadding:]
+-[OnboardingContentViewController bottomPadding]
+-[OnboardingContentViewController setBottomPadding:]
+-[OnboardingContentViewController underPageControlPadding]
+-[OnboardingContentViewController setUnderPageControlPadding:]
+-[OnboardingContentViewController buttonActionHandler]
+-[OnboardingContentViewController setButtonActionHandler:]
+-[OnboardingContentViewController viewWillAppearBlock]
+-[OnboardingContentViewController setViewWillAppearBlock:]
+-[OnboardingContentViewController viewDidAppearBlock]
+-[OnboardingContentViewController setViewDidAppearBlock:]
+-[OnboardingContentViewController viewWillDisappearBlock]
+-[OnboardingContentViewController setViewWillDisappearBlock:]
+-[OnboardingContentViewController viewDidDisappearBlock]
+-[OnboardingContentViewController setViewDidDisappearBlock:]
+-[OnboardingContentViewController moviePlayerController]
+-[OnboardingContentViewController setMoviePlayerController:]
+-[OnboardingContentViewController player]
+-[OnboardingContentViewController setPlayer:]
+-[OnboardingContentViewController videoURL]
+-[OnboardingContentViewController setVideoURL:]
+-[OnboardingContentViewController wasPreviouslyVisible]
+-[OnboardingContentViewController setWasPreviouslyVisible:]
+-[OnboardingContentViewController .cxx_destruct]
+___block_descriptor_tmp.22
+___block_descriptor_tmp.80
+___block_descriptor_tmp.98
+___block_literal_global.99
+___block_descriptor_tmp.102
+___block_literal_global.103
+___block_descriptor_tmp.106
+___block_literal_global.107
+___block_descriptor_tmp.110
+___block_literal_global.111
+___block_descriptor_tmp.158
+___block_descriptor_tmp.169
+___block_descriptor_tmp.176
+___block_descriptor_tmp.183
+_OBJC_IVAR_$_OnboardingContentViewController._delegate
+_OBJC_IVAR_$_OnboardingContentViewController._movesToNextViewController
+_OBJC_IVAR_$_OnboardingContentViewController._iconImageView
+_OBJC_IVAR_$_OnboardingContentViewController._titleLabel
+_OBJC_IVAR_$_OnboardingContentViewController._bodyLabel
+_OBJC_IVAR_$_OnboardingContentViewController._actionButton
+_OBJC_IVAR_$_OnboardingContentViewController._iconWidth
+_OBJC_IVAR_$_OnboardingContentViewController._iconHeight
+_OBJC_IVAR_$_OnboardingContentViewController._topPadding
+_OBJC_IVAR_$_OnboardingContentViewController._underIconPadding
+_OBJC_IVAR_$_OnboardingContentViewController._underTitlePadding
+_OBJC_IVAR_$_OnboardingContentViewController._bottomPadding
+_OBJC_IVAR_$_OnboardingContentViewController._underPageControlPadding
+_OBJC_IVAR_$_OnboardingContentViewController._buttonActionHandler
+_OBJC_IVAR_$_OnboardingContentViewController._viewWillAppearBlock
+_OBJC_IVAR_$_OnboardingContentViewController._viewDidAppearBlock
+_OBJC_IVAR_$_OnboardingContentViewController._viewWillDisappearBlock
+_OBJC_IVAR_$_OnboardingContentViewController._viewDidDisappearBlock
+_OBJC_IVAR_$_OnboardingContentViewController._moviePlayerController
+_OBJC_IVAR_$_OnboardingContentViewController._player
+_OBJC_IVAR_$_OnboardingContentViewController._videoURL
+_OBJC_IVAR_$_OnboardingContentViewController._wasPreviouslyVisible
+/Users/jacky/EECS498/test/buttonAddition/Carthage/Checkouts/Onboard/Source/OnboardingContentViewController.m
+/Users/jacky/EECS498/test/buttonAddition/Carthage/Checkouts/Onboard/Source/OnboardingContentViewController.h
+__destroy_helper_block_
+__copy_helper_block_
+__52-[OnboardingContentViewController viewDidDisappear:]_block_invoke
+__53-[OnboardingContentViewController viewWillDisappear:]_block_invoke
+__49-[OnboardingContentViewController viewDidAppear:]_block_invoke
+__50-[OnboardingContentViewController viewWillAppear:]_block_invoke
+__92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_5
+__92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_4
+__92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_3
+__92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke_2
+__92-[OnboardingContentViewController initWithTitle:body:image:videoURL:buttonText:actionBlock:]_block_invoke
+__81-[OnboardingContentViewController initWithTitle:body:videoURL:buttonText:action:]_block_invoke
+__78-[OnboardingContentViewController initWithTitle:body:image:buttonText:action:]_block_invoke
+/Users/jacky/Library/Caches/org.carthage.CarthageKit/DerivedData/9.2_9C40b/Onboard/v2.3.1/Build/Intermediates.noindex/ArchiveIntermediates/Onboard/IntermediateBuildFilesPath/Onboard.build/Release-iphoneos/Onboard.build/DerivedSources/Onboard_vers.c
+__ZL15__ARCLite__loadv
+__ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+__ZL22add_image_hook_swiftV1PK11mach_headerl
+__ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+__ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+__ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+__ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+__ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+__ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+__ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+__ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+__ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+__ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+__ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+__ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+__ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+__ZL32__arclite_object_getIndexedIvarsP11objc_object
+__ZL23__arclite_objc_getClassPKc
+__ZL27__arclite_objc_getMetaClassPKc
+__ZL31__arclite_objc_getRequiredClassPKc
+__ZL26__arclite_objc_lookUpClassPKc
+__ZL26__arclite_objc_getProtocolPKc
+__ZL23__arclite_class_getNameP10objc_class
+__ZL26__arclite_protocol_getNameP8Protocol
+__ZL37__arclite_objc_copyClassNamesForImagePKcPj
+__ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+__ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+__ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+__ZL14initialize_impP11objc_objectP13objc_selector
+__ZL18allocateMaybeSwiftP18glue_swift_class_tm
+__ZL22copySwiftV1MangledNamePKcb
+__ZL13demangledNamePKcb
+__ZL16scanMangledFieldRPKcS0_S1_Ri
+__ZL30arclite_uninitialized_functionv
+__ZL12cxxConstructP11objc_object
+__ZL20fixStringForCoreDataP11objc_object
+_OBJC_METACLASS_$___ARCLite__
+__ZL24OBJC_CLASS_$___ARCLite__
+__ZL31OBJC_METACLASS_RO_$___ARCLite__
+__non_lazy_classes
+__ZL27OBJC_CLASS_RO_$___ARCLite__
+__ZL11_class_name
+__ZL32OBJC_$_CLASS_METHODS___ARCLite__
+__ZL17_load_method_name
+__ZL17_load_method_type
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+__ZL30NSUndoManagerProxy_targetClass
+__ZL29original_NSManagedObject_init
+__ZL40original_NSManagedObject_allocWithEntity
+__ZL35original_NSManagedObject_allocBatch
+__ZL25NSMutableDictionary_class
+__ZL22NSConstantString_class
+__ZL14NSString_class
+__ZL36original_NSKKMS_fastIndexForKnownKey
+__ZL27original_NSKKMS_indexForKey
+__ZL28original_NSKKsD_objectForKey
+__ZL34original_NSKKsD_removeObjectForKey
+__ZL32original_NSKKsD_setObject_forKey
+__ZL40original_NSKKsD_addEntriesFromDictionary
+__ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+__ZL31original_objc_allocateClassPair
+__ZL31original_object_getIndexedIvars
+__ZL22original_objc_getClass
+__ZL26original_objc_getMetaClass
+__ZL30original_objc_getRequiredClass
+__ZL25original_objc_lookUpClass
+__ZL25original_objc_getProtocol
+__ZL22original_class_getName
+__ZL25original_protocol_getName
+__ZL36original_objc_copyClassNamesForImage
+__ZL12demangleLock
+__ZL9Demangled
+Apple LLVM version 9.0.0 (clang-900.0.39)
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -fno-sanitize=vptr -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -fembed-bitcode=all -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/Symbols/BuiltProducts -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -Wno-error=incomplete-umbrella -Wno-error=invalid-ios-deployment-target -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/install/TempContent/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=305
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-67
+fixStringForCoreData
+cxxConstruct
+arclite_uninitialized_function
+scanMangledField
+isdigit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.Internal.sdk/usr/include/ctype.h
+__isctype
+demangledName
+copySwiftV1DemangledName
+copySwiftV1MangledName
+allocateMaybeSwift
+word_align
+isSwift
+initialize_imp
+transcribeProperties
+property_list_nth
+transcribeProtocols
+transcribeMethods
+data
+method_list_nth
+__arclite_objc_copyClassNamesForImage
+__arclite_protocol_getName
+__arclite_class_getName
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+__arclite_objc_getClass
+__arclite_object_getIndexedIvars
+__arclite_objc_allocateClassPair
+metaclass
+__arclite_objc_readClassPair
+transcribeIvars
+ivar_list_nth
+max
+alignment
+ro
+fastFlags
+__arclite_NSKKsD_addEntriesFromDictionary
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+__arclite_NSManagedObject_init
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+add_image_hook_swiftV1
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+patch_t<const char *(Protocol *)>
+patch_t<const char *(Class)>
+patch_t<Protocol *(const char *)>
+patch_t<Class (const char *)>
+patch_t<void *(id)>
+patch_t<Class (Class, const char *, unsigned long)>
+patch_t<Class (Class, const objc_image_info *)>
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+__ARCLite__load
+install_swiftV1
+install_dict_nil_value
+addOrReplaceMethod
+keyedGetter

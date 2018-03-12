@@ -26,7 +26,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     var leftclick: PressableButton!
     var rightclick: PressableButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +43,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         
         tmp = PressableButton()
         tmp.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
-//        tmp.backgroundColor = .red
+        //        tmp.backgroundColor = .red
         tmp.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         tmp.colors = .init(
             button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
@@ -57,7 +57,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         counter = 0
         self.view.backgroundColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
-//        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
+        //        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
         
         leftclick = PressableButton()
         rightclick = PressableButton()
@@ -91,9 +91,9 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         
         leftclick.alpha = 0
         rightclick.alpha = 0
-//
-//        self.view.addSubview(leftclick)
-//        self.view.addSubview(rightclick)
+        //
+        //        self.view.addSubview(leftclick)
+        //        self.view.addSubview(rightclick)
         self.view.addSubview(tmp)
         
         // Do any additional setup after loading the view.
@@ -101,12 +101,12 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         
-//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-//            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
-//            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
-//            self.leftclick.alpha = 1
-//            self.rightclick.alpha = 1
-//        }, completion: nil)
+        //        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+        //            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
+        //            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
+        //            self.leftclick.alpha = 1
+        //            self.rightclick.alpha = 1
+        //        }, completion: nil)
         
     }
     
@@ -119,7 +119,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             self.ip = inner_ip
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -143,13 +143,13 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         }
         counter = 0
     }
-
+    
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
     }
-
+    
     // MARK: UIViewControllerTransitioningDelegate
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -340,7 +340,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             //now create the URLRequest object using the url object
             var request = URLRequest(url: url)
             request.httpMethod = "GET" //set http method as POST
-        
+            
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             
@@ -359,17 +359,17 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
                 do {
                     //create json object from data
                     if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-//                        print(json)
+                        //                        print(json)
                         // handle json...
                     }
                 } catch let error {
-//                    print(error.localizedDescription)
+                    //                    print(error.localizedDescription)
                 }
             })
             task.resume()
         }
         else {
-//            print("????")
+            //            print("????")
             if getlock == false {
                 getip()
                 getlock = true
@@ -378,5 +378,5 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         }
     }
     
-
+    
 }
