@@ -26,12 +26,15 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     var leftclick: PressableButton!
     var rightclick: PressableButton!
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(pressleft))
         self.view.addGestureRecognizer(tapGes)
+        
         
         let tapDouble = UITapGestureRecognizer(target: self, action: #selector(pressright(_:)))
         tapDouble.numberOfTouchesRequired = 2
@@ -41,9 +44,27 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         tapDoublecc.numberOfTapsRequired = 2
         self.view.addGestureRecognizer(tapDoublecc)
         
+        let mouseMove = UIPanGestureRecognizer(target: self, action: #selector(testfunc))
+        mouseMove.maximumNumberOfTouches = 1
+        mouseMove.minimumNumberOfTouches = 1
+        //        mouseMove.setTranslation(CGPoint(x: 0.001, y:0.001), in: self.view)
+        self.view.addGestureRecognizer(mouseMove)
+        
+        
+        let scrollMouse = UIPanGestureRecognizer(target: self, action: #selector(scrollfunc))
+        scrollMouse.maximumNumberOfTouches = 2
+        scrollMouse.minimumNumberOfTouches = 2
+        self.view.addGestureRecognizer(scrollMouse)
+        
+        let drag = UIPanGestureRecognizer(target: self, action: #selector(dragfunc))
+        drag.maximumNumberOfTouches = 3
+        drag.minimumNumberOfTouches = 3
+        self.view.addGestureRecognizer(drag)
+        
+        
         tmp = PressableButton()
         tmp.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
-//        tmp.backgroundColor = .red
+        //        tmp.backgroundColor = .red
         tmp.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
         tmp.colors = .init(
             button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
@@ -57,7 +78,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         counter = 0
         self.view.backgroundColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
-//        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
+        //        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
         
         leftclick = PressableButton()
         rightclick = PressableButton()
@@ -91,9 +112,9 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         
         leftclick.alpha = 0
         rightclick.alpha = 0
-//
-//        self.view.addSubview(leftclick)
-//        self.view.addSubview(rightclick)
+        //
+        //        self.view.addSubview(leftclick)
+        //        self.view.addSubview(rightclick)
         self.view.addSubview(tmp)
         
         // Do any additional setup after loading the view.
@@ -101,12 +122,12 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         
-//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-//            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
-//            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
-//            self.leftclick.alpha = 1
-//            self.rightclick.alpha = 1
-//        }, completion: nil)
+        //        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+        //            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
+        //            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
+        //            self.leftclick.alpha = 1
+        //            self.rightclick.alpha = 1
+        //        }, completion: nil)
         
     }
     
@@ -119,37 +140,40 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             self.ip = inner_ip
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self.view)
-            let tpCenter: center = center(mx: location.x, my: location.y)
-            startpos = center(mx: tpCenter.x, my: tpCenter.y)
-        }
+        pressUP()
+        startpos = center(mx: 0, my: 0)
+    }
+    //
+    //    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        print("moved")
+    //        print(touches.count)
+    //        for touch in touches {
+    //            let location = touch.location(in: self.view)
+    //            let tpCenter: center = center(mx: location.x, my: location.y)
+    //            //            print(tpCenter.x - startpos.x)
+    //            moveMouse(x1: (tpCenter.x - startpos.x) * 3, y1: (tpCenter.y - startpos.y) * 3)
+    //            startpos = center(mx: tpCenter.x, my: tpCenter.y)
+    //        }
+    //        counter = 0
+    //    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        pressUP()
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self.view)
-            let tpCenter: center = center(mx: location.x, my: location.y)
-            //            print(tpCenter.x - startpos.x)
-            moveMouse(x1: (tpCenter.x - startpos.x) * 3, y1: (tpCenter.y - startpos.y) * 3)
-            startpos = center(mx: tpCenter.x, my: tpCenter.y)
-        }
-        counter = 0
-    }
-
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination
         controller.transitioningDelegate = self
         controller.modalPresentationStyle = .custom
     }
-
+    
     // MARK: UIViewControllerTransitioningDelegate
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -165,6 +189,27 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         transition.bubbleColor = tmp.backgroundColor!
         return transition
     }
+    
+    @objc func testfunc(_ sender: UIPanGestureRecognizer) {
+        let tpCenter: center = center(mx: sender.translation(in: self.view).x, my: sender.translation(in: self.view).y)
+        moveMouse(x1: (tpCenter.x - startpos.x) * 3, y1: (tpCenter.y - startpos.y) * 3)
+        startpos = center(mx: tpCenter.x, my: tpCenter.y)
+    }
+    
+    
+    @objc func dragfunc(_ sender: UIPanGestureRecognizer) {
+        let tpCenter: center = center(mx: sender.translation(in: self.view).x, my: sender.translation(in: self.view).y)
+        dragMouse(x1: (tpCenter.x - startpos.x) * 3, y1: (tpCenter.y - startpos.y) * 3)
+        startpos = center(mx: tpCenter.x, my: tpCenter.y)
+    }
+    
+    
+    @objc func scrollfunc(_ sender: UIPanGestureRecognizer) {
+        let tpCenter: center = center(mx: sender.translation(in: self.view).x, my: sender.translation(in: self.view).y)
+        scrollMouseSend(x1: (tpCenter.x - startpos.x) * 3, y1: (tpCenter.y - startpos.y) * 3)
+        startpos = center(mx: tpCenter.x, my: tpCenter.y)
+    }
+    
     
     @objc func pressConfirm(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -198,7 +243,6 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             task.resume()
         }
         else {
-            //            print("????")
             if getlock == false {
                 getip()
                 getlock = true
@@ -234,7 +278,41 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             task.resume()
         }
         else {
-            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    @objc func pressUP() {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/api/mouseup")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
             if getlock == false {
                 getip()
                 getlock = true
@@ -331,16 +409,16 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         task.resume()
     }
     
-    func moveMouse(x1: CGFloat, y1: CGFloat) {
+    func dragMouse(x1: CGFloat, y1: CGFloat) {
         if let tmp_url = self.ip {
-            let url = URL(string: "http://" + tmp_url + ":3000/api/moveMouse/" + x1.description + "/" + y1.description)!
+            let url = URL(string: "http://" + tmp_url + ":3000/api/dragMouse/" + x1.description + "/" + y1.description)!
             
             //create the session object
             let session = URLSession.shared
             //now create the URLRequest object using the url object
             var request = URLRequest(url: url)
             request.httpMethod = "GET" //set http method as POST
-        
+            
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             
@@ -359,17 +437,17 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
                 do {
                     //create json object from data
                     if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-//                        print(json)
+                        //                        print(json)
                         // handle json...
                     }
                 } catch let error {
-//                    print(error.localizedDescription)
+                    //                    print(error.localizedDescription)
                 }
             })
             task.resume()
         }
         else {
-//            print("????")
+            //            print("????")
             if getlock == false {
                 getip()
                 getlock = true
@@ -378,5 +456,101 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         }
     }
     
-
+    
+    func scrollMouseSend(x1: CGFloat, y1: CGFloat) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/api/scrollMouse/" + x1.description + "/" + y1.description)!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+                do {
+                    //create json object from data
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        //                        print(json)
+                        // handle json...
+                    }
+                } catch let error {
+                    //                    print(error.localizedDescription)
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+            
+        }
+    }
+    
+    func moveMouse(x1: CGFloat, y1: CGFloat) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/api/moveMouse/" + x1.description + "/" + y1.description)!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+                do {
+                    //create json object from data
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        //                        print(json)
+                        // handle json...
+                    }
+                } catch let error {
+                    //                    print(error.localizedDescription)
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+            
+        }
+    }
+    
+    
 }
+

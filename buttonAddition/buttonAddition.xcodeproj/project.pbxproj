@@ -20,14 +20,21 @@
 		04EFC05B2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; };
 		04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		856EFE482058522400E84255 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 856EFE472058522400E84255 /* blue.png */; };
+		856EFE4A2058526400E84255 /* play.gif in Resources */ = {isa = PBXBuildFile; fileRef = 856EFE492058526400E84255 /* play.gif */; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
 		8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F1D7202A32AC0030B309 /* rectangular.swift */; };
+		85B24B35204F9B3B008BA49A /* Onboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B24B34204F9B3B008BA49A /* Onboard.framework */; };
+		85B24B37204F9CA4008BA49A /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B24B36204F9CA4008BA49A /* Tutorial.swift */; };
+		85B24B39204F9DDB008BA49A /* Onboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B24B38204F9DDB008BA49A /* Onboard.framework */; };
+		85B24B3A204F9DDB008BA49A /* Onboard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 85B24B38204F9DDB008BA49A /* Onboard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7CF6F202362C50049EA32 /* AppDelegate.swift */; };
 		85B7CF72202362C50049EA32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B7CF71202362C50049EA32 /* ViewController.swift */; };
 		85B7CF75202362C50049EA32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B7CF73202362C50049EA32 /* Main.storyboard */; };
 		85B7CF77202362C50049EA32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85B7CF76202362C50049EA32 /* Assets.xcassets */; };
 		85B7CF7A202362C50049EA32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B7CF78202362C50049EA32 /* LaunchScreen.storyboard */; };
+		85DA365D20507AD7007E5AB5 /* IOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA365C20507AD7007E5AB5 /* IOSDevCenters+GIF.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +44,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				85B24B3A204F9DDB008BA49A /* Onboard.framework in Embed Frameworks */,
 				04EFC05B2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Embed Frameworks */,
 				04EFC05320315E6100D6B02E /* SwiftyButton.framework in Embed Frameworks */,
 				0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */,
@@ -58,9 +66,14 @@
 		04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewAppExtension.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewAppExtension.framework; sourceTree = "<group>"; };
 		04F1CC1920327131003A5BA0 /* BubbleTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BubbleTransition.framework; path = Carthage/Build/iOS/BubbleTransition.framework; sourceTree = "<group>"; };
+		856EFE472058522400E84255 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue.png; path = "../../../onboard_frame/Onboard/Demo/Demo Files/media/blue.png"; sourceTree = "<group>"; };
+		856EFE492058526400E84255 /* play.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = play.gif; path = "../../../gif/GIF-Swift/GIF-Swift/play.gif"; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
 		8578F1D7202A32AC0030B309 /* rectangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rectangular.swift; sourceTree = "<group>"; };
+		85B24B34204F9B3B008BA49A /* Onboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Onboard.framework; path = Carthage/Build/iOS/Onboard.framework; sourceTree = "<group>"; };
+		85B24B36204F9CA4008BA49A /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
+		85B24B38204F9DDB008BA49A /* Onboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Onboard.framework; path = Carthage/Build/iOS/Onboard.framework; sourceTree = "<group>"; };
 		85B7CF6C202362C50049EA32 /* buttonAddition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = buttonAddition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85B7CF6F202362C50049EA32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85B7CF71202362C50049EA32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +81,7 @@
 		85B7CF76202362C50049EA32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85B7CF79202362C50049EA32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85B7CF7B202362C50049EA32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85DA365C20507AD7007E5AB5 /* IOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85B24B39204F9DDB008BA49A /* Onboard.framework in Frameworks */,
 				04EFC05A2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Frameworks */,
 				04EFC0552031667800D6B02E /* NVActivityIndicatorView.framework in Frameworks */,
 				04EFC05220315E6100D6B02E /* SwiftyButton.framework in Frameworks */,
@@ -82,6 +97,7 @@
 				0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */,
 				04EFC0572031668200D6B02E /* NVActivityIndicatorView.framework in Frameworks */,
 				04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */,
+				85B24B35204F9B3B008BA49A /* Onboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +107,7 @@
 		0465A3362028122300D6C58A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				85B24B34204F9B3B008BA49A /* Onboard.framework */,
 				04EFC0542031667800D6B02E /* NVActivityIndicatorView.framework */,
 				04EFC05020315DE500D6B02E /* SwiftyButton.framework */,
 				0465A3372028122300D6C58A /* PulsingHalo.framework */,
@@ -101,6 +118,9 @@
 		85B7CF63202362C40049EA32 = {
 			isa = PBXGroup;
 			children = (
+				856EFE492058526400E84255 /* play.gif */,
+				856EFE472058522400E84255 /* blue.png */,
+				85B24B38204F9DDB008BA49A /* Onboard.framework */,
 				04F1CC1920327131003A5BA0 /* BubbleTransition.framework */,
 				04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */,
 				04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */,
@@ -124,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				85B7CF6F202362C50049EA32 /* AppDelegate.swift */,
+				85DA365C20507AD7007E5AB5 /* IOSDevCenters+GIF.swift */,
+				85B24B36204F9CA4008BA49A /* Tutorial.swift */,
 				8578161620238D4000B45AF8 /* WelcomeViewController.swift */,
 				85B7CF71202362C50049EA32 /* ViewController.swift */,
 				857816182023AE4000B45AF8 /* lineView.swift */,
@@ -201,6 +223,8 @@
 				85B7CF7A202362C50049EA32 /* LaunchScreen.storyboard in Resources */,
 				85B7CF77202362C50049EA32 /* Assets.xcassets in Resources */,
 				85B7CF75202362C50049EA32 /* Main.storyboard in Resources */,
+				856EFE482058522400E84255 /* blue.png in Resources */,
+				856EFE4A2058526400E84255 /* play.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +239,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Pulsator.framework",
 				"",
+				"$(SRCROOT)/Carthage/Build/iOS/Onboard.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Pulsator.framework",
@@ -232,10 +257,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E0434B2038DCAF0032AC49 /* MouseView.swift in Sources */,
+				85DA365D20507AD7007E5AB5 /* IOSDevCenters+GIF.swift in Sources */,
 				857816192023AE4000B45AF8 /* lineView.swift in Sources */,
 				8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */,
 				8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */,
 				85B7CF72202362C50049EA32 /* ViewController.swift in Sources */,
+				85B24B37204F9CA4008BA49A /* Tutorial.swift in Sources */,
 				85B7CF70202362C50049EA32 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

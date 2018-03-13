@@ -62,7 +62,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
-
+        
         upSwipe.direction = .up
         downSwipe.direction = .down
         leftSwipe.direction = .left
@@ -74,10 +74,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         scheduledTimerWithTimeInterval()
     }
     
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
-
+        
         if (!whether_num) {
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                 self.buttons[0].alpha = 1
@@ -97,9 +97,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 self.buttons[10].frame.origin.y = self.buttons[6].frame.origin.y + 100
                 self.buttons[11].alpha = 1
                 self.buttons[11].frame.origin.y = self.buttons[7].frame.origin.y + 100
+                
+                self.buttons[12].alpha = 1
+                self.buttons[12].frame.origin.y = self.buttons[7].frame.origin.y - 200
             }, completion: nil)
         }
-    
+        
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -131,7 +134,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
-
+        
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
@@ -202,6 +205,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[1].setTitle("w", for: .normal)
                                 self.buttons[2].setTitle("e", for: .normal)
                                 self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[12].setTitle("t", for: .normal)
                                 self.buttons[4].setTitle("a", for: .normal)
                                 self.buttons[5].setTitle("s", for: .normal)
                                 self.buttons[6].setTitle("d", for: .normal)
@@ -211,23 +215,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[10].setTitle("c", for: .normal)
                                 self.buttons[11].setTitle("v", for: .normal)
                             } else if self.vState == 1 {
-                                self.buttons[0].setTitle("t", for: .normal)
-                                self.buttons[1].setTitle("y", for: .normal)
-                                self.buttons[2].setTitle("u", for: .normal)
-                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[0].setTitle("y", for: .normal)
+                                self.buttons[1].setTitle("u", for: .normal)
+                                self.buttons[2].setTitle("i", for: .normal)
+                                self.buttons[3].setTitle("o", for: .normal)
                                 self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[12].setTitle("p", for: .normal)
                                 self.buttons[5].setTitle("h", for: .normal)
                                 self.buttons[6].setTitle("j", for: .normal)
                                 self.buttons[7].setTitle("k", for: .normal)
                                 self.buttons[8].setTitle("b", for: .normal)
                                 self.buttons[9].setTitle("n", for: .normal)
                                 self.buttons[10].setTitle("m", for: .normal)
-                                self.buttons[11].setTitle("o", for: .normal)
+                                self.buttons[11].setTitle("l", for: .normal)
                             } else if self.vState == 2 {
-                                self.buttons[0].setTitle("p", for: .normal)
-                                self.buttons[1].setTitle("l", for: .normal)
-                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[0].setTitle("!", for: .normal)
+                                self.buttons[1].setTitle("#", for: .normal)
+                                self.buttons[2].setTitle("'", for: .normal)
                                 self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[12].setTitle(".", for: .normal)
                                 self.buttons[4].setTitle("\"", for: .normal)
                                 self.buttons[5].setTitle("?", for: .normal)
                                 self.buttons[6].setTitle("(", for: .normal)
@@ -283,6 +289,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[1].setTitle("w", for: .normal)
                                 self.buttons[2].setTitle("e", for: .normal)
                                 self.buttons[3].setTitle("r", for: .normal)
+                                self.buttons[12].setTitle("t", for: .normal)
                                 self.buttons[4].setTitle("a", for: .normal)
                                 self.buttons[5].setTitle("s", for: .normal)
                                 self.buttons[6].setTitle("d", for: .normal)
@@ -292,23 +299,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                                 self.buttons[10].setTitle("c", for: .normal)
                                 self.buttons[11].setTitle("v", for: .normal)
                             } else if self.vState == 1 {
-                                self.buttons[0].setTitle("t", for: .normal)
-                                self.buttons[1].setTitle("y", for: .normal)
-                                self.buttons[2].setTitle("u", for: .normal)
-                                self.buttons[3].setTitle("i", for: .normal)
+                                self.buttons[0].setTitle("y", for: .normal)
+                                self.buttons[1].setTitle("u", for: .normal)
+                                self.buttons[2].setTitle("i", for: .normal)
+                                self.buttons[3].setTitle("o", for: .normal)
                                 self.buttons[4].setTitle("g", for: .normal)
+                                self.buttons[12].setTitle("p", for: .normal)
                                 self.buttons[5].setTitle("h", for: .normal)
                                 self.buttons[6].setTitle("j", for: .normal)
                                 self.buttons[7].setTitle("k", for: .normal)
                                 self.buttons[8].setTitle("b", for: .normal)
                                 self.buttons[9].setTitle("n", for: .normal)
                                 self.buttons[10].setTitle("m", for: .normal)
-                                self.buttons[11].setTitle("o", for: .normal)
+                                self.buttons[11].setTitle("l", for: .normal)
                             } else if self.vState == 2 {
-                                self.buttons[0].setTitle("p", for: .normal)
-                                self.buttons[1].setTitle("l", for: .normal)
-                                self.buttons[2].setTitle(".", for: .normal)
+                                self.buttons[0].setTitle("!", for: .normal)
+                                self.buttons[1].setTitle("#", for: .normal)
+                                self.buttons[2].setTitle("'", for: .normal)
                                 self.buttons[3].setTitle(",", for: .normal)
+                                self.buttons[12].setTitle(".", for: .normal)
                                 self.buttons[4].setTitle("\"", for: .normal)
                                 self.buttons[5].setTitle("?", for: .normal)
                                 self.buttons[6].setTitle("(", for: .normal)
@@ -356,6 +365,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         bt.frame.origin.x += 60
                         bt.removeFromSuperview()
                     }
+                    self.buttons[12].alpha = 0
+                    self.buttons[12].removeFromSuperview()
+                    
                     // change keys
                     self.buttons[0].setTitle("1", for: .normal)
                     self.buttons[1].setTitle("4", for: .normal)
@@ -418,7 +430,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 
                 UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
                     
-                    for bt in self.buttons {
+                    for bt in self.buttons[0...11] {
                         bt.alpha = 0
                         bt.frame.origin.x += 60
                     }
@@ -433,6 +445,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[1].setTitle("w", for: .normal)
                         self.buttons[2].setTitle("e", for: .normal)
                         self.buttons[3].setTitle("r", for: .normal)
+                        self.buttons[12].setTitle("t", for: .normal)
                         self.buttons[4].setTitle("a", for: .normal)
                         self.buttons[5].setTitle("s", for: .normal)
                         self.buttons[6].setTitle("d", for: .normal)
@@ -442,23 +455,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[10].setTitle("c", for: .normal)
                         self.buttons[11].setTitle("v", for: .normal)
                     } else if self.vState == 1 {
-                        self.buttons[0].setTitle("t", for: .normal)
-                        self.buttons[1].setTitle("y", for: .normal)
-                        self.buttons[2].setTitle("u", for: .normal)
-                        self.buttons[3].setTitle("i", for: .normal)
+                        self.buttons[0].setTitle("y", for: .normal)
+                        self.buttons[1].setTitle("u", for: .normal)
+                        self.buttons[2].setTitle("i", for: .normal)
+                        self.buttons[3].setTitle("o", for: .normal)
                         self.buttons[4].setTitle("g", for: .normal)
+                        self.buttons[12].setTitle("p", for: .normal)
                         self.buttons[5].setTitle("h", for: .normal)
                         self.buttons[6].setTitle("j", for: .normal)
                         self.buttons[7].setTitle("k", for: .normal)
                         self.buttons[8].setTitle("b", for: .normal)
                         self.buttons[9].setTitle("n", for: .normal)
                         self.buttons[10].setTitle("m", for: .normal)
-                        self.buttons[11].setTitle("o", for: .normal)
+                        self.buttons[11].setTitle("l", for: .normal)
                     } else if self.vState == 2 {
-                        self.buttons[0].setTitle("p", for: .normal)
-                        self.buttons[1].setTitle("l", for: .normal)
-                        self.buttons[2].setTitle(".", for: .normal)
+                        self.buttons[0].setTitle("!", for: .normal)
+                        self.buttons[1].setTitle("#", for: .normal)
+                        self.buttons[2].setTitle("'", for: .normal)
                         self.buttons[3].setTitle(",", for: .normal)
+                        self.buttons[12].setTitle(".", for: .normal)
                         self.buttons[4].setTitle("\"", for: .normal)
                         self.buttons[5].setTitle("?", for: .normal)
                         self.buttons[6].setTitle("(", for: .normal)
@@ -482,6 +497,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         self.buttons[iter].frame = CGRect(x: self.centerArray[iter % 4].x, y: self.centerArray[iter % 4].y + CGFloat(100 * row), width: 90, height: 90)
                         iter += 1
                     }
+                    self.view.addSubview(self.buttons[12])
                     for bt in self.buttons {
                         bt.alpha = 0
                         bt.frame.origin.x -= 60
@@ -541,15 +557,15 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     func setButton() {
         /*inputText = UILabel(frame: CGRect(x: 44, y: 75, width: 680.5, height: 96))
-        inputText.textAlignment = .left
-        inputText.font = UIFont(name: "", size: 45)
-        inputText.text = ""
-        inputText.backgroundColor = UIColor.white
-        self.view.addSubview(inputText)*/
+         inputText.textAlignment = .left
+         inputText.font = UIFont(name: "", size: 45)
+         inputText.text = ""
+         inputText.backgroundColor = UIColor.white
+         self.view.addSubview(inputText)*/
         
         var iter: Int = 0
         // setup normal keys
-        while iter < 12 {
+        while iter < 13 {
             var row: Int = 0
             if iter < 4 {
                 row = -1
@@ -557,14 +573,20 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 row = 0
             } else if iter < 12 {
                 row = 1
+            } else if iter == 12{
+                row = 2
             }
             let bt = PressableButton()
-            bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
+            if iter < 12{
+                bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
+            } else if iter == 12{
+                bt.frame = CGRect(x: centerArray[3].x, y: centerArray[3].y, width: 90, height: 90) // jingyu
+            }
             bt.shadowHeight = 8
             bt.cornerRadius = 20
             
             // transition of the button:
-        
+            
             bt.addTarget(self, action: #selector(pressCharacter(_:)), for: .touchUpInside)
             if row == -1 {
                 if iter % 4 == 0 {
@@ -586,7 +608,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     bt.setTitle("f", for: .normal)
                 }
-            } else {
+            } else if row == 1{
                 if iter % 4 == 0 {
                     bt.setTitle("z", for: .normal)
                 } else if iter % 4 == 1 {
@@ -596,16 +618,18 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 } else {
                     bt.setTitle("v", for: .normal)
                 }
+            } else if row == 2{
+                bt.setTitle("t", for: .normal)
             }
             bt.layer.cornerRadius = bt.frame.height / 2
             buttons.append(bt)
             self.view.addSubview(bt)
             
-//            UIView.animate(withDuration: 0.3, delay: 1, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-//                bt.alpha = 1
-//                bt.frame.origin.y += CGFloat(100 * row)
-//            }, completion: nil)
-//
+            //            UIView.animate(withDuration: 0.3, delay: 1, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+            //                bt.alpha = 1
+            //                bt.frame.origin.y += CGFloat(100 * row)
+            //            }, completion: nil)
+            //
             iter += 1
         }
         
@@ -633,21 +657,21 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         
         
         /*SwitchMode = PressableButton()
-        //        SwitchMode.backgroundColor = UIColor.green
-        //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
-        SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark - 100, width: 100, height: 90)
-        SwitchMode.colors = .init(
-            button: UIColor(red: 80 / 255, green: 90 / 255, blue: 100 / 255, alpha: 1),
-            shadow: UIColor(red: 50 / 255, green: 60 / 255, blue: 50 / 255, alpha: 1)
-        )
-       
-        SwitchMode.shadowHeight = 8
-        SwitchMode.cornerRadius = 16 */
+         //        SwitchMode.backgroundColor = UIColor.green
+         //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+         SwitchMode.frame = CGRect(x: buttons[7].frame.origin.x + 100, y: benchmark - 100, width: 100, height: 90)
+         SwitchMode.colors = .init(
+         button: UIColor(red: 80 / 255, green: 90 / 255, blue: 100 / 255, alpha: 1),
+         shadow: UIColor(red: 50 / 255, green: 60 / 255, blue: 50 / 255, alpha: 1)
+         )
+         
+         SwitchMode.shadowHeight = 8
+         SwitchMode.cornerRadius = 16 */
         
         
         mouseButton = PressableButton()
-//        SwitchMode.backgroundColor = UIColor.green
-//        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
+        //        SwitchMode.backgroundColor = UIColor.green
+        //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
         // mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
         mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
         mouseButton.colors = .init(
@@ -667,8 +691,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         //self.view.addSubview(SwitchMode)
         
         Cap = PressableButton()
-//        Cap.backgroundColor = UIColor.gray
-//        Cap.setTitleColor(UIColor.white, for: .normal)
+        //        Cap.backgroundColor = UIColor.gray
+        //        Cap.setTitleColor(UIColor.white, for: .normal)
         // Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
         Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
         Cap.colors = .init(
@@ -685,7 +709,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         self.view.addSubview(Cap)
         
         Delete = PressableButton()
-//        Delete.setTitleColor(UIColor.white, for: .normal)
+        //        Delete.setTitleColor(UIColor.white, for: .normal)
         // Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
         Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
         Delete.colors = .init(
@@ -699,8 +723,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         self.view.addSubview(Delete)
         
         Space = PressableButton()
-//        Space.backgroundColor = UIColor.white
-//        Space.setTitleColor(UIColor.black, for: .normal)
+        //        Space.backgroundColor = UIColor.white
+        //        Space.setTitleColor(UIColor.black, for: .normal)
         Space.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 300, width: 100, height: 130) // jingyu
         Space.colors = .init(
             // button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
@@ -716,8 +740,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         self.view.addSubview(Space)
         
         Enter = PressableButton()
-//        Enter.backgroundColor = UIColor.gray
-//        Enter.setTitleColor(UIColor.white, for: .normal)
+        //        Enter.backgroundColor = UIColor.gray
+        //        Enter.setTitleColor(UIColor.white, for: .normal)
         Enter.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 450, width: 100, height: 130) // jingyu
         
         Enter.colors = .init(
@@ -731,8 +755,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         self.view.addSubview(Enter)
         
         goBack = PressableButton()
-//        goBack.backgroundColor = UIColor.red
-//        goBack.setTitleColor(UIColor.white, for: .normal)
+        //        goBack.backgroundColor = UIColor.red
+        //        goBack.setTitleColor(UIColor.white, for: .normal)
         goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 90)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Configure", for: .normal)
@@ -801,8 +825,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         iter = 0
         while iter < 2 {
             let bt = PressableButton()
-//            bt.backgroundColor = UIColor.gray
-//            bt.setTitleColor(UIColor.black, for: .normal)
+            //            bt.backgroundColor = UIColor.gray
+            //            bt.setTitleColor(UIColor.black, for: .normal)
             
             bt.shadowHeight = 8
             bt.cornerRadius = 16
@@ -898,40 +922,44 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 postRequest(text: "key_rbracket")
             } else if sender.titleLabel!.text! == "/" {
                 postRequest(text: "key_slash")
+            } else if sender.titleLabel!.text! == "!" {
+                postRequest(text: "key_exclam")
+            } else if sender.titleLabel!.text! == "#" {
+                postRequest(text: "key_hashtag")
             } else {
                 postRequest(text: sender.titleLabel!.text!)
             }
             
             /*
-            if let tmp_url = self.ip {
-                let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
-                //create the session object
-                let session = URLSession.shared
-                
-                //now create the URLRequest object using the url object
-                var request = URLRequest(url: url)
-                request.httpMethod = "GET" //set http method as POST
-                
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
-                
-                //create dataTask using the session object to send data to the server
-                let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-                    
-                    guard error == nil else {
-                        return
-                    }
-                    
-                    guard let data = data else {
-                        return
-                    }
-                    
-                })
-                task.resume()
-            }
-            else {
-                return
-            }*/
+             if let tmp_url = self.ip {
+             let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
+             //create the session object
+             let session = URLSession.shared
+             
+             //now create the URLRequest object using the url object
+             var request = URLRequest(url: url)
+             request.httpMethod = "GET" //set http method as POST
+             
+             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+             request.addValue("application/json", forHTTPHeaderField: "Accept")
+             
+             //create dataTask using the session object to send data to the server
+             let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+             
+             guard error == nil else {
+             return
+             }
+             
+             guard let data = data else {
+             return
+             }
+             
+             })
+             task.resume()
+             }
+             else {
+             return
+             }*/
         }
     }
     
@@ -939,8 +967,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         print("\(sender.titleLabel!.text!) pressed")
         postRequest(text: "key_delete")
         /*if inputText.text!.count > 0 {
-            inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
-        }*/
+         inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
+         }*/
     }
     
     @objc func pressSpace(_ sender: UIButton) {
@@ -1131,6 +1159,16 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     }
     
     @objc func pressGoBack(_ sender: UIButton) {
+        // TODO: defaults may not be deleted at once
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "p0_x")
+        defaults.removeObject(forKey: "p0_y")
+        defaults.removeObject(forKey: "p1_x")
+        defaults.removeObject(forKey: "p1_y")
+        defaults.removeObject(forKey: "p2_x")
+        defaults.removeObject(forKey: "p2_y")
+        defaults.removeObject(forKey: "p3_x")
+        defaults.removeObject(forKey: "p3_y")
         let keyView = WelcomeViewController(nibName: nil, bundle: nil)
         keyView.modalTransitionStyle = .crossDissolve
         self.present(keyView, animated: true, completion: nil)
@@ -1148,3 +1186,4 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         })
     }
 }
+

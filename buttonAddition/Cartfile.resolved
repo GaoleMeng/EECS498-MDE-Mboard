@@ -1,4 +1,5 @@
 github "TakeScoop/SwiftyButton" "0.8.0"
 github "andreamazz/BubbleTransition" "2.0.2"
+github "mamaral/Onboard" "v2.3.1"
 github "ninjaprox/NVActivityIndicatorView" "4.1.1"
 github "shu223/Pulsator" "0.4.1"

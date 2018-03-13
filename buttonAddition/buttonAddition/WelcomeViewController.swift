@@ -30,7 +30,7 @@ class WelcomeViewController: UIViewController {
     
     var settle: PressableButton!
     
-
+    
     var reset: PressableButton!
     
     // track the position of the four finger
@@ -47,40 +47,57 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.isMultipleTouchEnabled = true
-        //        let tapGes = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        //        self.view.addGestureRecognizer(tapGes)
-        self.view.backgroundColor = .white
-        //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
-        let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
-        let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
-        let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
-        let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
-        vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        hLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        self.view.addSubview(vLine1)
-        self.view.addSubview(vLine2)
-        self.view.addSubview(hLine1)
-        self.view.addSubview(hLine2)
-        instrLabel = UILabel(frame: CGRect(x: 50, y: 200, width: self.view.frame.width - 135, height: 80))
-        instrLabel.font = instrLabel.font.withSize(30)
-        instrLabel.text = "Place and keep your four fingers inside"
-        instrLabel.textAlignment = .left
-        instrLabel.textColor = .gray
-        instrLabel.backgroundColor = .white
-        touchLock = false
-        self.view.addSubview(instrLabel)
-        
-        loadingicon = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width - 135, height: 80), color: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1))
-        
-        self.view.addSubview(loadingicon)
-//        loadingicon.startAnimating()
-        
-        
-        
+        let defaults = UserDefaults.standard
+        if let hasPos = defaults.string(forKey: "p0_x") {
+            view.backgroundColor = .lightGray
+        } else {
+            view.backgroundColor = .white
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        if let hasPos = defaults.string(forKey: "p0_x") {
+            // has already configured before
+            let keyView = ViewController()
+            keyView.modalTransitionStyle = .crossDissolve
+            keyView.setCenterArray(x1: CGFloat(defaults.float(forKey: "p0_x")), y1: CGFloat(defaults.float(forKey: "p0_y")),
+                                   x2: CGFloat(defaults.float(forKey: "p1_x")), y2: CGFloat(defaults.float(forKey: "p1_y")),
+                                   x3: CGFloat(defaults.float(forKey: "p2_x")), y3: CGFloat(defaults.float(forKey: "p2_y")),
+                                   x4: CGFloat(defaults.float(forKey: "p3_x")), y4: CGFloat(defaults.float(forKey: "p3_y")))
+            self.present(keyView, animated: true, completion: nil)
+        } else {
+            self.view.isMultipleTouchEnabled = true
+            //        let tapGes = UITapGestureRecognizer(target: self, action: #selector(tapAction))
+            //        self.view.addGestureRecognizer(tapGes)
+            //self.view.backgroundColor = .white
+            //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
+            let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
+            let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
+            let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+            let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+            vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            hLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
+            self.view.addSubview(vLine1)
+            self.view.addSubview(vLine2)
+            self.view.addSubview(hLine1)
+            self.view.addSubview(hLine2)
+            instrLabel = UILabel(frame: CGRect(x: 50, y: 200, width: self.view.frame.width - 135, height: 80))
+            instrLabel.font = instrLabel.font.withSize(30)
+            instrLabel.text = "Place and keep your four fingers inside"
+            instrLabel.textAlignment = .left
+            instrLabel.textColor = .gray
+            instrLabel.backgroundColor = .white
+            touchLock = false
+            self.view.addSubview(instrLabel)
+            
+            loadingicon = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width - 135, height: 80), color: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1))
+            
+            self.view.addSubview(loadingicon)
+            //        loadingicon.startAnimating()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -222,9 +239,9 @@ class WelcomeViewController: UIViewController {
                     settle.alpha = 0
                     
                     self.view.addSubview(self.settle)
-//                    UIView.animate(withDuration: 1.5) {
-//                        self.settle.alpha = 1.0
-//                    }
+                    //                    UIView.animate(withDuration: 1.5) {
+                    //                        self.settle.alpha = 1.0
+                    //                    }
                     
                     reset = PressableButton()
                     reset.colors = .init(
@@ -423,7 +440,15 @@ class WelcomeViewController: UIViewController {
                                x2: bxArray[1].frame.origin.x, y2: bxArray[1].frame.origin.y,
                                x3: bxArray[2].frame.origin.x, y3: bxArray[2].frame.origin.y,
                                x4: bxArray[3].frame.origin.x, y4: bxArray[3].frame.origin.y)
-        
+        let defaults = UserDefaults.standard
+        defaults.set(bxArray[0].frame.origin.x, forKey: "p0_x")
+        defaults.set(bxArray[0].frame.origin.y, forKey: "p0_y")
+        defaults.set(bxArray[1].frame.origin.x, forKey: "p1_x")
+        defaults.set(bxArray[1].frame.origin.y, forKey: "p1_y")
+        defaults.set(bxArray[2].frame.origin.x, forKey: "p2_x")
+        defaults.set(bxArray[2].frame.origin.y, forKey: "p2_y")
+        defaults.set(bxArray[3].frame.origin.x, forKey: "p3_x")
+        defaults.set(bxArray[3].frame.origin.y, forKey: "p3_y")
         self.present(keyView, animated: true, completion: nil)
     }
     
@@ -460,4 +485,3 @@ class WelcomeViewController: UIViewController {
     }
     
 }
-
