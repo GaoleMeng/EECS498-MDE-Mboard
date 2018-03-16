@@ -12,10 +12,16 @@ import SwiftyButton
 import NVActivityIndicatorView
 
 class WelcomeViewController: UIViewController {
+    
+    var handChosen:String = ""
+    
+    var button_x = CGFloat()
+    
     var wrongPos: Int = 0
     
     let dumpingRate:CGFloat = 0.7
     var instrLabel: UILabel!
+    var handLabel: UILabel!
     var counter: Int = 0
     var pos:[center] = []
     var bt1: UIImageView!
@@ -28,10 +34,10 @@ class WelcomeViewController: UIViewController {
     var pulsebt3: Pulsator!
     var pulsebt4: Pulsator!
     
+    var falseReconfigure: PressableButton!
     var settle: PressableButton!
-    
-    
     var reset: PressableButton!
+    var ReselectHand: PressableButton!
     
     // track the position of the four finger
     var checkpos1: [center] = []
@@ -48,34 +54,83 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
-        if let hasPos = defaults.string(forKey: "p0_x") {
-            view.backgroundColor = .lightGray
-        } else {
-            view.backgroundColor = .white
-        }
+        handChosen = defaults.string(forKey: "handChosen")!
+        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        if(handChosen == "left"){
+            button_x = self.view.frame.width - 65
+        }else{
+            button_x = 65
+        }
+        ReselectHand = PressableButton()
+        ReselectHand.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 175, width: 120, height: 90)
+        ReselectHand.shadowHeight = 8
+        ReselectHand.cornerRadius = 20
+        ReselectHand.colors = .init(
+            button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+            shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        )
+        ReselectHand.setTitle("Reselect Hand", for: .normal)
+        ReselectHand.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        ReselectHand.addTarget(self, action: #selector(chooseHand(_:)), for: .touchUpInside)
+        self.view.addSubview(ReselectHand)
+        
+        /* falseReconfigure = PressableButton()
+        falseReconfigure.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 270, width: 120, height: 90)
+        falseReconfigure.shadowHeight = 8
+        falseReconfigure.cornerRadius = 20
+        falseReconfigure.colors = .init(
+            button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+            shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        )
+        falseReconfigure.setTitle("Go Back", for: .normal)
+        falseReconfigure.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        falseReconfigure.addTarget(self, action: #selector(pressFalseReconfigure(_:)), for: .touchUpInside)
+        self.view.addSubview(falseReconfigure) */
+        
         let defaults = UserDefaults.standard
         if let hasPos = defaults.string(forKey: "p0_x") {
-            // has already configured before
-            let keyView = ViewController()
-            keyView.modalTransitionStyle = .crossDissolve
-            keyView.setCenterArray(x1: CGFloat(defaults.float(forKey: "p0_x")), y1: CGFloat(defaults.float(forKey: "p0_y")),
-                                   x2: CGFloat(defaults.float(forKey: "p1_x")), y2: CGFloat(defaults.float(forKey: "p1_y")),
-                                   x3: CGFloat(defaults.float(forKey: "p2_x")), y3: CGFloat(defaults.float(forKey: "p2_y")),
-                                   x4: CGFloat(defaults.float(forKey: "p3_x")), y4: CGFloat(defaults.float(forKey: "p3_y")))
-            self.present(keyView, animated: true, completion: nil)
-        } else {
+            print("already have dataxxx")
+            falseReconfigure = PressableButton()
+            falseReconfigure.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 270, width: 120, height: 90)
+            falseReconfigure.shadowHeight = 8
+            falseReconfigure.cornerRadius = 20
+            falseReconfigure.colors = .init(
+                button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+            )
+            falseReconfigure.setTitle("Go Back", for: .normal)
+            falseReconfigure.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            falseReconfigure.addTarget(self, action: #selector(pressFalseReconfigure(_:)), for: .touchUpInside)
+            self.view.addSubview(falseReconfigure)
+        }
+        
+        
+        
+        if(true){
             self.view.isMultipleTouchEnabled = true
             //        let tapGes = UITapGestureRecognizer(target: self, action: #selector(tapAction))
             //        self.view.addGestureRecognizer(tapGes)
             //self.view.backgroundColor = .white
             //let vLine = rectangular(frame: CGRect(x: 5, y: 110, width: self.view.frame.width - 135, height: self.view.frame.height - 250))
-            let vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
-            let vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
-            let hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
-            let hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+            var vLine1 = lineView()
+            var vLine2 = lineView()
+            var hLine1 = rectangular()
+            var hLine2 = rectangular()
+            if(handChosen == "left"){
+                vLine1 = lineView(frame: CGRect(x: 5, y: 300, width: 2, height: self.view.frame.height - 440))
+                vLine2 = lineView(frame: CGRect(x: 5 + self.view.frame.width - 135 - 20, y: 300, width: 2, height: self.view.frame.height - 440)) // jingyu
+                hLine1 = rectangular(frame: CGRect(x: 5, y: 300, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+                hLine2 = rectangular(frame: CGRect(x: 5, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2)) // jingyu
+            } else{
+                vLine1 = lineView(frame: CGRect(x: self.view.frame.width - 5, y: 300, width: 2, height: self.view.frame.height - 440))
+                vLine2 = lineView(frame: CGRect(x: -5 + 135 + 20, y: 300, width: 2, height: self.view.frame.height - 440))
+                hLine1 = rectangular(frame: CGRect(x: -5 + 135 + 20, y: 300, width: self.view.frame.width - 135 - 20, height: 2))
+                hLine2 = rectangular(frame: CGRect(x: -5 + 135 + 20, y: 300 + self.view.frame.height - 440, width: self.view.frame.width - 135 - 20, height: 2))
+            }
             vLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
             vLine2.backgroundColor = UIColor(white: 1, alpha: 0.5)
             hLine1.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -92,6 +147,16 @@ class WelcomeViewController: UIViewController {
             instrLabel.backgroundColor = .white
             touchLock = false
             self.view.addSubview(instrLabel)
+            handLabel = UILabel(frame: CGRect(x: self.view.center.x, y: self.view.frame.maxY - 20, width: self.view.frame.width - 135, height: 80))
+            handLabel.center = CGPoint()
+            handLabel.center.x = self.view.center.x
+            handLabel.center.y = self.view.frame.maxY - 20
+            handLabel.font = instrLabel.font.withSize(30)
+            handLabel.text = "Layout is set to be " + handChosen + " handed"
+            handLabel.textAlignment = .center
+            handLabel.textColor = .gray
+            handLabel.backgroundColor = .white
+            self.view.addSubview(handLabel)
             
             loadingicon = NVActivityIndicatorView(frame: CGRect(x: 0, y: 100, width: self.view.frame.width - 135, height: 80), color: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1))
             
@@ -233,7 +298,7 @@ class WelcomeViewController: UIViewController {
                     settle.shadowHeight = 7
                     settle.cornerRadius = 5
                     //                    settle.setTitleColor(UIColor.blue, for: .normal)
-                    settle.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
+                    settle.frame = CGRect(x: button_x - 50, y: self.view.frame.height / 2 - 75, width: 100, height: 100)
                     settle.setTitle("Confirm", for: .normal) // jingyu
                     settle.addTarget(self, action: #selector(pressConfirm(_:)), for: .touchUpInside)
                     settle.alpha = 0
@@ -254,7 +319,7 @@ class WelcomeViewController: UIViewController {
                     reset.cornerRadius = 5
                     
                     reset.setTitleColor(UIColor.white, for: .normal)
-                    reset.frame = CGRect(x: self.view.frame.width - 120, y: self.view.frame.height / 2 + 75, width: 100, height: 100)
+                    reset.frame = CGRect(x: button_x - 50, y: self.view.frame.height / 2 + 50, width: 100, height: 100)
                     reset.setTitle("Reset", for: .normal)
                     reset.addTarget(self, action: #selector(pressReset(_:)), for: .touchUpInside)
                     
@@ -415,8 +480,17 @@ class WelcomeViewController: UIViewController {
         bxArray.append(bt4.frame.midX)
         bxArray = bxArray.sorted(by: {$0 < $1})
         //print(bxArray)
-        if bxArray[3] > self.view.frame.width - 170 - 20 // jingyu
-            || bxArray[0] < 40
+        var leftBound = CGFloat()
+        var rightBound = CGFloat()
+        if(handChosen == "left"){
+            leftBound = 40
+            rightBound = self.view.frame.width - 170 - 20
+        } else{
+            leftBound = 190
+            rightBound = self.view.frame.width - 40
+        }
+        if bxArray[3] > rightBound // jingyu
+            || bxArray[0] < leftBound
             || bt1.frame.origin.y < 300 || bt1.frame.origin.y > self.view.frame.height - 210
             || bt2.frame.origin.y < 300 || bt2.frame.origin.y > self.view.frame.height - 210
             || bt3.frame.origin.y < 300 || bt3.frame.origin.y > self.view.frame.height - 210
@@ -426,6 +500,23 @@ class WelcomeViewController: UIViewController {
         return false
     }
     
+    @objc func chooseHand(_ sender: UIButton) {
+        let defaults = UserDefaults.standard
+        if let hasPos = defaults.string(forKey: "p0_x") {
+            //print("already have data")
+            defaults.removeObject(forKey: "p0_x")
+            defaults.removeObject(forKey: "p0_y")
+            defaults.removeObject(forKey: "p1_x")
+            defaults.removeObject(forKey: "p1_y")
+            defaults.removeObject(forKey: "p2_x")
+            defaults.removeObject(forKey: "p2_y")
+            defaults.removeObject(forKey: "p3_x")
+            defaults.removeObject(forKey: "p3_y")
+        }
+        let keyView = LeftRightConfigure()
+        keyView.modalTransitionStyle = .crossDissolve
+        self.present(keyView, animated: true, completion: nil)
+    }
     
     @objc func pressConfirm(_ sender: UIButton) {
         var bxArray: [UIImageView] = []
@@ -449,6 +540,7 @@ class WelcomeViewController: UIViewController {
         defaults.set(bxArray[2].frame.origin.y, forKey: "p2_y")
         defaults.set(bxArray[3].frame.origin.x, forKey: "p3_x")
         defaults.set(bxArray[3].frame.origin.y, forKey: "p3_y")
+        defaults.set(button_x, forKey: "thumb")
         self.present(keyView, animated: true, completion: nil)
     }
     
@@ -477,6 +569,20 @@ class WelcomeViewController: UIViewController {
         pulsebt4.stop()
         
         pos = []
+    }
+    
+    @objc func pressFalseReconfigure(_ sender: UIButton) {
+        let defaults = UserDefaults.standard
+        let keyView = ViewController()
+        keyView.modalTransitionStyle = .crossDissolve
+        /*if let hasPos = defaults.string(forKey: "p0_x") {
+            print("has pos")
+        }*/
+        keyView.setCenterArray(x1: CGFloat(defaults.float(forKey: "p0_x")), y1: CGFloat(defaults.float(forKey: "p0_y")),
+                               x2: CGFloat(defaults.float(forKey: "p1_x")), y2: CGFloat(defaults.float(forKey: "p1_y")),
+                               x3: CGFloat(defaults.float(forKey: "p2_x")), y3: CGFloat(defaults.float(forKey: "p2_y")),
+                               x4: CGFloat(defaults.float(forKey: "p3_x")), y4: CGFloat(defaults.float(forKey: "p3_y")))
+        self.present(keyView, animated: true, completion: nil)
     }
     
     

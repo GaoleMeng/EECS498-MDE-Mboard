@@ -36,7 +36,12 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var mouseButton: PressableButton!
     
     var modes: Array<UIButton> = []
+    
     var predWords: Array<UIButton> = []
+    var str1 = ""
+    var str2 = ""
+    var pred_flag = -1 // 0: autocomplete, 1: predict new word
+    
     var ip: String?
     var nav_arrows_alpha: Array<UIButton> = []
     var nav_arrows_num: Array<UIButton> = []
@@ -563,6 +568,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
          inputText.backgroundColor = UIColor.white
          self.view.addSubview(inputText)*/
         
+        let defaults = UserDefaults.standard
+        let thumb_center = CGFloat(defaults.float(forKey: "thumb"))
+        
         var iter: Int = 0
         // setup normal keys
         while iter < 13 {
@@ -577,6 +585,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 row = 2
             }
             let bt = PressableButton()
+            //print(centerArray.count)
             if iter < 12{
                 bt.frame = CGRect(x: centerArray[iter % 4].x, y: centerArray[iter % 4].y, width: 90, height: 90) // jingyu
             } else if iter == 12{
@@ -673,7 +682,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         //        SwitchMode.backgroundColor = UIColor.green
         //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
         // mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
-        mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
+        mouseButton.frame = CGRect(x: thumb_center - 50, y: benchmark + 100, width: 100, height: 90) // jingyu
         mouseButton.colors = .init(
             button: UIColor(red: 52 / 255, green: 125 / 255, blue: 219 / 255, alpha: 1),
             shadow: UIColor(red: 38 / 255, green: 116 / 255, blue: 168 / 255, alpha: 1)
@@ -694,7 +703,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         //        Cap.backgroundColor = UIColor.gray
         //        Cap.setTitleColor(UIColor.white, for: .normal)
         // Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
-        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
+        Cap.frame = CGRect(x: thumb_center - 50, y: benchmark + 200, width: 100, height: 90) // jingyu
         Cap.colors = .init(
             button: UIColor(red: 41 / 255, green: 128 / 255, blue: 185 / 255, alpha: 1),
             shadow: UIColor(red: 31 / 255, green: 95 / 255, blue: 137 / 255, alpha: 1)
@@ -711,7 +720,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Delete = PressableButton()
         //        Delete.setTitleColor(UIColor.white, for: .normal)
         // Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
-        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
+        Delete.frame = CGRect(x: thumb_center - 50, y: benchmark, width: 100, height: 90) // jingyu
         Delete.colors = .init(
             button: UIColor(red: 229 / 255, green: 80 / 255, blue: 57 / 255, alpha: 1),
             shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
@@ -725,7 +734,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Space = PressableButton()
         //        Space.backgroundColor = UIColor.white
         //        Space.setTitleColor(UIColor.black, for: .normal)
-        Space.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 300, width: 100, height: 130) // jingyu
+        Space.frame = CGRect(x: thumb_center - 50, y: benchmark + 300, width: 100, height: 130) // jingyu
         Space.colors = .init(
             // button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
             // shadow: UIColor(red: 25 / 255, green: 112 / 255, blue: 61 / 255, alpha: 1)
@@ -742,7 +751,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Enter = PressableButton()
         //        Enter.backgroundColor = UIColor.gray
         //        Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 450, width: 100, height: 130) // jingyu
+        Enter.frame = CGRect(x: thumb_center - 50, y: benchmark + 450, width: 100, height: 130) // jingyu
         
         Enter.colors = .init(
             button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1),
@@ -757,7 +766,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         goBack = PressableButton()
         //        goBack.backgroundColor = UIColor.red
         //        goBack.setTitleColor(UIColor.white, for: .normal)
-        goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 90)
+        goBack.frame = CGRect(x: thumb_center - 50, y: go_back_benchmark_y, width: 100, height: 90)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Configure", for: .normal)
         self.view.addSubview(goBack)
@@ -876,6 +885,44 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         return true
     }
     
+    func postPred(text: String) -> Bool {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/pred/" + text)!
+            let session = URLSession.shared
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+                do {
+                    //create json object from data
+                    if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                        print(json)
+                        var pred_string_list = json["pred"] as? String
+                        // TODO: parse and update predWords button texts
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            })
+            task.resume()
+        } else {
+            return false
+        }
+        return true
+    }
+    
     @objc func pressCharacter(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
         if sender.titleLabel!.text! == "Sign" {
@@ -930,36 +977,19 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 postRequest(text: sender.titleLabel!.text!)
             }
             
-            /*
-             if let tmp_url = self.ip {
-             let url = URL(string: "http://" + tmp_url + ":3000/input/" + sender.titleLabel!.text!)!
-             //create the session object
-             let session = URLSession.shared
-             
-             //now create the URLRequest object using the url object
-             var request = URLRequest(url: url)
-             request.httpMethod = "GET" //set http method as POST
-             
-             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-             request.addValue("application/json", forHTTPHeaderField: "Accept")
-             
-             //create dataTask using the session object to send data to the server
-             let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-             
-             guard error == nil else {
-             return
-             }
-             
-             guard let data = data else {
-             return
-             }
-             
-             })
-             task.resume()
-             }
-             else {
-             return
-             }*/
+            if isAlpha(text: sender.titleLabel!.text!) {
+                // update str2
+                str2 += sender.titleLabel!.text!
+                if str1.count == 0 {
+                    // autocomplete using one word
+                    postPred(text: str2)
+                    pred_flag = 0
+                } else {
+                    // autocomplete using two words
+                    postPred(text: str1 + "_" + str2)
+                    pred_flag = 0
+                }
+            }
         }
     }
     
@@ -969,12 +999,61 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         /*if inputText.text!.count > 0 {
          inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
          }*/
+        
+        if str2.count > 0 {
+            str2.remove(at: str2.index(before: str2.endIndex))
+            if str2.count > 0 {
+                if str1.count == 0 {
+                    // autocomplete using one word
+                    postPred(text: str2)
+                    pred_flag = 0
+                } else {
+                    // autocomplete using two words
+                    postPred(text: str1 + "_" + str2)
+                    pred_flag = 0
+                }
+            } else {
+                if str1.count > 0 {
+                    // predict next word using one word
+                    postPred(text: str1 + "_")
+                    pred_flag = 1
+                }
+            }
+        } else {
+            if str1.count > 0 {
+                // delete a space
+                // autocomplete using one word
+                str2 = str1
+                str1 = ""
+                postPred(text: str2)
+                pred_flag = 0
+            }
+        }
     }
     
     @objc func pressSpace(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
         postRequest(text: "key_space")
         /*inputText.text! += " "*/
+        if str2.count > 0 {
+            pred_flag = 1
+            if str1.count == 0 {
+                // predict for next word using one word
+                postPred(text: str2 + "_")
+            } else {
+                // predict for next word using two words
+                postPred(text: str1 + "_" + str2 + "_")
+            }
+            str1 = str2
+            str2 = ""
+            // Predicate word should later go directly to str2
+        } else {
+            // fix two successive space
+            if str1.count > 0 {
+                str1 = ""
+                str2 = ""
+            }
+        }
     }
     
     @objc func pressCap(_ sender: UIButton) {
@@ -1011,6 +1090,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         print("\(sender.titleLabel!.text!) pressed")
         /*inputText.text! += "\n"*/
         postRequest(text: "key_newline")
+        str1 = ""
+        str2 = ""
+        pred_flag = -1
     }
     
     
@@ -1160,7 +1242,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @objc func pressGoBack(_ sender: UIButton) {
         // TODO: defaults may not be deleted at once
-        let defaults = UserDefaults.standard
+        /*let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "p0_x")
         defaults.removeObject(forKey: "p0_y")
         defaults.removeObject(forKey: "p1_x")
@@ -1168,7 +1250,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         defaults.removeObject(forKey: "p2_x")
         defaults.removeObject(forKey: "p2_y")
         defaults.removeObject(forKey: "p3_x")
-        defaults.removeObject(forKey: "p3_y")
+        defaults.removeObject(forKey: "p3_y")*/
         let keyView = WelcomeViewController(nibName: nil, bundle: nil)
         keyView.modalTransitionStyle = .crossDissolve
         self.present(keyView, animated: true, completion: nil)
@@ -1179,11 +1261,40 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         /*inputText.text! += sender.titleLabel!.text!*/
         sender.backgroundColor = .white
         sender.setTitleColor(.black, for: .normal)
-        postRequest(text: sender.titleLabel!.text!)
+        //postRequest(text: sender.titleLabel!.text!)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
             sender.backgroundColor = .gray
             sender.setTitleColor(.white, for: .normal)
         })
+        if pred_flag == 1 {
+            // this is the next word
+            str2 = sender.titleLabel!.text!
+            // predict next word using two words
+            postPred(text: str1 + "_" + str2 + "_")
+            
+            postRequest(text: str2)
+            postRequest(text: "key_space")
+            str1 = str2
+            str2 = ""
+            pred_flag = 1
+        } else if pred_flag == 0 {
+            // this is an autocompletion
+            let fullword = sender.titleLabel!.text!
+            let subString = fullword.suffix(fullword.count - str2.count)
+            if str1.count > 0 {
+                // predict next word using two words
+                postPred(text: str1 + "_" + str2 + "_")
+            } else {
+                // predict next word using one word
+                postPred(text: str2 + "_")
+            }
+            
+            postRequest(text: String(subString))
+            postRequest(text: "key_space")
+            str1 = str2
+            str2 = ""
+            pred_flag = 1
+        }
     }
 }
 
