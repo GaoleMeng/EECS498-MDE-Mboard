@@ -20,6 +20,7 @@
 		04EFC05B2031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; };
 		04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		850800A9205B44B100BFAFB8 /* LeftRightConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850800A8205B44B100BFAFB8 /* LeftRightConfigure.swift */; };
 		856EFE482058522400E84255 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 856EFE472058522400E84255 /* blue.png */; };
 		856EFE4A2058526400E84255 /* play.gif in Resources */ = {isa = PBXBuildFile; fileRef = 856EFE492058526400E84255 /* play.gif */; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
@@ -66,6 +67,7 @@
 		04EFC0562031668200D6B02E /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewAppExtension.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewAppExtension.framework; sourceTree = "<group>"; };
 		04F1CC1920327131003A5BA0 /* BubbleTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BubbleTransition.framework; path = Carthage/Build/iOS/BubbleTransition.framework; sourceTree = "<group>"; };
+		850800A8205B44B100BFAFB8 /* LeftRightConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftRightConfigure.swift; sourceTree = "<group>"; };
 		856EFE472058522400E84255 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue.png; path = "../../../onboard_frame/Onboard/Demo/Demo Files/media/blue.png"; sourceTree = "<group>"; };
 		856EFE492058526400E84255 /* play.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = play.gif; path = "../../../gif/GIF-Swift/GIF-Swift/play.gif"; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				857816182023AE4000B45AF8 /* lineView.swift */,
 				04E0434A2038DCAF0032AC49 /* MouseView.swift */,
 				8578F1D7202A32AC0030B309 /* rectangular.swift */,
+				850800A8205B44B100BFAFB8 /* LeftRightConfigure.swift */,
 				85B7CF73202362C50049EA32 /* Main.storyboard */,
 				85B7CF76202362C50049EA32 /* Assets.xcassets */,
 				85B7CF78202362C50049EA32 /* LaunchScreen.storyboard */,
@@ -260,6 +263,7 @@
 				85DA365D20507AD7007E5AB5 /* IOSDevCenters+GIF.swift in Sources */,
 				857816192023AE4000B45AF8 /* lineView.swift in Sources */,
 				8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */,
+				850800A9205B44B100BFAFB8 /* LeftRightConfigure.swift in Sources */,
 				8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */,
 				85B7CF72202362C50049EA32 /* ViewController.swift in Sources */,
 				85B24B37204F9CA4008BA49A /* Tutorial.swift in Sources */,

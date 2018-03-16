@@ -34,6 +34,7 @@ class WelcomeViewController: UIViewController {
     var pulsebt3: Pulsator!
     var pulsebt4: Pulsator!
     
+    var falseReconfigure: PressableButton!
     var settle: PressableButton!
     var reset: PressableButton!
     var ReselectHand: PressableButton!
@@ -53,9 +54,6 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaults = UserDefaults.standard
-        if let hasPos = defaults.string(forKey: "p0_x") {
-            print("already have data")
-        }
         handChosen = defaults.string(forKey: "handChosen")!
         view.backgroundColor = .white
     }
@@ -79,6 +77,38 @@ class WelcomeViewController: UIViewController {
         ReselectHand.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         ReselectHand.addTarget(self, action: #selector(chooseHand(_:)), for: .touchUpInside)
         self.view.addSubview(ReselectHand)
+        
+        /* falseReconfigure = PressableButton()
+        falseReconfigure.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 270, width: 120, height: 90)
+        falseReconfigure.shadowHeight = 8
+        falseReconfigure.cornerRadius = 20
+        falseReconfigure.colors = .init(
+            button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+            shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        )
+        falseReconfigure.setTitle("Go Back", for: .normal)
+        falseReconfigure.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        falseReconfigure.addTarget(self, action: #selector(pressFalseReconfigure(_:)), for: .touchUpInside)
+        self.view.addSubview(falseReconfigure) */
+        
+        let defaults = UserDefaults.standard
+        if let hasPos = defaults.string(forKey: "p0_x") {
+            print("already have dataxxx")
+            falseReconfigure = PressableButton()
+            falseReconfigure.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 270, width: 120, height: 90)
+            falseReconfigure.shadowHeight = 8
+            falseReconfigure.cornerRadius = 20
+            falseReconfigure.colors = .init(
+                button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
+                shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu
+            )
+            falseReconfigure.setTitle("Go Back", for: .normal)
+            falseReconfigure.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            falseReconfigure.addTarget(self, action: #selector(pressFalseReconfigure(_:)), for: .touchUpInside)
+            self.view.addSubview(falseReconfigure)
+        }
+        
+        
         
         if(true){
             self.view.isMultipleTouchEnabled = true
@@ -471,6 +501,18 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func chooseHand(_ sender: UIButton) {
+        let defaults = UserDefaults.standard
+        if let hasPos = defaults.string(forKey: "p0_x") {
+            //print("already have data")
+            defaults.removeObject(forKey: "p0_x")
+            defaults.removeObject(forKey: "p0_y")
+            defaults.removeObject(forKey: "p1_x")
+            defaults.removeObject(forKey: "p1_y")
+            defaults.removeObject(forKey: "p2_x")
+            defaults.removeObject(forKey: "p2_y")
+            defaults.removeObject(forKey: "p3_x")
+            defaults.removeObject(forKey: "p3_y")
+        }
         let keyView = LeftRightConfigure()
         keyView.modalTransitionStyle = .crossDissolve
         self.present(keyView, animated: true, completion: nil)
@@ -527,6 +569,20 @@ class WelcomeViewController: UIViewController {
         pulsebt4.stop()
         
         pos = []
+    }
+    
+    @objc func pressFalseReconfigure(_ sender: UIButton) {
+        let defaults = UserDefaults.standard
+        let keyView = ViewController()
+        keyView.modalTransitionStyle = .crossDissolve
+        /*if let hasPos = defaults.string(forKey: "p0_x") {
+            print("has pos")
+        }*/
+        keyView.setCenterArray(x1: CGFloat(defaults.float(forKey: "p0_x")), y1: CGFloat(defaults.float(forKey: "p0_y")),
+                               x2: CGFloat(defaults.float(forKey: "p1_x")), y2: CGFloat(defaults.float(forKey: "p1_y")),
+                               x3: CGFloat(defaults.float(forKey: "p2_x")), y3: CGFloat(defaults.float(forKey: "p2_y")),
+                               x4: CGFloat(defaults.float(forKey: "p3_x")), y4: CGFloat(defaults.float(forKey: "p3_y")))
+        self.present(keyView, animated: true, completion: nil)
     }
     
     
