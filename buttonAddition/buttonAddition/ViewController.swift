@@ -563,6 +563,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
          inputText.backgroundColor = UIColor.white
          self.view.addSubview(inputText)*/
         
+        let defaults = UserDefaults.standard
+        let thumb_center = CGFloat(defaults.float(forKey: "thumb"))
+        
         var iter: Int = 0
         // setup normal keys
         while iter < 13 {
@@ -673,7 +676,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         //        SwitchMode.backgroundColor = UIColor.green
         //        SwitchMode.setTitleColor(UIColor.blue, for: .normal)
         // mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
-        mouseButton.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
+        mouseButton.frame = CGRect(x: thumb_center - 50, y: benchmark + 100, width: 100, height: 90) // jingyu
         mouseButton.colors = .init(
             button: UIColor(red: 52 / 255, green: 125 / 255, blue: 219 / 255, alpha: 1),
             shadow: UIColor(red: 38 / 255, green: 116 / 255, blue: 168 / 255, alpha: 1)
@@ -694,7 +697,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         //        Cap.backgroundColor = UIColor.gray
         //        Cap.setTitleColor(UIColor.white, for: .normal)
         // Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 100, width: 100, height: 90) // jingyu
-        Cap.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
+        Cap.frame = CGRect(x: thumb_center - 50, y: benchmark + 200, width: 100, height: 90) // jingyu
         Cap.colors = .init(
             button: UIColor(red: 41 / 255, green: 128 / 255, blue: 185 / 255, alpha: 1),
             shadow: UIColor(red: 31 / 255, green: 95 / 255, blue: 137 / 255, alpha: 1)
@@ -711,7 +714,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Delete = PressableButton()
         //        Delete.setTitleColor(UIColor.white, for: .normal)
         // Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 200, width: 100, height: 90) // jingyu
-        Delete.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark, width: 100, height: 90) // jingyu
+        Delete.frame = CGRect(x: thumb_center - 50, y: benchmark, width: 100, height: 90) // jingyu
         Delete.colors = .init(
             button: UIColor(red: 229 / 255, green: 80 / 255, blue: 57 / 255, alpha: 1),
             shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1)
@@ -725,7 +728,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Space = PressableButton()
         //        Space.backgroundColor = UIColor.white
         //        Space.setTitleColor(UIColor.black, for: .normal)
-        Space.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 300, width: 100, height: 130) // jingyu
+        Space.frame = CGRect(x: thumb_center - 50, y: benchmark + 300, width: 100, height: 130) // jingyu
         Space.colors = .init(
             // button: UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1),
             // shadow: UIColor(red: 25 / 255, green: 112 / 255, blue: 61 / 255, alpha: 1)
@@ -742,7 +745,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Enter = PressableButton()
         //        Enter.backgroundColor = UIColor.gray
         //        Enter.setTitleColor(UIColor.white, for: .normal)
-        Enter.frame = CGRect(x: buttons[7].frame.origin.x + 120, y: benchmark + 450, width: 100, height: 130) // jingyu
+        Enter.frame = CGRect(x: thumb_center - 50, y: benchmark + 450, width: 100, height: 130) // jingyu
         
         Enter.colors = .init(
             button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1),
@@ -757,7 +760,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         goBack = PressableButton()
         //        goBack.backgroundColor = UIColor.red
         //        goBack.setTitleColor(UIColor.white, for: .normal)
-        goBack.frame = CGRect(x: go_back_benchmark_x, y: go_back_benchmark_y, width: 100, height: 90)
+        goBack.frame = CGRect(x: thumb_center - 50, y: go_back_benchmark_y, width: 100, height: 90)
         goBack.addTarget(self, action: #selector(pressGoBack(_:)), for: .touchUpInside)
         goBack.setTitle("Configure", for: .normal)
         self.view.addSubview(goBack)

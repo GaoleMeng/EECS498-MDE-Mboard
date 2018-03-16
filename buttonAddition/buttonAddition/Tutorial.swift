@@ -20,7 +20,7 @@ class Tutorial: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         let defaults = UserDefaults.standard
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
-            let keyView = WelcomeViewController(nibName: nil, bundle: nil)
+            let keyView = LeftRightConfigure(nibName: nil, bundle: nil)
             keyView.modalTransitionStyle = .crossDissolve
             self.present(keyView, animated: true, completion: nil)
         } else {
@@ -63,7 +63,7 @@ class Tutorial: UIViewController {
     }
     
     func start() {
-        let keyView = WelcomeViewController(nibName: nil, bundle: nil)
+        let keyView = LeftRightConfigure(nibName: nil, bundle: nil)
         keyView.modalTransitionStyle = .crossDissolve
         var topController: UIViewController = UIApplication.shared.keyWindow!.rootViewController!
         while (topController.presentedViewController != nil) {
