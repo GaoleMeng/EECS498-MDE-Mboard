@@ -37,6 +37,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     var modes: Array<UIButton> = []
     
+    var words: Array<String> = []
     var predWords: Array<UIButton> = []
     var str1 = ""
     var str2 = ""
@@ -908,9 +909,25 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 do {
                     //create json object from data
                     if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                        print(json)
-                        var pred_string_list = json["pred"] as? String
+                        //print("in")
+                        //print(json)
+                        // pred_string_list = a;b;... at most four
+                        //var pred_line = json["pred"] as? String
                         // TODO: parse and update predWords button texts
+                        //print(pred_line!.split(separator: ";"))
+                        var pred_line = json["pred"] as? String
+                        let end = pred_line!.split(separator: ";").count
+                        var it = 0
+                        self.words = []
+                        while it < end {
+                            self.words.append(String(pred_line!.split(separator: ";")[it]))
+                            it += 1
+                        }
+                        while it < 4 {
+                            self.words.append("")
+                            it += 1
+                        }
+                        //print(self.words)
                     }
                 } catch let error {
                     print(error.localizedDescription)
@@ -921,6 +938,18 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             return false
         }
         return true
+    }
+    
+    func updatePredWords(time: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(time), execute: {
+            // Put your code which should be executed with a delay here
+            let end = self.words.count
+            var it = 0
+            while it < end {
+                self.predWords[it].setTitle(self.words[it], for: .normal)
+                it += 1
+            }
+        })
     }
     
     @objc func pressCharacter(_ sender: UIButton) {
@@ -976,7 +1005,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             } else {
                 postRequest(text: sender.titleLabel!.text!)
             }
-            
+            debug()
             if isAlpha(text: sender.titleLabel!.text!) {
                 // update str2
                 str2 += sender.titleLabel!.text!
@@ -989,7 +1018,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     postPred(text: str1 + "_" + str2)
                     pred_flag = 0
                 }
+                updatePredWords(time: 300)
             }
+            debug()
         }
     }
     
@@ -999,7 +1030,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         /*if inputText.text!.count > 0 {
          inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
          }*/
-        
+        debug()
         if str2.count > 0 {
             str2.remove(at: str2.index(before: str2.endIndex))
             if str2.count > 0 {
@@ -1012,11 +1043,13 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     postPred(text: str1 + "_" + str2)
                     pred_flag = 0
                 }
+                updatePredWords(time: 300)
             } else {
                 if str1.count > 0 {
                     // predict next word using one word
                     postPred(text: str1 + "_")
                     pred_flag = 1
+                    updatePredWords(time: 300)
                 }
             }
         } else {
@@ -1027,14 +1060,17 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 str1 = ""
                 postPred(text: str2)
                 pred_flag = 0
+                updatePredWords(time: 300)
             }
         }
+        debug()
     }
     
     @objc func pressSpace(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
         postRequest(text: "key_space")
         /*inputText.text! += " "*/
+        debug()
         if str2.count > 0 {
             pred_flag = 1
             if str1.count == 0 {
@@ -1046,14 +1082,17 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             }
             str1 = str2
             str2 = ""
+            updatePredWords(time: 300)
             // Predicate word should later go directly to str2
         } else {
             // fix two successive space
             if str1.count > 0 {
                 str1 = ""
                 str2 = ""
+                pred_flag = -1
             }
         }
+        debug()
     }
     
     @objc func pressCap(_ sender: UIButton) {
@@ -1092,7 +1131,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         postRequest(text: "key_newline")
         str1 = ""
         str2 = ""
+        debug()
         pred_flag = -1
+        debug()
     }
     
     
@@ -1266,21 +1307,26 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             sender.backgroundColor = .gray
             sender.setTitleColor(.white, for: .normal)
         })
+        debug()
         if pred_flag == 1 {
             // this is the next word
             str2 = sender.titleLabel!.text!
             // predict next word using two words
             postPred(text: str1 + "_" + str2 + "_")
             
-            postRequest(text: str2)
-            postRequest(text: "key_space")
+            //postRequest(text: str2)
+            //postRequest(text: "key_space")
+            postRequest(text: str2 + "_keyspace")
             str1 = str2
             str2 = ""
             pred_flag = 1
+            updatePredWords(time: 300)
         } else if pred_flag == 0 {
             // this is an autocompletion
             let fullword = sender.titleLabel!.text!
-            let subString = fullword.suffix(fullword.count - str2.count)
+            var subString = ""
+            subString = String(fullword.suffix(fullword.count - str2.count))
+            str2 = fullword
             if str1.count > 0 {
                 // predict next word using two words
                 postPred(text: str1 + "_" + str2 + "_")
@@ -1289,11 +1335,36 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 postPred(text: str2 + "_")
             }
             
-            postRequest(text: String(subString))
-            postRequest(text: "key_space")
+            //postRequest(text: subString)
+            //postRequest(text: "key_space")
+            postRequest(text: subString + "_keyspace")
             str1 = str2
             str2 = ""
             pred_flag = 1
+            updatePredWords(time: 300)
+        } else if pred_flag == -1 {
+            //postRequest(text: sender.titleLabel!.text!)
+            //postRequest(text: "key_space")
+            postRequest(text: sender.titleLabel!.text! + "_keyspace")
+            str1 = sender.titleLabel!.text!
+            postPred(text: str1 + "_")
+            pred_flag = 1
+            updatePredWords(time: 300)
+        }
+        debug()
+    }
+    
+    func debug() {
+        print(pred_flag)
+        if str1 == "" {
+            print("empty")
+        } else {
+            print(str1)
+        }
+        if str2 == "" {
+            print("empty")
+        } else {
+            print(str2)
         }
     }
 }

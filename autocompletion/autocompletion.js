@@ -1,4 +1,4 @@
-function autocomplete(words) {
+export function autocomplete(words) {
 
     var request = require('request');
     var deasync = require("deasync");

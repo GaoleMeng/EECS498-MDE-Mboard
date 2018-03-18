@@ -1,17 +1,84 @@
 // the server running on the mac
-
+//import { autocomplete } from './autocompletion.js'
+// ../autocompletion/
 const express = require('express')
 const app = express()
 const robot = require("robotjs")
 const ip = require("ip")
+// import { }
+// 
 var keyEnable = false
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
+
 
 app.set('toggle', false)
 app.set('mousedown', false)
 app.set('ip', ip.address())
 
+//var tools = require('./autocompletion.js')
+
+/*function autocomplete(words) {
+    console.log(words)
+    //var request = require('request');
+
+    // var options = {
+    //     url: 'http://localhost:8080/' + words,
+
+    // };
+
+    // function callback(error, response, body) {
+    //     if (error) {
+    //         // console.error(error);
+    //         return error;
+    //     }
+    //     if (!error && response.statusCode == 200) {
+    //         // console.log(body)
+    //         return body;
+    //     }
+    // }
+
+    // return request(options, callback);
+    return "wordA;wordB;wordC"
+}*/
+
+/*app.get('/pred/:char', (req, res) => {
+    res_data = {
+        "pred": "wordA;wordB;wordC"
+    }
+    res.json(res_data)
+})*/
+
+app.get('/pred/:char', (req, res) => {
+    //console.log("xxxx")
+    let start = app.get('toggle')
+    let string = req.params.char
+    console.log(string)
+    //console.log("yyyy")
+    //res.json(res_data)
+
+    fetch('http://localhost:8080/' + string, {
+          method: 'GET',
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        })
+      .then((response) => {
+        if (!response.ok) throw Error(response.statusText);
+        console.log(response.body)
+        return response.json()
+      })
+      .then((data) => {
+        console.log(this.a)
+        console.log(data)
+        res.json(data)
+        // this.result = data
+        // return data
+        // console.log("sended")
+        // console.log(data)
+      })
+      .catch(error => console.log(error)) // eslint-disable-line no-console
+})
 
 app.get('/input/:char', (req, res) => {
     // let string = req.params.char
@@ -61,7 +128,14 @@ app.get('/input/:char', (req, res) => {
             robot.typeString("%")
         }
         else{
-            robot.typeString(string)
+            let string_list = string.split("_")
+            console.log(string_list)
+            if (string_list.length == 1) {
+                robot.typeString(string)
+            } 
+            else {
+                robot.typeString(string_list[0] + " ")
+            }
         }
         res.send("keyboard type")
 

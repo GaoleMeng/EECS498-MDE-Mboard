@@ -1,7 +1,7 @@
 import pickle
 from bottle import run, route, debug
 import operator
-
+import json
 
 
 import sys
@@ -82,7 +82,7 @@ def run_server(port_num=8080):
             # sys.stderr.close()
         results = model.parse(word)
 
-        return ";".join(results)
+        return json.dumps({"pred": ";".join(results)})
 
 
     run(host='localhost', port=port_num)
