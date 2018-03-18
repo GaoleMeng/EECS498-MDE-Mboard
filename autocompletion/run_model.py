@@ -71,7 +71,7 @@ class autocompletion:
 
 def run_server(port_num=8080):
     """little demo server for demo'ing sake"""
-    model = pickle.load(open("data/temp.model", "rb"))
+    model = pickle.load(open("autocompletion/data/temp.model", "rb"))
 
     debug(True)
 
