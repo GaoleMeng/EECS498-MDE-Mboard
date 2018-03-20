@@ -49,14 +49,19 @@ Next you will start up the iPad app. To do this, complete the following steps:
 6. Press the Build-and-Run button in the top left corner of the Xcode.
 7. On your device or simulator, you should now see a new application. Press on this to open the app.
 
+Note that you may have problems that the tutorial figures might not bind to the bundle. If that happens, you need to manually add the figures into the bundle. Click the top buttonAddition on the left column in Xcode. Drag the three figures (first.png, second.png, and third.png) using Finder to the Copy Bundle Resources under Build Phases. Then the three PNG files should appear in the left column. You might need to delete the previous PNG files if their filenames are showed in red color.
+
 
 ### Using the application
-To begin using the application, you will first be presented with the Configuration screen (0)
+If it is your first time to install the App, you will be showed a tutorial. After the tutorial, click Let's Start to go to a view, which will ask you whether you will use your left hand or right hand to type. 
+
+After you choose the hand, you will then be presented with the Configuration screen (0)
 
 0. Configuration Sceen:
 - Configure the keyboard to your hand by placing your four fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be one by one). Follow the on-screen directions to do this.
 - If you are satisfied with the postioning, click confirm. This will bring you to the main typing screen (1). Otherwise, you can click reset to restart this process.
 - If your positioning will cause overlapping keys in the later view or is not inside the outlined area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers to close to each other.
+- If you want to reselect you typing hand, click Reselect button.
 
 
 1. Main typing screen:
@@ -64,11 +69,12 @@ To begin using the application, you will first be presented with the Configurati
 - On the iPad, press character keys to type to the computer.
 - Swipe up or down on the screen to change the characters on the keys.
 - Swipe left on the screen to switch to the number mode screen (2).
-- Word prediction boxes along the top of the screen may be pressed to type the word offered in that box. The whole functionality of the word prediction box will be implemented in Beta release.
+- Word prediction boxes along the top of the screen may be pressed to type the word offered in that box.
 - Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side of this view. You can also try them.
 - "Configure" button at bottom right (or top right based on your positioning in (0)) brings you back to configure the keyboard if you would like to reconfigure.
 - Pressing the blue button on the right with a computer mouse symbol will bring you to the mouse control screen (3).
 - The symbols at the bottom of the screen (including a black circle with the label "Swipe") cannot be interracted with. These are navigtional symbols which show you what keys you can get to by swiping in various directions. These will be updated for whatever screen you are on except for the mouse control screen (3) which does not offer navigation-by-swiping.
+- You can also go back to see the tutorial by clicking the button with "?" on the top.
 
 2. Number mode screen:
 - Press number keys to type to the computer.
