@@ -66,14 +66,14 @@ class WelcomeViewController: UIViewController {
             button_x = 65
         }
         ReselectHand = PressableButton()
-        ReselectHand.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 175, width: 120, height: 90)
-        ReselectHand.shadowHeight = 8
-        ReselectHand.cornerRadius = 20
+        ReselectHand.frame = CGRect(x: button_x - 50, y: self.view.frame.height / 2 + 175, width: 100, height: 100)
+        ReselectHand.shadowHeight = 7
+        ReselectHand.cornerRadius = 5
         ReselectHand.colors = .init(
             button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
             shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         )
-        ReselectHand.setTitle("Reselect Hand", for: .normal)
+        ReselectHand.setTitle("Reselect", for: .normal)
         ReselectHand.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
         ReselectHand.addTarget(self, action: #selector(chooseHand(_:)), for: .touchUpInside)
         self.view.addSubview(ReselectHand)
@@ -95,9 +95,9 @@ class WelcomeViewController: UIViewController {
         if let hasPos = defaults.string(forKey: "p0_x") {
             print("already have dataxxx")
             falseReconfigure = PressableButton()
-            falseReconfigure.frame = CGRect(x: button_x - 60, y: self.view.frame.height / 2 + 270, width: 120, height: 90)
-            falseReconfigure.shadowHeight = 8
-            falseReconfigure.cornerRadius = 20
+            falseReconfigure.frame = CGRect(x: button_x - 50, y: self.view.frame.height / 2 + 300, width: 100, height: 100)
+            falseReconfigure.shadowHeight = 7
+            falseReconfigure.cornerRadius = 5
             falseReconfigure.colors = .init(
                 button: UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1), // jingyu
                 shadow: UIColor(red: 175 / 255, green: 57 / 255, blue: 36 / 255, alpha: 1) // jingyu

@@ -20,7 +20,8 @@ class LeftRightConfigure: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        //view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        view.backgroundColor = .white
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,34 +49,38 @@ class LeftRightConfigure: UIViewController {
             self.view.addSubview(instructions)
             
             Left_bt = PressableButton()
-            Left_bt.frame = CGRect(x: self.view.center.x - 100, y: self.view.center.y/2, width: 90, height: 90)
+            Left_bt.frame = CGRect(x: self.view.center.x - 110, y: self.view.center.y/2, width: 110, height: 110)
             Left_bt.center = self.view.center
             Left_bt.center.x = self.view.center.x - 100
             Left_bt.center.y = self.view.center.y - 150
             Left_bt.shadowHeight = 8
             Left_bt.cornerRadius = 20
             Left_bt.colors = .init(
-                button: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1),
-                shadow: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+                shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
             )
             Left_bt.setTitle("left", for: .normal)
-            Left_bt.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            Left_bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+            //Left_bt.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            Left_bt.setTitleColor(.white, for: .normal)
             Left_bt.addTarget(self, action: #selector(chooseHand(_:)), for: .touchUpInside)
             self.view.addSubview(Left_bt)
             
             Right_bt = PressableButton()
-            Right_bt.frame = CGRect(x: self.view.center.x + 100, y: self.view.center.y/2, width: 90, height: 90)
+            Right_bt.frame = CGRect(x: self.view.center.x + 110, y: self.view.center.y/2, width: 110, height: 110)
             Right_bt.center = self.view.center
             Right_bt.center.x = self.view.center.x + 100
             Right_bt.center.y = self.view.center.y - 150
             Right_bt.shadowHeight = 8
             Right_bt.cornerRadius = 20
             Right_bt.colors = .init(
-                button: #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1),
-                shadow: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                button: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),
+                shadow: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
             )
             Right_bt.setTitle("right", for: .normal)
-            Right_bt.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            Right_bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+            //Right_bt.setTitleColor(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), for: .normal)
+            Left_bt.setTitleColor(.white, for: .normal)
             Right_bt.addTarget(self, action: #selector(chooseHand(_:)), for: .touchUpInside)
             self.view.addSubview(Right_bt)
         }

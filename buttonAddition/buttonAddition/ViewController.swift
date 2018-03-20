@@ -21,6 +21,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     var Space: PressableButton!
     var Delete: PressableButton!
     var Enter: PressableButton!
+    var Helper: PressableButton!
     
     var Cap: PressableButton!
     var isCapped: Int = 0
@@ -764,6 +765,18 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         Enter.setTitle("Enter", for: .normal)
         self.view.addSubview(Enter)
         
+        Helper = PressableButton()
+        Helper.frame = CGRect(x: thumb_center - 25, y: benchmark - 75, width: 50, height: 50) // jingyu
+        Helper.colors = .init(
+            button: UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1), // jingyu
+            shadow: UIColor(red: 40 / 255, green: 42 / 255, blue: 45 / 255, alpha: 1) // jingyu
+        )
+        Helper.shadowHeight = 0
+        Helper.cornerRadius = 25
+        Helper.addTarget(self, action: #selector(pressHelper(_:)), for: .touchUpInside)
+        Helper.setTitle("?", for: .normal)
+        self.view.addSubview(Helper)
+        
         goBack = PressableButton()
         //        goBack.backgroundColor = UIColor.red
         //        goBack.setTitleColor(UIColor.white, for: .normal)
@@ -781,7 +794,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter % 2) * pred_width),
                               y: Int(center_y - 300 + CGFloat((iter / 2) * 52)), width: Int(pred_width - 2), height: 50)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
-            bt.setTitle("predWord" + String(iter), for: .normal)
+            //bt.setTitle("predWord" + String(iter), for: .normal)
+            bt.setTitle("", for: .normal)
             predWords.append(bt)
             self.view.addSubview(bt)
             iter += 1
@@ -945,10 +959,24 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             // Put your code which should be executed with a delay here
             let end = self.words.count
             var it = 0
+            var flag = 0
             while it < end {
-                self.predWords[it].setTitle(self.words[it], for: .normal)
+                //print("============")
+                //print(self.words[it])
+                if self.words[it] == "``" {
+                    flag += 1
+                } else if self.words[it] != "" {
+                    self.predWords[it - flag].setTitle(self.words[it], for: .normal)
+                } else {
+                    self.predWords[it - flag].setTitle(" ", for: .normal)
+                }
+                //print(self.predWords[it].titleLabel!.text!)
                 it += 1
             }
+            /*print(self.predWords[0].titleLabel!.text!)
+            print(self.predWords[1].titleLabel!.text!)
+            print(self.predWords[2].titleLabel!.text!)
+            print(self.predWords[3].titleLabel!.text!)*/
         })
     }
     
@@ -1005,7 +1033,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             } else {
                 postRequest(text: sender.titleLabel!.text!)
             }
-            debug()
+            //debug()
             if isAlpha(text: sender.titleLabel!.text!) {
                 // update str2
                 str2 += sender.titleLabel!.text!
@@ -1020,7 +1048,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 }
                 updatePredWords(time: 300)
             }
-            debug()
+            //debug()
         }
     }
     
@@ -1030,7 +1058,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         /*if inputText.text!.count > 0 {
          inputText.text!.remove(at: inputText.text!.index(before: inputText.text!.endIndex))
          }*/
-        debug()
+        //debug()
         if str2.count > 0 {
             str2.remove(at: str2.index(before: str2.endIndex))
             if str2.count > 0 {
@@ -1063,14 +1091,14 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 updatePredWords(time: 300)
             }
         }
-        debug()
+        //debug()
     }
     
     @objc func pressSpace(_ sender: UIButton) {
         print("\(sender.titleLabel!.text!) pressed")
         postRequest(text: "key_space")
         /*inputText.text! += " "*/
-        debug()
+        //debug()
         if str2.count > 0 {
             pred_flag = 1
             if str1.count == 0 {
@@ -1092,7 +1120,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 pred_flag = -1
             }
         }
-        debug()
+        //debug()
     }
     
     @objc func pressCap(_ sender: UIButton) {
@@ -1131,9 +1159,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         postRequest(text: "key_newline")
         str1 = ""
         str2 = ""
-        debug()
+        //debug()
         pred_flag = -1
-        debug()
+        //debug()
     }
     
     
@@ -1281,6 +1309,14 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         }
     }
     
+    @objc func pressHelper(_ sender: UIButton) {
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "isAppAlreadyLaunchedOnce")
+        let keyView = Tutorial(nibName: nil, bundle: nil)
+        keyView.modalTransitionStyle = .crossDissolve
+        self.present(keyView, animated: true, completion: nil)
+    }
+    
     @objc func pressGoBack(_ sender: UIButton) {
         // TODO: defaults may not be deleted at once
         /*let defaults = UserDefaults.standard
@@ -1298,8 +1334,6 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     }
     
     @objc func pressWord(_ sender: UIButton) {
-        print("Word: \(sender.titleLabel!.text!) pressed")
-        /*inputText.text! += sender.titleLabel!.text!*/
         sender.backgroundColor = .white
         sender.setTitleColor(.black, for: .normal)
         //postRequest(text: sender.titleLabel!.text!)
@@ -1307,51 +1341,60 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
             sender.backgroundColor = .gray
             sender.setTitleColor(.white, for: .normal)
         })
-        debug()
-        if pred_flag == 1 {
-            // this is the next word
-            str2 = sender.titleLabel!.text!
-            // predict next word using two words
-            postPred(text: str1 + "_" + str2 + "_")
-            
-            //postRequest(text: str2)
-            //postRequest(text: "key_space")
-            postRequest(text: str2 + "_keyspace")
-            str1 = str2
-            str2 = ""
-            pred_flag = 1
-            updatePredWords(time: 300)
-        } else if pred_flag == 0 {
-            // this is an autocompletion
-            let fullword = sender.titleLabel!.text!
-            var subString = ""
-            subString = String(fullword.suffix(fullword.count - str2.count))
-            str2 = fullword
-            if str1.count > 0 {
-                // predict next word using two words
-                postPred(text: str1 + "_" + str2 + "_")
+        //debug()
+        if let tmp = sender.titleLabel!.text {
+            //print("Word: \(sender.titleLabel!.text!) pressed")
+            /*inputText.text! += sender.titleLabel!.text!*/
+            print(sender.titleLabel!.text!)
+            if sender.titleLabel!.text! == " " {
+                // pass
             } else {
-                // predict next word using one word
-                postPred(text: str2 + "_")
+                if pred_flag == 1 {
+                    // this is the next word
+                    str2 = sender.titleLabel!.text!
+                    // predict next word using two words
+                    postPred(text: str1 + "_" + str2 + "_")
+                    
+                    //postRequest(text: str2)
+                    //postRequest(text: "key_space")
+                    postRequest(text: str2 + "_keyspace")
+                    str1 = str2
+                    str2 = ""
+                    pred_flag = 1
+                    updatePredWords(time: 300)
+                } else if pred_flag == 0 {
+                    // this is an autocompletion
+                    let fullword = sender.titleLabel!.text!
+                    var subString = ""
+                    subString = String(fullword.suffix(fullword.count - str2.count))
+                    str2 = fullword
+                    if str1.count > 0 {
+                        // predict next word using two words
+                        postPred(text: str1 + "_" + str2 + "_")
+                    } else {
+                        // predict next word using one word
+                        postPred(text: str2 + "_")
+                    }
+                    
+                    //postRequest(text: subString)
+                    //postRequest(text: "key_space")
+                    postRequest(text: subString + "_keyspace")
+                    str1 = str2
+                    str2 = ""
+                    pred_flag = 1
+                    updatePredWords(time: 300)
+                } else if pred_flag == -1 {
+                    //postRequest(text: sender.titleLabel!.text!)
+                    //postRequest(text: "key_space")
+                    postRequest(text: sender.titleLabel!.text! + "_keyspace")
+                    str1 = sender.titleLabel!.text!
+                    postPred(text: str1 + "_")
+                    pred_flag = 1
+                    updatePredWords(time: 300)
+                }
             }
-            
-            //postRequest(text: subString)
-            //postRequest(text: "key_space")
-            postRequest(text: subString + "_keyspace")
-            str1 = str2
-            str2 = ""
-            pred_flag = 1
-            updatePredWords(time: 300)
-        } else if pred_flag == -1 {
-            //postRequest(text: sender.titleLabel!.text!)
-            //postRequest(text: "key_space")
-            postRequest(text: sender.titleLabel!.text! + "_keyspace")
-            str1 = sender.titleLabel!.text!
-            postPred(text: str1 + "_")
-            pred_flag = 1
-            updatePredWords(time: 300)
+            //debug()
         }
-        debug()
     }
     
     func debug() {

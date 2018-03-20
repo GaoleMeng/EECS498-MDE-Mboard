@@ -28,6 +28,9 @@ extension UIImage {
 
 
 class Tutorial: UIViewController {
+    override func viewDidLoad() {
+        self.view.backgroundColor = .white
+    }
     
     
     
@@ -102,6 +105,7 @@ class Tutorial: UIViewController {
             onboardingVC!.shouldMaskBackground = false;
             //        onboardingVC!.navigationController.
             onboardingVC!.view.backgroundColor = UIColor(white:1, alpha: 1)
+            onboardingVC?.modalTransitionStyle = .crossDissolve
             self.present(onboardingVC!, animated: true, completion: nil)
         }
     }

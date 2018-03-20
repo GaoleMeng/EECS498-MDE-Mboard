@@ -54,6 +54,8 @@ app.get('/pred/:char', (req, res) => {
     let start = app.get('toggle')
     let string = req.params.char
     console.log(string)
+
+    robot.mouseToggle("up")
     //console.log("yyyy")
     //res.json(res_data)
 
@@ -86,6 +88,9 @@ app.get('/input/:char', (req, res) => {
     // console.log(keyboard)
     // if ()
     console.log("trigger")
+
+    robot.mouseToggle("up")
+
     let start = app.get('toggle')
     if (start){
         robot.setKeyboardDelay(0)
@@ -127,6 +132,12 @@ app.get('/input/:char', (req, res) => {
         else if (string == "key_percent") {
             robot.typeString("%")
         }
+        else if (string == "key_exclam") {
+            robot.typeString("!")
+        }
+        else if (string == "key_hashtag") {
+            robot.typeString("#")
+        }
         else{
             let string_list = string.split("_")
             console.log(string_list)
@@ -146,61 +157,61 @@ app.get('/input/:char', (req, res) => {
 })
 
 
-app.post('/api/move', (req, res) => {
-    // let string = req.params.char
-    // robot.typeString("abc")
-    // console.log(keyboard)
-    // if ()
+// app.post('/api/move', (req, res) => {
+//     // let string = req.params.char
+//     // robot.typeString("abc")
+//     // console.log(keyboard)
+//     // if ()
 
-    let start = app.get('toggle')
-    console.log(start)
-    if (start){
-        let string = req.params.char
-        console.log(string)
+//     let start = app.get('toggle')
+//     console.log(start)
+//     if (start){
+//         let string = req.params.char
+//         console.log(string)
 
-        if (string == "key_space") {
-            robot.keyTap("space")
-        }
-        else if (string == "key_delete") {
-            robot.keyTap("backspace")
-        }
-        else if (string == "up" || string == "down" || string == "right" || string == "left") {
-            robot.keyTap(string)
-        }
-        else if (string == "key_newline") {
-            robot.keyTap("enter")
-        }
-        else if (string == "key_quotation") {
-            robot.keyTap("\"")
-        }
-        else if (string == "key_question") {
-            robot.keyTap("?")
-        }
-        else if (string == "key_less") {
-            robot.keyTap("<")
-        }
-        else if (string == "key_more") {
-            robot.keyTap(">")
-        }
-        else if (string == "key_lbracket") {
-            robot.keyTap("{")
-        }
-        else if (string == "key_rbracket") {
-            robot.keyTap("}")
-        }
-        else if (string == "key_slash") {
-            robot.keyTap("/")
-        }
-        else{
-            robot.typeString(string)
-        }
-        res.send("keyboard type")
+//         if (string == "key_space") {
+//             robot.keyTap("space")
+//         }
+//         else if (string == "key_delete") {
+//             robot.keyTap("backspace")
+//         }
+//         else if (string == "up" || string == "down" || string == "right" || string == "left") {
+//             robot.keyTap(string)
+//         }
+//         else if (string == "key_newline") {
+//             robot.keyTap("enter")
+//         }
+//         else if (string == "key_quotation") {
+//             robot.keyTap("\"")
+//         }
+//         else if (string == "key_question") {
+//             robot.keyTap("?")
+//         }
+//         else if (string == "key_less") {
+//             robot.keyTap("<")
+//         }
+//         else if (string == "key_more") {
+//             robot.keyTap(">")
+//         }
+//         else if (string == "key_lbracket") {
+//             robot.keyTap("{")
+//         }
+//         else if (string == "key_rbracket") {
+//             robot.keyTap("}")
+//         }
+//         else if (string == "key_slash") {
+//             robot.keyTap("/")
+//         }
+//         else{
+//             robot.typeString(string)
+//         }
+//         res.send("keyboard type")
 
-    }
-    else {
-        res.send("the keyboard is off")
-    }
-})
+//     }
+//     else {
+//         res.send("the keyboard is off")
+//     }
+// })
 
 
 app.get('/api/mouseToggle', (req, res) => {
