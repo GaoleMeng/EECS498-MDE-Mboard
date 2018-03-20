@@ -5,14 +5,23 @@ py=$1
 force=${2:-"1"}
 
 mkdir -p autocompletion/data
-if [ "$force" -eq "0" ]; then 
-	if [ ! -f autocompletion/data/temp.model ]; then
-		echo "model does not exist... downloading"
-		wget -O autocompletion/data/temp.model "http://www-personal.umich.edu/~zijwang/temp.model"
-	fi
+# if [ "$force" -eq "0" ]; then 
+# 	if [ ! -f autocompletion/data/temp.model ]; then
+#         echo "model does not exist... downloading"
+#         wget -O autocompletion/data/temp.model "http://www-personal.umich.edu/~zijwang/temp.model"
+#     else
+#         echo "model exists... no need to re-download"
+#     fi
+# else
+# 	echo "model exists, but force to re-download"
+# 	wget -O autocompletion/data/temp.model "http://www-personal.umich.edu/~zijwang/temp.model"
+# fi
+
+if [ ! -f autocompletion/data/temp.model ]; then
+    echo "model does not exist... downloading"
+    wget -O autocompletion/data/temp.model "http://www-personal.umich.edu/~zijwang/temp.model"
 else
-	echo "model exists, but force to re-download"
-	wget -O autocompletion/data/temp.model "http://www-personal.umich.edu/~zijwang/temp.model"
+    echo "model exists... no need to re-download"
 fi
 
 
@@ -23,3 +32,4 @@ else
 	echo "python version is not greater than 3.5"
 fi
 
+python3 autocompletion/run_model.py

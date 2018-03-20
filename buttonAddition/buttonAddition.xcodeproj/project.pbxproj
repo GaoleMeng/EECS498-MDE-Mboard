@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041AAC052060A1BB007C2F72 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 041AAC022060A1BB007C2F72 /* first.png */; };
+		041AAC062060A1BB007C2F72 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 041AAC032060A1BB007C2F72 /* third.png */; };
+		041AAC072060A1BB007C2F72 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 041AAC042060A1BB007C2F72 /* second.png */; };
 		0465A3312028111400D6C58A /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; };
 		0465A3322028111400D6C58A /* Pulsator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0465A3302028111400D6C58A /* Pulsator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04E0434B2038DCAF0032AC49 /* MouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E0434A2038DCAF0032AC49 /* MouseView.swift */; };
@@ -21,10 +24,6 @@
 		04F1CC1A20327132003A5BA0 /* BubbleTransition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; };
 		04F1CC1B20327132003A5BA0 /* BubbleTransition.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F1CC1920327131003A5BA0 /* BubbleTransition.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		850800A9205B44B100BFAFB8 /* LeftRightConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850800A8205B44B100BFAFB8 /* LeftRightConfigure.swift */; };
-		850E8B1F205E342B000564C5 /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = 850E8B1B205E342B000564C5 /* third.png */; };
-		850E8B20205E342B000564C5 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 850E8B1C205E342B000564C5 /* second.png */; };
-		850E8B21205E342B000564C5 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 850E8B1D205E342B000564C5 /* first.png */; };
-		850E8B22205E342B000564C5 /* Screen Shot 2018-03-16 at 8.04.17 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 850E8B1E205E342B000564C5 /* Screen Shot 2018-03-16 at 8.04.17 PM.png */; };
 		8578161720238D4000B45AF8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578161620238D4000B45AF8 /* WelcomeViewController.swift */; };
 		857816192023AE4000B45AF8 /* lineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857816182023AE4000B45AF8 /* lineView.swift */; };
 		8578F1D8202A32AC0030B309 /* rectangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578F1D7202A32AC0030B309 /* rectangular.swift */; };
@@ -60,6 +59,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		041AAC022060A1BB007C2F72 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = first.png; path = ../first.png; sourceTree = "<group>"; };
+		041AAC032060A1BB007C2F72 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = third.png; path = ../third.png; sourceTree = "<group>"; };
+		041AAC042060A1BB007C2F72 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = second.png; path = ../second.png; sourceTree = "<group>"; };
 		0465A3302028111400D6C58A /* Pulsator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pulsator.framework; path = Carthage/Build/iOS/Pulsator.framework; sourceTree = "<group>"; };
 		0465A3342028115C00D6C58A /* Pulsator.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Pulsator.framework.dSYM; path = Carthage/Build/iOS/Pulsator.framework.dSYM; sourceTree = "<group>"; };
 		0465A3372028122300D6C58A /* PulsingHalo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulsingHalo.framework; path = Carthage/Build/iOS/PulsingHalo.framework; sourceTree = "<group>"; };
@@ -70,10 +72,6 @@
 		04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorViewAppExtension.framework; path = Carthage/Build/iOS/NVActivityIndicatorViewAppExtension.framework; sourceTree = "<group>"; };
 		04F1CC1920327131003A5BA0 /* BubbleTransition.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BubbleTransition.framework; path = Carthage/Build/iOS/BubbleTransition.framework; sourceTree = "<group>"; };
 		850800A8205B44B100BFAFB8 /* LeftRightConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftRightConfigure.swift; sourceTree = "<group>"; };
-		850E8B1B205E342B000564C5 /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = third.png; path = "../../../beautify_tutorial/EECS498-MDE-Mboard/buttonAddition/third.png"; sourceTree = "<group>"; };
-		850E8B1C205E342B000564C5 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = second.png; path = "../../../beautify_tutorial/EECS498-MDE-Mboard/buttonAddition/second.png"; sourceTree = "<group>"; };
-		850E8B1D205E342B000564C5 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = first.png; path = "../../../beautify_tutorial/EECS498-MDE-Mboard/buttonAddition/first.png"; sourceTree = "<group>"; };
-		850E8B1E205E342B000564C5 /* Screen Shot 2018-03-16 at 8.04.17 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Screen Shot 2018-03-16 at 8.04.17 PM.png"; path = "../../../beautify_tutorial/EECS498-MDE-Mboard/buttonAddition/Screen Shot 2018-03-16 at 8.04.17 PM.png"; sourceTree = "<group>"; };
 		8578161620238D4000B45AF8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		857816182023AE4000B45AF8 /* lineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lineView.swift; sourceTree = "<group>"; };
 		8578F1D7202A32AC0030B309 /* rectangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rectangular.swift; sourceTree = "<group>"; };
@@ -124,10 +122,9 @@
 		85B7CF63202362C40049EA32 = {
 			isa = PBXGroup;
 			children = (
-				850E8B1D205E342B000564C5 /* first.png */,
-				850E8B1E205E342B000564C5 /* Screen Shot 2018-03-16 at 8.04.17 PM.png */,
-				850E8B1C205E342B000564C5 /* second.png */,
-				850E8B1B205E342B000564C5 /* third.png */,
+				041AAC022060A1BB007C2F72 /* first.png */,
+				041AAC042060A1BB007C2F72 /* second.png */,
+				041AAC032060A1BB007C2F72 /* third.png */,
 				85B24B38204F9DDB008BA49A /* Onboard.framework */,
 				04F1CC1920327131003A5BA0 /* BubbleTransition.framework */,
 				04EFC0592031669200D6B02E /* NVActivityIndicatorViewAppExtension.framework */,
@@ -229,11 +226,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				850E8B1F205E342B000564C5 /* third.png in Resources */,
-				850E8B20205E342B000564C5 /* second.png in Resources */,
-				850E8B21205E342B000564C5 /* first.png in Resources */,
-				850E8B22205E342B000564C5 /* Screen Shot 2018-03-16 at 8.04.17 PM.png in Resources */,
 				85B7CF7A202362C50049EA32 /* LaunchScreen.storyboard in Resources */,
+				041AAC052060A1BB007C2F72 /* first.png in Resources */,
+				041AAC062060A1BB007C2F72 /* third.png in Resources */,
+				041AAC072060A1BB007C2F72 /* second.png in Resources */,
 				85B7CF77202362C50049EA32 /* Assets.xcassets in Resources */,
 				85B7CF75202362C50049EA32 /* Main.storyboard in Resources */,
 			);

@@ -8,11 +8,21 @@ A basic M-Board app involves two apps to be started, which located in two folder
 
 - `mac-keyboard-server` - the receiver app that runs on Mac to receive input from virtual keyboard
 
+- `autocompletion` - the auto-completion server that runs on Mac to produce predicted words
+
 To use the app, clone the repository and run the following commands. These commands include running the receiver app in the terminal, which is the first thing you need to do in order to use M-Board app:
 
 ```bash
 # Clone this repository
 git clone https://github.com/GaoleMeng/EECS498-MDE-Mboard.git
+# Go into the repository
+cd EECS498-MDE-Mboard
+# run the auto-completion model download script
+sh autocompletion-init.sh
+```
+
+Open another terminal enter the same root directory
+```bash
 # Go into the repository
 cd EECS498-MDE-Mboard
 # Go to the receiver app directory:
@@ -22,9 +32,10 @@ npm start
 ```
 
 This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping).
-In alpha release, remember to open and turn on the receiver app before running the iPad app!
-
-### In the alpha release, remember to open and turn on the receiver app before running the iPad app!
+You may need to install dependency for the autocompletion server if it shows error:
+```bash
+pip3 install bottle
+```
 
 Next you will start up the iPad app. To do this, complete the following steps:
 1. Navigate to the root of `EECS498-MDE-Mboard`
@@ -63,7 +74,8 @@ To begin using the application, you will first be presented with the Configurati
 - Access to all keys from the main typing screen (1) that are not character keys or word prediction boxes.
 
 3. Mouse control screen:
-- Press and drag your finger (or mouse if using a simulator) on the screen to control the cursor on your computer.
+- You can use one or multiple fingers to control the mouse.
+- One finger for tap, two finger for right click, three finger for dragging, also you can scroll with two fingers.
 - Press the "Back" button to go back to whichever screen you navigated here from.
 
 
