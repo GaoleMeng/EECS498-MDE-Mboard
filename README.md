@@ -19,6 +19,9 @@ git clone https://github.com/GaoleMeng/EECS498-MDE-Mboard.git
 cd EECS498-MDE-Mboard
 # run the auto-completion model download script
 sh autocompletion-init.sh
+# Listening on http://localhost:8080/
+# Hit Ctrl-C to quit.
+# ...
 ```
 
 Open another terminal enter the same root directory
