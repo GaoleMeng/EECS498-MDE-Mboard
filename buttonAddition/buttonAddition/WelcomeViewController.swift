@@ -13,6 +13,8 @@ import NVActivityIndicatorView
 
 class WelcomeViewController: UIViewController {
     
+    var finishDetecting: Bool = false
+    
     var handChosen:String = ""
     
     var button_x = CGFloat()
@@ -228,7 +230,7 @@ class WelcomeViewController: UIViewController {
                     if wrongPos == 0 {
                         instrLabel.text = "This may cause key overlap"
                         instrLabel.textColor = .red
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             // Put your code which should be executed with a delay here
                             self.instrLabel.text = "Place and keep your four fingers inside"
                             self.instrLabel.textColor = .gray
@@ -243,7 +245,7 @@ class WelcomeViewController: UIViewController {
                     if wrongPos == 0 {
                         instrLabel.text = "Please place inside the region"
                         instrLabel.textColor = .red
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                             // Put your code which should be executed with a delay here
                             self.instrLabel.text = "Place and keep your four fingers inside"
                             self.instrLabel.textColor = .gray
@@ -256,6 +258,9 @@ class WelcomeViewController: UIViewController {
                 }
                 else {
                     // the check is ok, we then progress to the finalize of the button
+                    self.instrLabel.text = "Confirm or Reset"
+                    self.instrLabel.textColor = .gray
+                    finishDetecting = true
                     
                     pulsebt1 = Pulsator()
                     view.layer.addSublayer(pulsebt1)
@@ -349,6 +354,10 @@ class WelcomeViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !finishDetecting {
+            self.instrLabel.text = "Detecting ..."
+            self.instrLabel.textColor = .gray
+        }
         for touch in touches {
             if counter < 4 {
                 let location = touch.location(in: self.view)
@@ -546,6 +555,8 @@ class WelcomeViewController: UIViewController {
     
     @objc func pressReset(_ sender: UIButton) {
         self.timer.invalidate()
+        instrLabel.text = "Place and keep your four fingers inside"
+        finishDetecting = false
         
         bt1.removeFromSuperview()
         bt2.removeFromSuperview()

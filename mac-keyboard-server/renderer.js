@@ -359,6 +359,64 @@ app.get('/doubleClick', (req, res) => {
     res.json(res_data)
 })
 
+app.get('/lightup', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start) {
+        robot.keyTap('lights_mon_up')
+    }
+   
+    res_data = {
+        "status": "right click"
+    }
+    res.json(res_data)
+})
+
+
+app.get('/lightdown', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start) {
+        robot.keyTap('lights_mon_down')
+    }
+   
+    res_data = {
+        "status": "right click"
+    }
+    res.json(res_data)
+})
+
+
+app.get('/volumnup', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start) {
+        robot.keyTap('audio_vol_up')
+    }
+   
+    res_data = {
+        "status": "right click"
+    }
+    res.json(res_data)
+})
+
+
+app.get('/volumndown', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    let start = app.get('toggle')
+    if (start) {
+        robot.keyTap('audio_vol_down')
+    }
+   
+    res_data = {
+        "status": "right click"
+    }
+    res.json(res_data)
+})
 
 app.get('/rightclick', (req, res) => {
 

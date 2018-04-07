@@ -24,8 +24,11 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     var counter: Int!
     
-    var leftclick: PressableButton!
-    var rightclick: PressableButton!
+    var lightup: PressableButton!
+    var lightdown: PressableButton!
+    
+    var volumnup: PressableButton!
+    var volumndown: PressableButton!
     
     
     
@@ -79,42 +82,81 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         self.view.backgroundColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         //        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
+        //
+        lightup = PressableButton()
+        lightdown = PressableButton()
         
-        leftclick = PressableButton()
-        rightclick = PressableButton()
         
+        lightup = PressableButton()
+        lightup.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        lightup.shadowHeight = 8
+        lightup.cornerRadius = 16
         
-        leftclick = PressableButton()
-        leftclick.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
-        leftclick.shadowHeight = 8
-        leftclick.cornerRadius = 16
-        
-        leftclick.colors = .init(
+        lightup.colors = .init(
             button: UIColor(red: 149 / 255, green: 165 / 255, blue: 166 / 255, alpha: 1),
             shadow: UIColor(red: 93 / 255, green: 103 / 255, blue: 104 / 255, alpha: 1)
         )
-        leftclick.addTarget(self, action: #selector(pressleft(_:)), for: .touchUpInside)
-        leftclick.setTitle("left", for: .normal)
+        lightup.addTarget(self, action: #selector(presslightup(_:)), for: .touchUpInside)
+        lightup.setTitle("☀️up", for: .normal)
         
         
-        rightclick = PressableButton()
-        rightclick.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
-        rightclick.shadowHeight = 8
-        rightclick.cornerRadius = 16
+        lightdown = PressableButton()
+        lightdown.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        lightdown.shadowHeight = 8
+        lightdown.cornerRadius = 16
         
-        rightclick.colors = .init(
+        lightdown.colors = .init(
             button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
             shadow: UIColor(red: 73 / 255, green: 81 / 255, blue: 84 / 255, alpha: 1)
         )
         
-        rightclick.addTarget(self, action: #selector(pressright(_:)), for: .touchUpInside)
-        rightclick.setTitle("right", for: .normal)
+        lightdown.addTarget(self, action: #selector(presslightdown(_:)), for: .touchUpInside)
+        lightdown.setTitle("☀️down", for: .normal)
         
-        leftclick.alpha = 0
-        rightclick.alpha = 0
+        lightup.alpha = 0
+        lightdown.alpha = 0
+        
+        
+        
+        volumnup = PressableButton()
+        volumndown = PressableButton()
+        
+        
+        volumnup = PressableButton()
+        volumnup.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        volumnup.shadowHeight = 8
+        volumnup.cornerRadius = 16
+        
+        volumnup.colors = .init(
+            button: UIColor(red: 149 / 255, green: 165 / 255, blue: 166 / 255, alpha: 1),
+            shadow: UIColor(red: 93 / 255, green: 103 / 255, blue: 104 / 255, alpha: 1)
+        )
+        volumnup.addTarget(self, action: #selector(pressvolumnup(_:)), for: .touchUpInside)
+        volumnup.setTitle("🔊up", for: .normal)
+        
+        
+        volumndown = PressableButton()
+        volumndown.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
+        volumndown.shadowHeight = 8
+        volumndown.cornerRadius = 16
+        
+        volumndown.colors = .init(
+            button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
+            shadow: UIColor(red: 73 / 255, green: 81 / 255, blue: 84 / 255, alpha: 1)
+        )
+        
+        volumndown.addTarget(self, action: #selector(pressvolumndown(_:)), for: .touchUpInside)
+        volumndown.setTitle("🔊down", for: .normal)
+        
+        volumnup.alpha = 0
+        volumndown.alpha = 0
         //
-        //        self.view.addSubview(leftclick)
-        //        self.view.addSubview(rightclick)
+        //
+        self.view.addSubview(lightup)
+        self.view.addSubview(lightdown)
+        
+        self.view.addSubview(volumnup)
+        self.view.addSubview(volumndown)
         self.view.addSubview(tmp)
         
         // Do any additional setup after loading the view.
@@ -122,12 +164,16 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         
-        //        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
-        //            self.leftclick.frame.origin.x = self.leftclick.frame.origin.x - 300
-        //            self.rightclick.frame.origin.x = self.rightclick.frame.origin.x - 150
-        //            self.leftclick.alpha = 1
-        //            self.rightclick.alpha = 1
-        //        }, completion: nil)
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 10, options: .allowAnimatedContent, animations: {
+            self.lightup.frame.origin.y = self.lightup.frame.origin.y + 200
+            self.lightdown.frame.origin.y = self.lightdown.frame.origin.y + 100
+            self.volumnup.frame.origin.y = self.volumnup.frame.origin.y + 400
+            self.volumndown.frame.origin.y = self.volumndown.frame.origin.y + 300
+            self.lightup.alpha = 1
+            self.lightdown.alpha = 1
+            self.volumnup.alpha = 1
+            self.volumndown.alpha = 1
+        }, completion: nil)
         
     }
     
@@ -213,6 +259,113 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
     
     @objc func pressConfirm(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @objc func pressvolumnup(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/volumnup")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    @objc func pressvolumndown(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/volumndown")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    
+    @objc func pressright(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/rightclick")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
     }
     
     @objc func pressleft(_ sender: UIButton) {
@@ -320,13 +473,46 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         }
     }
     
-    
-    
-    
-    
-    @objc func pressright(_ sender: UIButton) {
+    @objc func presslightdown(_ sender: UIButton) {
         if let tmp_url = self.ip {
-            let url = URL(string: "http://" + tmp_url + ":3000/rightclick")!
+            let url = URL(string: "http://" + tmp_url + ":3000/lightdown")!
+            
+            //create the session object
+            let session = URLSession.shared
+            //now create the URLRequest object using the url object
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET" //set http method as POST
+            
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            
+            
+            //create dataTask using the session object to send data to the server
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard error == nil else {
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+            })
+            task.resume()
+        }
+        else {
+            //            print("????")
+            if getlock == false {
+                getip()
+                getlock = true
+            }
+        }
+    }
+    
+    
+    @objc func presslightup(_ sender: UIButton) {
+        if let tmp_url = self.ip {
+            let url = URL(string: "http://" + tmp_url + ":3000/lightup")!
             
             //create the session object
             let session = URLSession.shared
