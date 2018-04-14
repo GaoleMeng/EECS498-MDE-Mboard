@@ -82,7 +82,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         self.view.backgroundColor = UIColor(red: 229 / 255, green: 81 / 255, blue: 55 / 255, alpha: 1)
         
         //        self.view.backgroundColor = UIColor(red: 52 / 255, green: 73 / 255, blue: 94 / 255, alpha: 1)
-        //
+
         lightup = PressableButton()
         lightdown = PressableButton()
         
@@ -91,20 +91,20 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         lightup.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
         lightup.shadowHeight = 8
         lightup.cornerRadius = 16
-        
+
         lightup.colors = .init(
             button: UIColor(red: 149 / 255, green: 165 / 255, blue: 166 / 255, alpha: 1),
             shadow: UIColor(red: 93 / 255, green: 103 / 255, blue: 104 / 255, alpha: 1)
         )
         lightup.addTarget(self, action: #selector(presslightup(_:)), for: .touchUpInside)
         lightup.setTitle("☀️up", for: .normal)
-        
+
         
         lightdown = PressableButton()
         lightdown.frame = CGRect(x: back_pos.x, y: back_pos.y, width: 100, height: 90)
         lightdown.shadowHeight = 8
         lightdown.cornerRadius = 16
-        
+
         lightdown.colors = .init(
             button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
             shadow: UIColor(red: 73 / 255, green: 81 / 255, blue: 84 / 255, alpha: 1)
@@ -113,6 +113,23 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         lightdown.addTarget(self, action: #selector(presslightdown(_:)), for: .touchUpInside)
         lightdown.setTitle("☀️down", for: .normal)
         
+        lightup.alpha = 0
+        lightdown.alpha = 0
+        
+        
+        
+        volumnup = PressableButton()
+        volumndown = PressableButton()
+
+
+        lightdown.colors = .init(
+            button: UIColor(red: 99 / 255, green: 110 / 255, blue: 114 / 255, alpha: 1),
+            shadow: UIColor(red: 73 / 255, green: 81 / 255, blue: 84 / 255, alpha: 1)
+        )
+
+        lightdown.addTarget(self, action: #selector(presslightdown(_:)), for: .touchUpInside)
+        lightdown.setTitle("☀️down", for: .normal)
+
         lightup.alpha = 0
         lightdown.alpha = 0
         
@@ -150,8 +167,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
         
         volumnup.alpha = 0
         volumndown.alpha = 0
-        //
-        //
+
         self.view.addSubview(lightup)
         self.view.addSubview(lightdown)
         
@@ -508,8 +524,7 @@ class MouseView: UIViewController,  UIViewControllerTransitioningDelegate{
             }
         }
     }
-    
-    
+
     @objc func presslightup(_ sender: UIButton) {
         if let tmp_url = self.ip {
             let url = URL(string: "http://" + tmp_url + ":3000/lightup")!
