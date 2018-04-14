@@ -16,6 +16,8 @@ app.set('toggle', false)
 app.set('mousedown', false)
 app.set('ip', ip.address())
 
+
+
 //var tools = require('./autocompletion.js')
 
 /*function autocomplete(words) {
@@ -356,6 +358,17 @@ app.get('/doubleClick', (req, res) => {
     res_data = {
         "status": "left click"
     }
+    res.json(res_data)
+})
+
+app.get('/connect', (req, res) => {
+
+    res.setHeader('Content-Type', 'application/json')
+
+    let myNotification = new Notification('Keyboard Found', {
+        body: 'Connected from ipad keyboard'
+      })
+  
     res.json(res_data)
 })
 
