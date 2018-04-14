@@ -160,10 +160,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 //create json object from data
                 if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     print(json)
-                    self.ip = json["ip"] as? String
-                    self.timer.invalidate()
                     
-                    if let tmp_url = self.ip {
+                    if let tmp_url = json["ip"] as? String {
+                        print("ddd")
                         let url = URL(string: "http://" + tmp_url + ":3000/connect")!
                         //create the session object
                         let session = URLSession.shared
@@ -176,14 +175,27 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         request.addValue("application/json", forHTTPHeaderField: "Accept")
                         
                         //create dataTask using the session object to send data to the server
-                        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                        let task = session.dataTask(with: request as URLRequest, completionHandler: { new_data, response, error in
                             
                             guard error == nil else {
                                 return
                             }
                             
-                            guard let data = data else {
+                            guard let new_data = new_data else {
                                 return
+                            }
+                            
+                            
+                            do {
+                                if (try JSONSerialization.jsonObject(with: new_data, options: .mutableContainers) as? [String: Any]) != nil {
+                                    print(json)
+                                    
+                                    self.ip = json["ip"] as? String
+                                    self.timer.invalidate()
+                                }
+                            
+                            } catch let error {
+                                print(error.localizedDescription)
                             }
                             
                         })
