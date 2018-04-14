@@ -368,6 +368,10 @@ app.get('/connect', (req, res) => {
     let myNotification = new Notification('Keyboard Found', {
         body: 'Connected from ipad keyboard'
       })
+
+    res_data = {
+        "status": "connected"
+    }
   
     res.json(res_data)
 })
