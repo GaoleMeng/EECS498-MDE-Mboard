@@ -9,8 +9,13 @@ const ip = require("ip")
 // 
 var keyEnable = false
 var bodyParser = require("body-parser");
+// var pickle = require('picklejs')
 app.use(bodyParser.json());
+var model;
 
+// shell.exec('export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.6/site-packages')
+// shell.exec('./autocompletion-init.sh')
+var detect_autocomplete;
 
 app.set('toggle', false)
 app.set('mousedown', false)
@@ -216,6 +221,7 @@ app.get('/input/:char', (req, res) => {
 // })
 
 
+
 app.get('/api/mouseToggle', (req, res) => {
     robot.setMouseDelay(0)
     res.setHeader('Content-Type', 'application/json')
@@ -269,6 +275,21 @@ app.get('/api/mousedown', (req, res) => {
     }
     res.json(res_data)
 })
+
+
+app.get('/auto_complete_connect', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+
+    console.log("sss")
+    let myNotification = new Notification('Autocompletion', {
+                body: "loading finish"
+              })
+    res_data = {
+        "status": "right click"
+    }
+    res.json(res_data)
+})
+
 
 
 app.get('/api/moveMouse/:xx/:yy', (req, res) => {
@@ -478,6 +499,7 @@ app.get('/show', (req, res) => {
 app.listen(3000, () => {
     // TO do: parse the ip address to server
 
+
     let ip = app.get('ip')
     let data_body = {
         'name': "brad",
@@ -504,7 +526,41 @@ app.listen(3000, () => {
           .catch(error => console.log(error)) // eslint-disable-line no-console
 
     console.log('The M-board has started!')
+
+    // model = pickle.load("temp.model")
+
+
+    // shell.exec('export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.6/site-packages')
+
 })
+
+
+    // detect_autocomplete = setTimeout(function() {
+
+    //     fetch('http://localhost:8080/a', {
+    //       method: 'GET',
+    //       headers: new Headers({
+    //         'Content-Type': 'application/json'
+    //       })
+    //     })
+    //   .then((response) => {
+    //     if (!response.ok) throw Error(response.statusText);
+    //     console.log(response.body)
+    //     return response.json()
+    //   })
+    //   .then((data) => {
+    //     let myNotification = new Notification('Autocompletion', {
+    //             body: "Autocomplete loading finish"
+    //           })
+    //     clearTimeout(detect_autocomplete)
+    //     // this.result = data
+    //     // return data
+    //     // console.log("sended")
+    //     // console.log(data)
+    //   })
+    //   .catch(error => console.log(error)) // eslint-disable-line no-console
+
+
 
 
 
