@@ -124,6 +124,10 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     
     @objc func getip(){
+        if let tmp = self.ip {
+            return;
+        }
+        
         print("finding ip")
         let url = URL(string: "https://mboard-middle-server.herokuapp.com/api/getip")! //change the url
         
@@ -470,7 +474,9 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     self.buttons[11].setTitle("Sign", for: .normal)
                     // reformat keys
                     var iter: Int = 0
-                    let tl = self.Cap.frame.origin.y
+                    //let tl = self.Cap.frame.origin.y
+                    let tl = self.Delete.frame.origin.y
+                    
                     while iter < 12 {
                         var column: Int = 0
                         if iter < 4 {
@@ -480,7 +486,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                         } else {
                             column = 2
                         }
-                        self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 90, height: 90)
+                        // self.buttons[iter].frame = CGRect(x: 100 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 90, height: 90)
+                        self.buttons[iter].frame = CGRect(x: self.view.frame.maxX / 2 - 110 + 110 * CGFloat(column), y: tl + CGFloat(100 * (iter % 4)), width: 90, height: 90)
                         iter += 1
                     }
                     
@@ -883,14 +890,17 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         let pred_width = (buttons[3].frame.origin.x - buttons[0].frame.origin.x + 80) / 2 // jingyu
         while iter < 4 {
             let bt = UIButton()
-            bt.backgroundColor = UIColor.gray
+            //bt.backgroundColor = UIColor.gray
+            bt.backgroundColor = UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1)
+            
             bt.setTitleColor(UIColor.white, for: .normal)
             bt.frame = CGRect(x: Int(buttons[0].frame.origin.x + CGFloat(iter % 2) * pred_width),
                               y: Int(center_y - 300 + CGFloat((iter / 2) * 52)), width: Int(pred_width - 2), height: 50)
             bt.addTarget(self, action: #selector(pressWord(_:)), for: .touchUpInside)
             //bt.setTitle("predWord" + String(iter), for: .normal)
             bt.setTitle("", for: .normal)
-            bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+            //bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+            bt.titleLabel?.font = UIFont.boldSystemFont(ofSize: 35)
             predWords.append(bt)
             self.view.addSubview(bt)
             iter += 1
@@ -899,7 +909,15 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         // setup navigational buttons
         let nav_bt_size = CGFloat(55)
         let nav_bt_x = (buttons[3].frame.origin.x + buttons[0].frame.origin.x + pred_width - nav_bt_size) / 2
-        let nav_bt_y = view.frame.maxY - (2.5 * nav_bt_size)
+        //let nav_bt_y = view.frame.maxY - (2.5 * nav_bt_size)
+        
+        var nav_bt_y = CGFloat(0.0)
+        if go_back_benchmark_y >= self.view.frame.height / 2 {
+            nav_bt_y = go_back_benchmark_y
+        } else {
+            nav_bt_y = go_back_benchmark_y + nav_bt_size
+        }
+        
         let bt = UIButton()
         bt.backgroundColor = UIColor.black
         bt.setTitleColor(UIColor.white, for: .normal)
@@ -1162,6 +1180,14 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     postPred(text: str1 + "_")
                     pred_flag = 1
                     updatePredWords(time: 300)
+                } else {
+                    self.words = []
+                    var it = 0
+                    while it < 4 {
+                        self.words.append("")
+                        it += 1
+                    }
+                    updatePredWords(time: 0)
                 }
             }
         } else {
@@ -1173,7 +1199,7 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                 postPred(text: str2)
                 pred_flag = 0
                 updatePredWords(time: 300)
-            }
+            } 
         }
     }
     
@@ -1203,6 +1229,14 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
                     postPred(text: str1 + "_")
                     pred_flag = 1
                     updatePredWords(time: 300)
+                } else {
+                    self.words = []
+                    var it = 0
+                    while it < 4 {
+                        self.words.append("")
+                        it += 1
+                    }
+                    updatePredWords(time: 0)
                 }
             }
         } else {
@@ -1415,7 +1449,8 @@ class ViewController: UIViewController, UIViewControllerTransitioningDelegate {
         sender.setTitleColor(.black, for: .normal)
         //postRequest(text: sender.titleLabel!.text!)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
-            sender.backgroundColor = .gray
+            // sender.backgroundColor = .gray
+            sender.backgroundColor = UIColor(red: 73 / 255, green: 85 / 255, blue: 89 / 255, alpha: 1)
             sender.setTitleColor(.white, for: .normal)
         })
         //debug()
