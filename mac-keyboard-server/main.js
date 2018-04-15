@@ -46,6 +46,11 @@ app.on('ready', createWindow)
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
+
+  var exec = require('child_process').exec;
+  exec('kill $(lsof -t -i:8080)', function callback(error, stdout, stderr){
+
+  });
   if (process.platform !== 'darwin') {
     app.quit()
   }

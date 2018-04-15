@@ -1,7 +1,9 @@
-import pickle
+import _pickle as pickle
 from bottle import run, route, debug
 import operator
 import json
+
+import requests
 
 
 import sys
@@ -72,6 +74,11 @@ class autocompletion:
 def run_server(port_num=8080):
     """little demo server for demo'ing sake"""
     model = pickle.load(open("autocompletion/data/temp.model", "rb"))
+
+    try:
+        r = requests.get('http://localhost:3000/auto_complete_connect', auth=('user', 'pass'))
+    except:
+        pass
 
     debug(True)
 
