@@ -10,11 +10,23 @@ A basic M-Board app involves two apps to be started, which located in two folder
 
 - `autocompletion` - the auto-completion server that runs on Mac to produce predicted words
 
-To use the app, clone the repository and run the following commands. These commands include running the receiver app in the terminal, which is the first thing you need to do in order to use M-Board app:
+To use the app, clone the repository and run the following commands in the terminal. These commands include creating a bundle for the server app.
 
 ```bash
 # Clone this repository
 git clone https://github.com/GaoleMeng/EECS498-MDE-Mboard.git
+# Go into the repository
+cd EECS498-MDE-Mboard
+# Create bundle for the server app
+cd mac-keyboard-server
+sh bundle.sh
+```
+
+After these commands, the server app is created under directory mac-keyboard-server/M-board-darwin-x64/. Use the Finder to go to EECS498-MDE-Mboard/mac-keyboard-server/M-board-darwin-x64/. Double click M-board(.app) to open the server. This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping). 
+
+Then open the terminal to run the following commands to download and start the autocompletion model. 
+
+```bash
 # Go into the repository
 cd EECS498-MDE-Mboard
 # run the auto-completion model download script
@@ -24,21 +36,12 @@ sh autocompletion-init.sh
 # ...
 ```
 
-Open another terminal enter the same root directory
-```bash
-# Go into the repository
-cd EECS498-MDE-Mboard
-# Go to the receiver app directory:
-cd mac-keyboard-server
-# Start the app, you should have node to start it:
-npm start
-```
-
-This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping).
 You may need to install dependency for the autocompletion server if it shows error:
 ```bash
 pip3 install bottle
 ```
+
+It may take some time to download and start the autocompletion model. Wait until there is a notification from the server app showing that the model has been loaded successfully. 
 
 Next you will start up the iPad app. To do this, complete the following steps:
 1. Navigate to the root of `EECS498-MDE-Mboard`
@@ -60,32 +63,32 @@ After you choose the hand, you will then be presented with the Configuration scr
 0. Configuration Sceen:
 - Configure the keyboard to your hand by placing your four fingers on the screen within the outlined area (if on a simulator, you will have to click where you want your fingers to be one by one). Follow the on-screen directions to do this.
 - If you are satisfied with the postioning, click confirm. This will bring you to the main typing screen (1). Otherwise, you can click reset to restart this process.
-- If your positioning will cause overlapping keys in the later view or is not inside the outlined area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers to close to each other.
+- If your positioning will cause overlapping keys in the later view or is not inside the outlined area, you will get a warning on that and you need to choose a new positioning by moving your four fingers until the app asks you to confirm or reset. Please do not keep your fingers too close to each other.
 - If you want to reselect you typing hand, click Reselect button.
-
 
 1. Main typing screen:
 - On your computer, set the cursor to where you want to type (Notes, Word, etc.)
 - On the iPad, press character keys to type to the computer.
-- Swipe up or down on the screen to change the characters on the keys.
-- Swipe left on the screen to switch to the number mode screen (2).
+- Swipe left or right on the screen to change the characters on the keys.
+- Swipe up on the screen to switch to the number mode screen (2).
 - Word prediction boxes along the top of the screen may be pressed to type the word offered in that box.
-- Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side of this view. You can also try them.
-- "Configure" button at bottom right (or top right based on your positioning in (0)) brings you back to configure the keyboard if you would like to reconfigure.
+- Enter key, Space key, Delete key (labeled 'Del'), Caps lock (labeled 'Cap'), can be found on the right side (if left-handed) or the left side (if right-handed) of this view. You can also try them.
+- If left-handed, "Configure" button at bottom right (or top right based on your positioning in (0)) brings you back to configure the keyboard if you would like to reconfigure. If right-handed, "Configure" button will be at bottom left or top left. If you mistakenly click the "Configure" button, there is a "Go Back" button, which allows you to go back to the main typing screen (1).
 - Pressing the blue button on the right with a computer mouse symbol will bring you to the mouse control screen (3).
-- The symbols at the bottom of the screen (including a black circle with the label "Swipe") cannot be interracted with. These are navigtional symbols which show you what keys you can get to by swiping in various directions. These will be updated for whatever screen you are on except for the mouse control screen (3) which does not offer navigation-by-swiping.
+- The symbols at the bottom or top of the screen (including a black circle with the label "Swipe") cannot be interracted with. These are navigtional symbols which show you what keys you can get to by swiping in various directions. These will be updated for whatever screen you are on except for the mouse control screen (3) which does not offer navigation-by-swiping.
 - You can also go back to see the tutorial by clicking the button with "?" on the top.
 
 2. Number mode screen:
 - Press number keys to type to the computer.
 - Press the "sign" button to switch to number-related signs. This will also present the "Num" button, which can be pressed to switch the keys back to numbers.
-- Swipe right on the screen to switch back to the main typing screen (1).
+- Swipe down on the screen to switch back to the main typing screen (1).
 - Access to all keys from the main typing screen (1) that are not character keys or word prediction boxes.
 
 3. Mouse control screen:
 - You can use one or multiple fingers to control the mouse.
 - One finger for tap, two finger for right click, three finger for dragging, also you can scroll with two fingers.
 - Press the "Back" button to go back to whichever screen you navigated here from.
+- Press the other buttons to calibrate the volume or the brightness of the Mac.
 
 
 ## Note for developer
