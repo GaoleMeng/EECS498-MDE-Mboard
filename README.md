@@ -22,7 +22,7 @@ cd mac-keyboard-server
 sh bundle.sh
 ```
 
-After these commands, the server App is created under directory mac-keyboard-server/M-board-darwin-x64/. Use the Finder to go to EECS498-MDE-Mboard/mac-keyboard-server/M-board-darwin-x64/. Double click M-board(.app) to open the server. This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping). 
+After these commands, the server App is created under directory `mac-keyboard-server/M-board-darwin-x64/`. Use the Finder to go to `mac-keyboard-server/M-board-darwin-x64/`. Double click M-board(.app) to open the server. This will open up a window with an on/off switch. Set this switch to on by clicking it (not swiping). 
 
 Then open the terminal to run the following commands to download and start the autocompletion model. 
 
@@ -45,19 +45,18 @@ pip3 install bottle
 It may take some time to download and start the autocompletion model. Wait until there is a notification from the server App showing that the model has been loaded successfully. 
 
 Next you will start up the iPad app. To do this, complete the following steps:
-1. Navigate to the root of `EECS498-MDE-Mboard`
-2. Enter `buttonAddition` directory
-3. Open `buttonAddition.xcodeproj` with Xcode
-4. Click in the box that says "buttonAddition" which is to the right of the Build-and-Run and Stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
-5. If you have an iPad, plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list. You will have a better experience of the whole features of M-Board, if you can run that on iPad. Remember to check the bundle identifier and signing team by clicking the buttonAddition folder in the left column of the screen. You might need to change the bundle identifier and signing team to your own Apple developer account in order to run the App on iPad.
-6. Press the Build-and-Run button in the top left corner of the Xcode.
-7. On your device or simulator, you should now see a new application. Press on this to open the App.
+1. Navigate to the root of `EECS498-MDE-Mboard/buttonAddition`
+2. Open `buttonAddition.xcodeproj` with Xcode
+3. Click in the box that says "buttonAddition" which is to the right of the Build-and-Run and Stop buttons in the top left of the screen. Once this opens, expand the list labeled "buttonAddition" to get a list of devices that you can choose to run the application on.
+4. If you have an iPad, plug it into your computer and select it from the list of devices. Otherwise, just pick an iPad simulator from the list. You will have a better experience of the whole features of M-Board, if you can run that on iPad. Remember to check the bundle identifier and signing team by clicking the buttonAddition folder in the left column of the screen. You might need to change the bundle identifier and signing team to your own Apple developer account in order to run the App on iPad.
+5. Press the Build-and-Run button in the top left corner of the Xcode.
+6. On your device or simulator, you should now see a new application. Press on this to open the App.
 
 Note that you may have problems that the tutorial figures might not bind to the bundle. If that happens, you need to manually add the figures into the bundle. Click the top buttonAddition on the left column in Xcode. Drag the three figures (first.png, second.png, and third.png) using Finder to the Copy Bundle Resources under Build Phases. Then the three PNG files should appear in the left column. You might need to delete the previous PNG files if their filenames are showed in red color.
 
 
 ### Using the application
-If it is your first time to install the App, you will be showed a tutorial. After the tutorial, click Let's Start to go to a view, which will ask you whether you will use your left hand or right hand to type. 
+If it is your first time to install the App, a tutorial will show up. After the tutorial, click Let's Start to go to a view, which will ask you whether you will use your left hand or right hand to type. 
 
 After you choose the hand, you will then be presented with the Configuration screen (0)
 
