@@ -2,7 +2,7 @@
 
 ## Quick start
 
-Note: If you have updated the XCode, do "carthage update" first.
+Note: If you have updated the XCode, do "carthage update" first under the project root `EECS498-MDE-Mboard/buttonAddition`.
 
 A basic M-Board App involves two Apps to be started, which located in two folder:
 
